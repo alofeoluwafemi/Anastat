@@ -1,0 +1,333 @@
+/*Overide default styles*/
+ul.database{
+	padding-left:0px !important;
+}
+
+ul.database li{
+	list-style: none;
+    display: block;
+    width: 100%;
+    padding-left: 2px;
+    margin-bottom: 2%;
+    /*border-bottom: 1px solid white;*/
+    font-size: 11px;
+    color: initial;
+}
+
+span.databaselist:hover,span.question:hover{
+	color: rgba(228, 79, 79, 0.8);
+}
+
+.surveydata{
+    color: rgba(228, 79, 79, 0.8);
+}
+
+.sectorslist{
+    padding-left:0px !important;
+}
+
+.sectorslist li{
+    list-style: none;
+}
+
+.sectorslist li a{
+    font-size: 12px;
+    padding-left:2%;
+    text-decoration: none !important;
+}
+
+.dart::before {
+    display: inline-block;
+    margin-right: .5em;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transform: translate(0, 0);
+    color:rgb(228, 79, 79);
+}
+
+.check::before {
+    display: inline-block;
+    margin-right: .5em;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transform: translate(0, 0);
+    color:green;
+}
+
+.site-red{
+    color:rgb(228, 79, 79);
+}
+
+.site-init{
+    color: initial;
+}
+
+.bold{
+    font-weight:bold;
+}
+
+.codeinfo{
+    margin-bottom: 2%;
+    display: block;
+}
+
+.no-margin{
+    margin:0px !important;
+}
+
+/*OVERIDE CHOSEN CSS*/
+li.search-choice{
+	color: rgb(228, 79, 79) !important;
+    border: 1px solid gray;
+    font-size: 14px;
+}
+
+.search-field{
+    font-size: 14px;
+}
+
+div.chosen-container{
+	border: 1px solid rgba(228, 79, 79, 0.79);
+	margin-top:4%;
+}
+
+select.chosentable{
+    width:100%;
+    margin-left:auto;
+    margin:auto;
+}
+
+.info{
+    font-size:24px !important;
+}
+
+.chosen-single{
+    border-radius:0px !important; 
+}
+
+.comment{
+    height: 100px !important;
+    font-size: 12px;
+    resize: none;
+    border-radius: 0px;
+    margin-bottom: 10%;
+}
+
+.submitdiv,#savereview{
+        margin-top: 4%;
+}
+
+span.content{
+    font-size: 11px;
+}
+
+hr.splitter{
+    margin: 5px 0px;
+}
+
+div#logindiv  input,div#logindiv  select,div#logindiv  textarea,div.logindiv  input,div.logindiv  select,div.site-input input,div.site-input  select{
+    border: 1px solid rgb(228, 79, 79);
+    border-radius: 0px;
+    margin-bottom: 4%;
+}
+
+/*/ADMIN*/
+.menui{
+    font-size: 20px !important;
+}
+
+.no-pad,.nopad{
+    padding:0px !important;
+}
+
+.admin-menu{
+    background: white;
+    padding: 5px;
+    margin-bottom: 2px;
+    display: block;
+    text-decoration: none;
+}
+
+.admin-menu:hover{
+    opacity: 0.7;
+    text-decoration: none;
+}
+
+.activated{
+    opacity: 0.7;
+    border: 1px solid rgb(228, 79, 79);
+}
+
+.admin-menu > i{
+    font-size: 14px !important;
+}
+
+.fonts{
+    font-size: 14px !important;
+}
+
+.action-btn{
+    text-decoration: none;
+    border: 1px solid rgb(226, 118, 118);
+    padding: 2px 4px;
+    background: white;
+    color: black;
+    margin: 0px 2px;
+}
+
+.action-btn:hover{
+    opacity: 0.8;
+    text-decoration: none;
+    color:black;
+}
+
+.action-btn:visited{
+    text-decoration: none;
+}
+
+.inline{
+    display:inline !important;
+}
+
+.notify{
+    border: 1px solid rgb(226, 118, 118);
+    padding: 2px 4px;
+    background: white;
+    color: black;
+    margin: auto;
+    text-align: center;
+    width: 70% !important;
+    color: green;
+}
+
+.notifystay{
+    border: 1px solid rgb(226, 118, 118);
+    padding: 2px 4px;
+    background: white;
+    color: black;
+    margin: auto;
+    text-align: center;
+    width: 70% !important;
+}
+
+.split-list{
+    margin: 4px 0px;
+}
+
+.agree{
+    padding: 0px;
+    font-size: 12px;
+}
+
+.help-editor{
+    min-height: 200px;
+}
+
+.editor i {
+    font-size: 12px !important;
+}
+
+#periodchild{
+    margin-top: 4%;
+    border: 1px solid gray;
+    padding: 4px;
+}
+
+.no-margin{
+    margin:0px;
+}
+
+.dash-row{
+    font-size: 10px !important;
+}
+
+.font12{
+    font-size: 12px !important;
+}
+
+.counter{
+    margin: auto !important;
+    width: 3%;
+    background: rgb(228, 79, 79);
+    border-radius: 50%;
+    text-align: center;
+    margin-left: 6%;
+    color: white;
+    margin-bottom: 2% !important;
+    border: 1px solid black;
+}
+
+.green{
+    color:green !important;
+}
+
+#manualperiod{
+    border: 1px solid black;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+div#sortdiv{
+    border-top: 1px solid white;
+    padding-top: 1% !important;
+    margin-bottom: 2% !important;
+    border-bottom: 1px solid white;
+}
+
+div#sortdiv select,div#sortdiv button{
+        height: 29px;
+    line-height: 28px;
+    font-size: 12px;
+}
+
+div#sortdiv button,div#sortdiv a{
+    border: 1px solid rgb(228, 79, 79);
+    height: 29px;
+    line-height: 28px;
+    font-size: 12px;
+    display: inline-block;
+    width: 29px;
+    text-align: center;
+}
+
+.margin-top-3{
+    margin-top:3% !important;
+}
+
+.white{
+        color: white;
+}
+
+.norightpad{
+    padding-right:0px;
+}
+
+.noleftpad{
+    padding-left:0px;
+}
+
+.periodbox{
+    padding: 1%;
+    border: 1px solid black;
+    margin-top: 1%;
+} 
+
+.overview-dashboard{
+    background: white;
+}
+
+.overview-dashboard  div.modules{
+    border: 1px solid black;
+}
+
+.overview-count{
+    margin: 30px;
+    color: rgb(228, 79, 79);
+    font-size: 20px;
+}

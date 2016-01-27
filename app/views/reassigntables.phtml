@@ -1,0 +1,100 @@
+<!--HEADER -->
+<?php include('partials/adminheader.phtml') ?>
+<!-- END HEADER -->
+
+<!-- MENU SECTION -->
+<?php include('partials/backendmenu.phtml') ?>
+<!--MENU SECTION END-->
+
+
+<!--HOME SECTION END-->
+<!--SERVICE SECTION START-->
+<br>
+<br>
+<section id="services" >
+<div class="container">
+<div class="row text-center header">
+</div>
+<div class="row animate-in" data-anim-type="fade-in-up">
+
+<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+	<?php include("partials/adminmenu.phtml") ?>
+</div>
+
+<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 main-body">
+	<div class="services-wrapper">
+	<h4 class="site-init inline">Tables</h4> 
+	<a href="<?php echo geturl("admin/reassigntables/{$database_id}") ?>" class="site-init action-btn pull-right">
+		<i class="ion-ios-arrow-back fonts site-red"></i> Go Back</a>
+		<hr>
+		<div class="row font12">
+		<?php if(isset($notification) && !empty($notification)) :?>
+			<div class="notify"><?php echo $notification ?></div>
+		<?php endif ?>
+
+		<h5 class="site-init text-center">Re-Assign Tables</h5> 
+
+		<!-- ADD NEW DATABASE -->
+		<form class="form-horizontal" method="post" action="">
+			<div class="col-md-12" id="logindiv">
+				<div class="col-md-12 nopad" id="pastetablediv">
+				<div class="col-md-12 nopad" id="copytablediv">
+					<div class="col-md-10 nopad" id="tablesbox">
+					<input type="text" class="form-control disabled" disabled value="<?php echo $name ?>" />
+					<input type="hidden" name="database" value="<?php echo $database_id ?>" />
+					</div>
+				</div>
+				</div>
+				
+				<div class="col-md-10 nopad">
+
+				<select name="tables[]" required multiple class="form-control chosentable aggtables" data-placeholder="Assign Tables">
+					<?php foreach($Tables as $data) :?>
+					<option <?php echo in_array($data['id'], $Assigned)  ? "selected" : ""?> 
+							value="<?php echo $data['id'] ?>"><?php echo $data['table_name'] ?></option>
+					<?php endforeach ?>
+				</select>
+				</div>
+			</div>
+
+			<!-- SELECT ALL -->
+					<div class="col-md-6">
+						<div class="checkbox site-init font12">
+							<label>
+								<input type="checkbox" name="selectalltable" value="yes"> Click to select all Tables
+							 </label>
+						</div>
+					</div>
+
+					<div class="col-md-6 nopad">
+						<div class="checkbox site-init font12">
+							<label>
+								<input type="checkbox" name="deselectalltable" value="yes"> Click to deselect all Tables
+							 </label>
+						</div>
+					</div>
+				<!-- END -->
+
+			<div id="submitdiv" class="col-md-10">
+				<button  class="btn button-custom btn-custom-two pull-right">Assign</button>
+			</div>
+		</form>
+		<!-- END DATABASE -->
+
+	</div>
+</div>
+
+
+
+</div>
+</div>
+</section>
+
+
+
+<!--CONTACT SECTION START-->
+<!--CONTACT SECTION END-->
+
+<!-- FOOTER -->
+<?php @include('partials/adminfooter.phtml') ?>
+<!-- END FOOTER

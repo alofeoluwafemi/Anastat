@@ -1,0 +1,104 @@
+<!--HEADER -->
+<?php include('partials/adminheader.phtml') ?>
+<!-- END HEADER -->
+
+<!-- MENU SECTION -->
+<?php include('partials/backendmenu.phtml') ?>
+<!--MENU SECTION END-->
+
+
+<!--HOME SECTION END-->
+<!--SERVICE SECTION START-->
+<br>
+<br>
+<section id="services" >
+<div class="container">
+<div class="row text-center header">
+<!-- <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 animate-in" data-anim-type="fade-in-up">
+<h3 style="margin:0px;">REQUEST DATA</h3>
+<hr style="margin-top:5px !mportant;margin-bottom:0px"/>
+</div> -->
+</div>
+<div class="row animate-in" data-anim-type="fade-in-up">
+
+<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+	<?php include("partials/adminmenu.phtml") ?>
+</div>
+
+<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 main-body">
+	<div class="services-wrapper">
+	<h4 class="site-init inline">Client</h4> 
+	<!-- <a href="<?php echo "addatabase" ?>" class="site-init action-btn pull-right"><i class="ion-plus fonts site-red"></i> Add New Database</a> -->
+		<hr>
+		<div class="row dash-row">
+			<?php if(!empty($Client)) :?>
+
+			<div class="col-md-12 site-init">
+			<div class="site-red col-md-3">Client Name</div>
+			<div class="col-md-8"><?php echo strtoupper( $Client['name'] ) ?></div>
+			</div>
+
+			<div class="col-md-6 site-init">
+			<div class="site-red col-md-3">Gender</div>
+			<div class="col-md-8"><?php echo strtoupper( $Client['sex'] ) ?></div>
+			</div>
+
+			<div class="col-md-6 site-init">
+			<div class="site-red col-md-3">Email</div>
+			<div class="col-md-8"><?php echo strtoupper( $Client['email'] ) ?></div>
+			</div>
+
+			<div class="col-md-12 site-init">
+			<div class="site-red col-md-3">Phone No</div>
+			<div class="col-md-8"><?php echo strtoupper( $Client['phone'] ) ?></div>
+			</div>
+
+			<div class="col-md-12 site-init">
+			<div class="site-red col-md-3">Instituition</div>
+			<div class="col-md-8"><?php echo !empty($Client['instituition']) ? strtoupper($Client['instituition']) : "Not Specified" ?></div>
+			</div>
+
+			<div class="col-md-12 site-init">
+			<div class="site-red col-md-3">Instituition Code</div>
+			<div class="col-md-8"><?php echo !empty($client['instituition_code']) ? $Client['instituition_code'] : "Not Specified" ?></div>
+			</div>
+
+			<div class="col-md-12 site-init">
+			<div class="site-red col-md-3">Designation</div>
+			<div class="col-md-8"><?php echo !empty($client['position_instituition']) ? strtoupper($Client['position_instituition']) : "Not Specified" ?></div>
+			</div>
+
+			<div class="col-md-12 site-init">
+			<div class="site-red col-md-3">Created</div>
+			<div class="col-md-8"><?php echo date('d M Y',$Client['created_at']) ?></div>
+			</div>
+
+			</div>
+
+			<div class="col-md-12">
+			<hr class="split-list">
+			</div>
+			<?php else :?>
+			<div class="notify">Client Details Not Found!</div>
+			<?php endif ?>
+
+		</div>
+		<!-- END Databases -->
+
+	</div>
+</div>
+
+
+
+</div>
+</div>
+</section>
+
+
+
+<!--CONTACT SECTION START-->
+<!--CONTACT SECTION END-->
+
+<!-- FOOTER -->
+<?php @include('partials/adminfooter.phtml') ?>
+<!-- END FOOTER

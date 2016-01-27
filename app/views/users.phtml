@@ -1,0 +1,119 @@
+<!--HEADER -->
+<?php include('partials/adminheader.phtml') ?>
+<!-- END HEADER -->
+
+<!-- MENU SECTION -->
+<?php include('partials/backendmenu.phtml') ?>
+<!--MENU SECTION END-->
+
+
+<!--HOME SECTION END-->
+<!--SERVICE SECTION START-->
+<br>
+<br>
+<section id="services" >
+<div class="container">
+<div class="row text-center header">
+<!-- <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 animate-in" data-anim-type="fade-in-up">
+<h3 style="margin:0px;">REQUEST DATA</h3>
+<hr style="margin-top:5px !mportant;margin-bottom:0px"/>
+</div> -->
+</div>
+<div class="row animate-in" data-anim-type="fade-in-up">
+
+<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+	<?php include("partials/adminmenu.phtml") ?>
+</div>
+
+<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 main-body">
+	<div class="services-wrapper">
+	<h4 class="site-init inline">Users</h4>
+	
+	<a href="<?php echo geturl("admin/users") ?>" class="site-init action-btn pull-right 
+	<?php echo (user('auth') == FALSE) ? "disabled" : "" ?>">
+
+	<i class="ion-plus fonts site-red"></i> Add New User</a>
+		<hr>
+		<div class="row dash-row">
+			
+			<?php if(isset($notification) && !empty($notification)) :?>
+			<div class="notify"><?php echo $notification ?></div>
+			<?php endif ?>
+
+			<!-- START AFFILIATES -->
+			<div class="col-md-2 nopad site-red">
+			Username
+			</div>
+			<div class="col-md-2 site-red">
+			Type
+			</div>
+			<div class="col-md-3 site-red">
+			Last Login
+			</div>
+			<div class="col-md-3 site-red">
+			Added On
+			</div>
+			<div class="col-md-2 site-red">
+			Actions
+			</div>
+			<hr>
+			
+			<?php if(!empty($Users)) :?>
+			<?php foreach($Users as $key => $user) :?>
+
+			<div class="col-md-2 nopad site-init">
+			<?php echo ($user['username']) ?>
+			</div>
+
+			<div class="col-md-2 site-init">
+			<?php echo ($user['type']) ?>
+			</div>
+
+			<div class="col-md-3 site-init">
+			<?php echo date_create($user['last_login'])->format('d M Y h:i:s A') ?>
+			</div>
+
+			<div class="col-md-3 site-init">
+			<?php echo  date_create($user['created_at'])->format('d M Y h:i:s A') ?>
+			</div>
+
+			<div class="col-md-2">
+			<?php if($user['role'] != 1): ?>
+			<a title="delete"  href="<?php echo geturl('admin/users?action=drop&id='.$user['id'] ) ?>" class="site-init action-btn">
+			<i class="ion-ios-trash fonts site-red"></i>
+			</a>
+			<?php endif ?>
+			<a title="edit"  href="<?php echo geturl('admin/edituser?id='.$user['id'] ) ?>" class="site-init action-btn">
+			<i class="ion-edit fonts site-red"></i>
+			</a>
+			</div>
+
+			<div class="col-md-12">
+			<hr class="split-list">
+			</div>
+
+			<?php endforeach ?>
+			<?php else :?>
+			<div class="notify">Users List Empty!</div>
+			<?php endif ?>
+
+		</div>
+		<!-- END AFFILIATES -->
+
+	</div>
+</div>
+
+
+
+</div>
+</div>
+</section>
+
+
+
+<!--CONTACT SECTION START-->
+<!--CONTACT SECTION END-->
+
+<!-- FOOTER -->
+<?php @include('partials/adminfooter.phtml') ?>
+<!-- END FOOTER

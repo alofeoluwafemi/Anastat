@@ -1,0 +1,96 @@
+<!--HEADER -->
+<?php include('partials/adminheader.phtml') ?>
+<!-- END HEADER -->
+
+<!-- MENU SECTION -->
+<?php include('partials/backendmenu.phtml') ?>
+<!--MENU SECTION END-->
+
+
+<!--HOME SECTION END-->
+<!--SERVICE SECTION START-->
+<br>
+<br>
+<section id="services" >
+<div class="container">
+<div class="row text-center header">
+<!-- <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 animate-in" data-anim-type="fade-in-up">
+<h3 style="margin:0px;">REQUEST DATA</h3>
+<hr style="margin-top:5px !mportant;margin-bottom:0px"/>
+</div> -->
+</div>
+<div class="row animate-in" data-anim-type="fade-in-up">
+
+<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+	<?php include("partials/adminmenu.phtml") ?>
+</div>
+
+<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 main-body">
+	<div class="services-wrapper">
+	<h4 class="site-init inline">Variables</h4>
+	<a href="<?php echo geturl("admin/variables") ?>" class="site-init action-btn pull-right">
+		<i class="ion-ios-arrow-back fonts site-red"></i> Go Back</a>
+		<hr>
+		<div class="row">
+		<?php if(isset($notification) && !empty($notification)) :?>
+			<div class="notify"><?php echo $notification ?></div>
+		<?php endif ?>
+
+		<h5 class="site-init text-center">Add New Variables</h5> 
+
+		<!-- ADD NEW DATABASE -->
+		<form class="form-horizontal" method="post" action="">
+			<div class="col-md-12" id="logindiv">
+				<div class="col-md-12 nopad" id="pastetablediv">
+				<div class="col-md-12 nopad" id="copytablediv">
+					<div class="col-md-10 nopad" id="tablesbox">
+					<input type="text" class="form-control" name="variable" required placeholder="Variable name"/>
+					</div>
+					
+					<div class="col-md-10 nopad">
+						<!-- ADD TABLE -->
+						<select name="table" required class="form-control">
+						<option value="">Select Table</option>
+						<?php foreach($Tables as $table) :?>
+						<option value="<?php echo $table['id'] ?>"><?php echo $table['table_name'] ?></option>
+						<?php endforeach ?>
+						</select>
+						
+						<input type="text" class="form-control" name="code" required placeholder="Code"/>
+						
+						<!-- ADD LEVEL OF AGGREGATION -->
+						<select name="level" required class="form-control">
+						<option value="">Select Level</option>
+						<?php foreach($Aggregations as $level) :?>
+						<option value="<?php echo $level['id'] ?>"><?php echo $level['level_aggregation_name'] ?></option>
+						<?php endforeach ?>
+						</select>
+					</div>
+
+				</div>
+				</div>
+			</div>
+
+			<div id="" class="col-md-10">
+				<button  class="btn button-custom btn-custom-two pull-right">Add Variable</button>
+			</div>
+		</form>
+		<!-- END DATABASE -->
+
+	</div>
+</div>
+
+
+
+</div>
+</div>
+</section>
+
+
+
+<!--CONTACT SECTION START-->
+<!--CONTACT SECTION END-->
+
+<!-- FOOTER -->
+<?php @include('partials/adminfooter.phtml') ?>
+<!-- END FOOTER

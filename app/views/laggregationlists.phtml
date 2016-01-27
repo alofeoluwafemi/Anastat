@@ -1,0 +1,107 @@
+<!--HEADER -->
+<?php include('partials/adminheader.phtml') ?>
+<!-- END HEADER -->
+
+<!-- MENU SECTION -->
+<?php include('partials/backendmenu.phtml') ?>
+<!--MENU SECTION END-->
+
+
+<!--HOME SECTION END-->
+<!--SERVICE SECTION START-->
+<br>
+<br>
+<section id="services" >
+<div class="container">
+<div class="row text-center header">
+<!-- <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 animate-in" data-anim-type="fade-in-up">
+<h3 style="margin:0px;">REQUEST DATA</h3>
+<hr style="margin-top:5px !mportant;margin-bottom:0px"/>
+</div> -->
+</div>
+<div class="row animate-in" data-anim-type="fade-in-up">
+
+<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+	<?php include("partials/adminmenu.phtml") ?>
+</div>
+
+<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 main-body">
+	<div class="services-wrapper">
+	<h4 class="site-init inline">Level Of Aggregations</h4> 
+	<a href="<?php echo "addaggregation" ?>" class="site-init action-btn pull-right">
+	<i class="ion-plus fonts site-red"></i> Add New Level</a>
+		<hr>
+		<div class="row dash-row">
+			
+			<?php if(isset($notification) && !empty($notification)) :?>
+			<div class="notify"><?php echo $notification ?></div>
+			<?php endif ?>
+
+			<!-- START TABLES -->
+			<div class="col-md-1 site-red">
+			S/N
+			</div>
+			<div class="col-md-5 site-red">
+			Name
+			</div>
+			<div class="col-md-4 site-red">
+			Table
+			</div>
+			<div class="col-md-2 site-red">
+			Actions
+			</div>
+			<hr>
+			
+			<?php if(!empty($Aggregations)) :?>
+			<?php foreach($Aggregations as $key => $data) :?>
+			<div class="col-md-1 site-init">
+			<?php echo $key + 1 ?>
+			</div>
+
+			<div class="col-md-5 site-init">
+			<?php echo strtoupper($data['level_aggregation_name']) ?>
+			</div>
+
+			<div class="col-md-4 site-init">
+			<?php echo strtoupper(implode("\n",$data['tables'])) ?>
+			</div>
+
+			<div class="col-md-2">
+			<a href="#" onclick='deletePromptAdmin("<?php echo geturl('admin/levelaggregation?action=drop&id='.$data['id'] ) ?>")' 
+			class="site-init action-btn">
+			<i class="ion-ios-trash fonts site-red"></i></a>
+			<a href="<?php echo geturl('admin/editaggregation?id='.$data['id'] ) ?>" class="site-init action-btn"><i class="ion-edit fonts site-red"></i></a>
+			</div>
+
+			<div class="col-md-12">
+			<hr class="split-list">
+			</div>
+
+			<?php endforeach ?>
+			<div class="col-md-12">
+				<?php echo $Links ?>
+			</div>
+			<?php else :?>
+			<div class="notify">Aggregation List Empty!</div>
+			<?php endif ?>
+
+		</div>
+		<!-- END AFFILIATES -->
+
+	</div>
+</div>
+
+
+
+</div>
+</div>
+</section>
+
+
+
+<!--CONTACT SECTION START-->
+<!--CONTACT SECTION END-->
+
+<!-- FOOTER -->
+<?php @include('partials/adminfooter.phtml') ?>
+<!-- END FOOTER

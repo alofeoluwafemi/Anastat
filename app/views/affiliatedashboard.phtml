@@ -1,0 +1,137 @@
+<!--HEADER -->
+<?php include('partials/adminheader.phtml') ?>
+<!-- END HEADER -->
+
+<!-- MENU SECTION -->
+<?php include('partials/backendmenu_affiliate.phtml') ?>
+
+<!--MENU SECTION END-->
+
+
+<!--HOME SECTION END-->
+<!--SERVICE SECTION START-->
+<br>
+<br>
+<section id="services" >
+<div class="container">
+<div class="row text-center header">
+<!-- <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 animate-in" data-anim-type="fade-in-up">
+<h3 style="margin:0px;">REQUEST DATA</h3>
+<hr style="margin-top:5px !mportant;margin-bottom:0px"/>
+</div> -->
+</div>
+<div class="row animate-in" data-anim-type="fade-in-up">
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 main-body">
+	<div class="services-wrapper">
+	<h4 class="site-init inline">Requests</h4>
+	<?php if(session_has('affiliateupdate')): ?>
+	<div class="notify"><?php echo session_get('affiliateupdate') ?></div>
+	<?php endif?>
+
+	<?php if(!empty($Requests)) :?>
+	<small class="site-init pull-right text-right"><i class="fonts ion-information-circled site-red"></i>Kindly click action button by client to perform actions on client.</small>
+		<hr>
+		<div class="row dash-row">
+			
+			<?php if(isset($notification) && !empty($notification)) :?>
+			<div class="notify"><?php echo $notification ?></div>
+			<?php endif ?>
+
+			<!-- START Databases -->
+			<div class="col-md-1 site-red">
+			S/N
+			</div>
+			<div class="col-md-3 nopad site-red">
+			Database Requested
+			</div>
+
+			<div class="col-md-1 site-red">
+			Type
+			</div>
+
+			<div class="col-md-1 site-red">
+			Approved
+			</div>
+
+			<div class="col-md-2 site-red">
+			Date
+			</div>
+
+			<div class="col-md-2 site-red">
+			Status
+			</div>
+			
+			<div class="col-md-2 site-red">
+			Actions
+			</div>
+			<hr>
+			
+			<?php foreach($Requests as $key => $Request) :?>
+			<div class="col-md-1 site-init">
+			<?php echo $key + 1 ?>
+			</div>
+
+			<div class="col-md-3 nopad site-init">
+			<?php echo strtoupper( $Request['code'] ) ?>
+			</div>
+			
+			<div class="col-md-1 site-init"><?php echo isset($Request['client_id']) ? 'Affilaited' : 'Personal' ?>
+			</div>
+
+			<div class="col-md-1 site-init"><?php echo ($Request['approved']) ?>
+			</div>
+
+			<div class="col-md-2 site-init"><?php echo date_create($Request['created_at'])->format('d M Y  h:i:s') ?>
+			</div>
+
+			<div class="col-md-2 site-init"><?php echo ($Request['status'] == 1) ? 
+			"<i title='Treated' class='ion-ios-checkmark-outline fonts green'></i> Request Attended"
+			: " <i title='Not Treated' class='ion-ios-close-outline fonts site-red'></i> Request Not Attended" ?>
+			</div>
+
+			<div class="col-md-2">
+			<a title="view request" target="_blank" href="<?php echo geturl('printrequest?overview='.$Request['id'] ) ?>
+			" class="site-init action-btn">
+			<i class="ion-eye fonts site-red"></i></a>
+			
+			<a class="site-init action-btn" href="<?php echo (strtolower($Request['approved']) == "yes")
+																? geturl('affiliate/action?for=disapprove&id='.$Request['id']) 
+																: geturl('affiliate/action?for=approve&id='.$Request['id']) ?>">
+			<?php echo (strtolower($Request['approved']) != 'yes') ? 
+			"<i title='Click To Approve Request' class='ion-checkmark fonts green'></i>"
+			: " <i title='Click To Disapprove Request' class='ion-close fonts site-red'></i>"
+			 ?>
+			</a>
+
+			</div>
+
+			<div class="col-md-12">
+			<hr class="split-list">
+			</div>
+
+			<?php endforeach ?>
+			<?php else :?>
+			<div class="notify">Requests List Empty! Because No Client From This Affiliate Has Submitted Any Request</div>
+			<?php endif ?>
+
+		</div>
+		<!-- END Databases -->
+
+	</div>
+</div>
+
+
+
+</div>
+</div>
+</section>
+
+
+
+<!--CONTACT SECTION START-->
+<!--CONTACT SECTION END-->
+
+<!-- FOOTER -->
+<?php @include('partials/adminfooter.phtml') ?>
+<!-- END FOOTER

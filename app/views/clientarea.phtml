@@ -1,0 +1,169 @@
+<?php @include('partials/header.phtml') ?>
+<!-- END HEADER -->
+
+<!-- MENU SECTION -->
+<?php @include('partials/frontmenu.phtml') ?>
+<!--MENU SECTION END-->
+
+<section id="contact" style="padding-top: 40px !important;">
+<div class="container">
+<div class="row text-center header animate-in" data-anim-type="fade-in-up">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+<h3>Client Area </h3>
+<hr />
+
+</div>
+</div>
+
+<div class="col-md-12 nopad">
+	<div class="contact-wrapper" id="logindiv">
+	<?php if(isset($notfound) && !empty($notfound)) :?>
+			<div class="notify"><?php echo $notfound ?></div>
+		<br>
+	<?php endif ?>
+		<form class="form-horizontal" action="" method="POST">
+			<div class="form-group">
+				<label for="title" class="col-md-1 site-red text-center">Email</label>
+				<div class="col-md-7">
+				<input type="email" name="email" value="<?php echo isset($_POST['email']) ? $_POST['email'] : '' ?>" class="form-control" required placeholder="Provide email used for requesting datas"/>
+				</div>
+
+				<div class="col-md-1 pull-left">
+					<button href="#" class="btn button-custom btn-custom-two no-margin">View My Requests</button>
+				</div>
+
+			</div>
+		</form>
+	</div>
+</div>
+
+<?php if(!empty($Requests)) :?>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
+	<div class="services-wrapper">
+	<h4 class="site-init inline">Request</h4> 
+		<hr>
+		<div class="row font12">
+		<?php if(isset($notification) && !empty($notification)) :?>
+			<div class="notify"><?php echo $notification ?></div>
+		<br>
+		<?php endif ?>
+		
+
+			<?php foreach($Requests as $key => $Request):?>
+			
+			<?php if($key == 0):?>
+			<div class="col-md-3 col-sm-12">
+			<div class="col-md-12">
+				<hr class="split-list">
+			</div>
+			<div class="col-md-12 site-init nopad">
+			<div class="site-red col-md-6">Name</div>
+			<div class="col-md-12"><?php echo strtoupper( $Request['name'] ) ?></div>
+			</div>
+
+			<div class="col-md-12 site-init nopad">
+			<div class="site-red col-md-6">Email</div>
+			<div class="col-md-12"><?php echo strtolower( $Request['email'] ) ?></div>
+			</div>
+
+			<div class="col-md-12 site-init nopad">
+			<div class="site-red col-md-6">Phone</div>
+			<div class="col-md-12"><?php echo strtoupper( $Request['phone'] ) ?></div>
+			</div>
+
+			<div class="col-md-12 site-init nopad">
+			<div class="site-red col-md-6">Designation</div>
+			<div class="col-md-12">
+			<?php echo (null != $Request['position_instituition']) ?strtoupper($Request['position_instituition']) : "Not specified" ?>
+			</div>
+			</div>
+
+			<div class="col-md-12 site-init nopad">
+			<div class="site-red col-md-6">Code</div>
+			<div class="col-md-12"><?php echo (null != $Request['instituition_code']) ?strtoupper($Request['affiliate_code']) : "Not specified" ?></div>
+			</div>
+
+			<div class="col-md-12 site-init nopad">
+			<div class="site-red col-md-6">Affiliate</div>
+			<div class="col-md-12"><?php echo (null != $Request['instituition']) ? strtoupper($Request['affiliate_name']) : "Not specified" ?></div>
+			</div>
+
+			<hr>
+			</div>
+			<?php endif ?>
+			
+			<div class="col-md-9 col-sm-12">
+				<div class="col-md-12">
+				<hr class="split-list">
+				</div>
+
+				<div class="col-md-12 site-init">
+				<div class="site-red col-md-4">Database</div>
+				<div class="col-md-8"><?php echo $Request['databasename'] ?></div>
+				</div>
+
+				<div class="col-md-12 site-init">
+				<div class="site-red col-md-4">Level Of Aggregation</div>
+				<div class="col-md-8"><?php echo $Request['level_aggregation'] ?></div>
+				</div>
+				
+				<div class="col-md-12 site-init">
+				<div class="site-red col-md-4">Category Of Aggregation</div>
+				<div class="col-md-8"><?php echo implode(',',json_decode($Request['category_aggregation'],true)) ?></div>
+				</div>
+
+				<div class="col-md-12 site-init">
+				<div class="site-red col-md-4">Frequency</div>
+				<div class="col-md-8"><?php echo $Request['frequency'] ?></div>
+				</div>
+
+				<div class="col-md-12 site-init">
+				<div class="site-red col-md-4">Variable</div>
+				<div class="col-md-8"><?php echo implode(',',json_decode($Request['variable'],true)) ?></div>
+				</div>
+
+				<div class="col-md-12 site-init">
+				<div class="site-red col-md-4">Period</div>
+				<div class="col-md-8"><?php echo implode('&nbsp; - &nbsp;',json_decode($Request['period'],true)) ?></div>
+				</div>
+
+				<div class="col-md-12 site-init">
+				<div class="site-red col-md-4">Status</div>
+				<div class="col-md-3"><?php echo ($Request['status'] == 1) ? "Treated <i class='ion-ios-checkmark-outline fonts green'></i>"
+																			  : "Not Treated <i class='ion-ios-close-outline fonts site-red'></i>" ?></div>
+
+				</div>
+
+				<div class="col-md-12 site-init">
+				<div class="site-red col-md-4">Approved By Affiliate</div>
+				<div class="col-md-8"><?php echo  $Request['approved'] ?></div>
+				</div>
+
+				<div class="col-md-12">
+				<hr class="split-list">
+				</div>
+			</div>
+
+			<?php endforeach ?>
+			<?php else :?>
+			<!-- <div class="notify">Requests Not Found!</div> -->
+			<?php endif ?>
+				
+		</div>
+		<!-- END Databases -->
+
+	</div>
+</div>
+
+</div>
+</section>
+
+
+
+<!--CONTACT SECTION START-->
+<!--CONTACT SECTION END-->
+
+<!-- FOOTER -->
+<?php @include('partials/footer.phtml') ?>
+<!-- END FOOTER

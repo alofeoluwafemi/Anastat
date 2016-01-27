@@ -1,0 +1,73 @@
+<!--HEADER -->
+<?php @include('partials/header.phtml') ?>
+<!-- END HEADER -->
+
+<!-- MENU SECTION -->
+<!--MENU SECTION END-->
+
+
+<!--HOME SECTION END-->
+<!--SERVICE SECTION START-->
+<br>
+<br>
+<section id="services" >
+<div class="container">
+<div class="row text-center header">
+</div>
+<div class="row animate-in" data-anim-type="fade-in-up">
+
+<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+	
+</div>
+
+<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+	<div class="services-wrapper">
+	<?php if(session_has('notification')) :?>
+			<div class="notify"><?php echo session_get('notification') ?></div>
+	<?php endif ?>
+	<h3 class="site-init"><i class="ion-key site-red"></i>Affiliate Login</h3>
+		
+		<form class="form-horizontal" method="post" action="<?php echo geturl('affiliatelogin') ?>">
+			<div class="row" id="">
+
+				<!-- PERIOD -->
+				<div class="col-md-12" id="logindiv">
+					<input type="email" name="username" class="form-control" placeholder="username" value="<?php echo get('username') ?>" />
+					<input type="password" name="password" class="form-control" placeholder="*********"/>
+				</div>
+
+				<div id="submitdiv" class="col-md-12">
+						<button  class="btn button-custom btn-custom-two pull-right">
+						Login
+						</button>
+				</div>
+
+			</div>
+		</form>
+		<br>
+		<br>
+	</div>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+</div>
+
+<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+</div>
+
+
+</div>
+</div>
+</section>
+
+
+
+<!--CONTACT SECTION START-->
+
+<!--CONTACT SECTION END-->
+
+<!-- FOOTER -->
+<?php @include('partials/footer.phtml') ?>
+<!-- END FOOTER

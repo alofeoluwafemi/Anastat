@@ -1,0 +1,404 @@
+<?php @include('partials/header.phtml') ?>
+<!-- END HEADER -->
+
+<!-- MENU SECTION -->
+<?php @include('partials/frontmenu.phtml') ?>
+<!--MENU SECTION END-->
+
+
+<!--HOME SECTION END-->
+<!--SERVICE SECTION START-->
+<br>
+<br>
+
+
+
+<section id="services">
+<div class="container">
+<div class="row text-center header">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 animate-in" data-anim-type="fade-in-up">
+<h3 style="margin:0px;">REQUEST DATA</h3>
+<hr style="margin-top:5px !mportant;margin-bottom:0px"/>
+</div>
+</div>
+<div class="row animate-in" data-anim-type="fade-in-up">
+
+<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+	<div class="services-wrapper" style="padding:6px !important">
+	<h3><i class="ion-social-buffer-outline"></i> Databases</h3>
+	<hr style="margin-top:10px;margin-bottom:5px"/>
+	<h3  class="text-center" style="margin-top:5px;margin-bottom:5px;">Micro Data</h3>
+	<hr style="margin-top:5px;margin-bottom:10px"/>
+	<ul class="database">
+	<?php if(!empty($Micros)) :?>
+	<?php foreach($Micros as $database) :?>
+		<li><span class="dart fa fa-caret-right databaselist" id="<?php echo 'data'.$database['id']?>"  data-code="<?php echo $database['shortcode'] ?>"  data-type="<?php echo $database['type'] ?>" data-fetch="<?php echo "database/{$database['id']}" ?>">
+		<?php echo $database['databasename'] ?></span>
+		<span class="ion-ios-help-outline pull-right site-init question" onclick=window.open("help/<?php echo $database['id'] ?>","Ratting","width=550,height=300,left=500,top=200,status=0,scrollbars=1")></span>
+		</li>
+	<?php endforeach?>
+	<li><a href="<?php echo geturl('surveyresearch') ?>" title="download database sectors free" class="dart fa fa-star green surveydata">RESEARCH &amp; SURVEY RESOURCES</a></li>
+	<?php endif ?>
+	</ul>
+	<hr style="margin-top:15px;margin-bottom:5px"/>
+	<h3  class="text-center" style="margin-top:5px;margin-bottom:5px;">Macro Data</h3>
+	<hr style="margin-top:5px;margin-bottom:10px"/>
+	<ul class="database">
+	<?php if(!empty($Macros)) :?>
+	<?php foreach($Macros as $database) :?>
+		<li><span class="dart fa fa-caret-right databaselist" id="<?php echo 'data'.$database['id']?>"  data-code="<?php echo $database['shortcode'] ?>"  data-type="<?php echo $database['type'] ?>" data-fetch="<?php echo "database/{$database['id']}" ?>">
+		<?php echo $database['databasename'] ?></span>
+		<span class="ion-ios-help-outline pull-right site-init question" onclick=window.open("help/<?php echo $database['id'] ?>","Ratting","width=550,height=300,left=500,top=200,status=0,scrollbars=1")></span></li>
+	<?php endforeach?>
+	<?php endif ?>
+	</ul>
+	</div>
+</div>
+
+<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+	<div class="services-wrapper" id="financeplace">
+	<h3><i class="ion-pie-graph"></i> Data Selection</h3>
+		
+		<?php if(isset($notification) && !empty($notification)) :?>
+			<div class="notify" style="width:100% !important"><?php echo $notification ?></div>
+			<?php endif ?>
+
+		<form class="form-horizontal ajaxForm" method="post" action="<?php echo geturl('newrequest') ?>">
+			<div class="row" id="finance">
+			<input type="hidden" name="submissiontype" id="submissiontype" value="nomore" />
+				
+				<!-- EMPTY SELECTION -->
+				<div class="col-md-12" id="empty">
+				<?php if(!empty($Surveys)) :?>
+				<h5 class="text-center inline">Select Any To Download</h5>
+				<a href="<?php echo geturl("surveyresearch") ?>" class="site-init action-btn pull-right">
+				<i class="ion-ios-arrow-back fonts site-red"></i> Back</a>
+				<hr>
+
+						<ul class="sectorslist">
+						<?php foreach($Surveys as $data) :?>
+							<li>
+							<a title="click to download pdf file" href="<?php echo geturl('download.php?action=download&filename='.$data['pathname']) ?>" 
+							class="dart site-init surveydata">
+							<?php echo $data['filename'] ?></a>
+							<span class="ion-android-download pull-left site-red question"></span>
+							</li>
+						<?php endforeach?>
+						</ul>
+						<?php else:?>
+							<div class="notifystay" style="width:100% !important">Sorry there are no free database under this sub sector</div>
+							<br><a href="<?php echo geturl("surveyresearch") ?>" class="site-init action-btn pull-right">
+							<i class="ion-ios-arrow-back fonts site-red"></i> Back</a>
+						<?php endif ?>
+				</div>
+				
+				<input type="hidden" name="databasename" value="" />
+
+				<!-- TABLE PLACEHOLDERS -->
+				<div class="col-md-12" id="tables">
+					
+				</div>
+				
+				<!-- LEVEL OF AGGREGATION -->
+				<div class="col-md-12" id="laggregation">
+					
+				</div>
+				
+				<!-- CATEGORY OF AGGREGATION -->
+				<div class="col-md-12" id="caggregation">
+					
+				</div>
+				
+				<!-- FREQUENCY OF DATA -->
+				<div class="col-md-12" id="frequency">
+					
+				</div>
+				
+				<!-- VARIABLES -->
+				<div class="col-md-12" id="variables">
+					
+				</div>
+				
+				<!-- PERIOD -->
+				<div class="col-md-12" id="period">
+					  
+				</div>
+
+				<!-- PERIOD -->
+				<!-- <div class="col-md-12 hide" id="manualperiod">
+				<br>
+					<div class="col-md-12 margin-top-1" id="logindiv">
+						<label for="from" class="col-md-2 site-init">From</label>
+						<div class="col-md-4">
+						<input type="text" class="form-control datepicker" name="from" id="from" required placeholder="dd/mm/YYYY" >
+						</div>
+						<label for="to" class="col-md-2 site-init">To</label>
+						<div class="col-md-4">
+						<input type="text" class="form-control datepicker" name="to" id="to" required placeholder="dd/mm/YYYY" >
+						</div>
+					</div>
+					<small class="site-init"><i class="fonts ion-information-circled site-red"></i>manually input additional period</small>
+				</div> -->
+
+
+				<div id="submitdiv" class="hide col-md-12">
+				<h5 class="site-init">Do you have additional instruction/comments? Please type</h5>
+					<textarea name="comment" required class="form-control comment dcomment"></textarea>
+						<a href="#" class="btn button-custom btn-custom-two pull-left" id="addnew" onclick="submitrequest(this.id,'addnew')">
+						Save &amp; make additional request</a>
+						<a href="#" class="btn button-custom btn-custom-two pull-right" id="addproceed" onclick="submitrequest(this.id,'add')">
+						Submit Request</a>
+				</div>
+
+			</div>
+		</form>
+
+	</div>
+
+	<div class="services-wrapper hide" id="clientdetails">
+		<h4 class="site-red">Terms &amp; Conditions</h4>
+		<span class="site-init">
+		There are terms and conditions attached to the use and dissemination of this database.
+		Make sure you review them before submission.<a href="#">Read terms &amp; conditions</a>
+		</span>
+		
+		<form class="form-horizontal" method="post" action="<?php echo geturl('/') ?>" id="addclient">
+
+		<input type="hidden" name="requestid[]" value="" />
+		<br>
+		<span class="site-init">Complete your request and help us serve you better, fill the form below</span>
+		<br>
+		<h5 class="site-red text-center">BIO FORM</h5>
+
+			<div class="col-md-12" id="logindiv">
+				<input type="text" class="form-control" name="name"  required placeholder="Name"/>
+				
+				<select name="sex" class="form-control">
+					<option value="Male">Male</option>
+					<option value="Male">Female</option>
+				</select>
+
+				<input type="email" class="form-control" name="email" required placeholder="Email"/>
+				<input type="text" class="form-control numlock" name="phone" required placeholder="Telephone"/>
+				<input type="text" class="form-control" name="address" required placeholder="Address"/>
+			</div>
+			
+			<select name="clienttype" class="form-control">
+					<option value="">Select Client Type</option>
+					<option value="personal">Independent</option>
+					<option value="affiliate">Registered/Affiliated</option>
+			</select>
+			
+			<div class="institution_detail logindiv hide col-md-12">
+			<br>
+				<select name="instituition" class="form-control">
+					<option value="">Select Instituition</option>
+					<?php foreach($Instituitions as $institute) :?>
+						<option data-code="<?php echo $institute['affiliate_code'] ?>" value="<?php echo $institute['affiliate_name'] ?>"><?php echo $institute['affiliate_name'] ?></option>
+					<?php endforeach ?>
+				</select>
+
+				<input type="text" class="form-control" name="instituition_code" autocomplete="off" placeholder="Instituition Code"/>
+				<small class="site-init codeinfo"><i class="fonts ion-information-circled site-red"></i>provide correct insituition code activate submit button</small>
+				
+				<input type="text" class="form-control" name="designation"   placeholder="Designation"/>
+				<input type="text" class="form-control" name="idn" placeholder="Identification Number"/>
+			</div>
+
+
+			<div id="submitdiv" class="col-md-12 clientsubmit">
+				<br>
+				<button  class="btn button-custom btn-custom-two pull-right">
+				OK Submit
+				</button>
+			</div>
+
+		</form>
+
+	</div>
+</div>
+
+<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+	<div class="services-wrapper">
+	<h3><i class="ion-clipboard"></i> Overview</h3>
+	
+	<div class="row" id="requestlists">
+		<!-- DATBASE OVERVIEW -->
+		<div class="col-md-12 hide" id="databaseoverview">
+			<h5 class="site-red">Database</h5>
+			<span class="content site-init"></span>
+		<hr class="splitter"/>
+		</div>
+
+		<!-- Table OVERVIEW -->
+		<div class="col-md-12 hide" id="tableoverview">
+			<h5 class="site-red">Table</h5>
+			<span class="content site-init"></span>
+		<hr class="splitter"/>
+		</div>
+
+		<!-- Level of Aggregation -->
+		<div class="col-md-12 hide" id="lagoverview">
+			<h5 class="site-red">Level Of Aggregation</h5>
+			<span class="content site-init"></span>
+		<hr class="splitter"/>
+		</div>
+
+		<!-- Cateory of Aggregation -->
+		<div class="col-md-12 hide" id="cagoverview">
+			<h5 class="site-red">Cateory Of Aggregation</h5>
+			<span class="content site-init"></span>
+		<hr class="splitter"/>
+		</div>
+	
+		<!-- Variables -->
+		<div class="col-md-12 hide" id="freqoverview">
+			<h5 class="site-red">Frequency</h5>
+			<span class="content site-init"></span>
+		<hr class="splitter"/>
+		</div>
+
+		<!-- Variables -->
+		<div class="col-md-12 hide" id="variableoverview">
+			<h5 class="site-red">Variables</h5>
+			<span class="content site-init"></span>
+		<hr class="splitter"/>
+		</div>
+
+		<!-- Periods -->
+		<div class="col-md-12 hide" id="periodoverview">
+			<h5 class="site-red">Periods</h5>
+			<span class="content site-init"></span>
+		<hr class="splitter"/>
+		</div>
+
+		<!-- Note -->
+		<div class="col-md-12 hide" id="commentoverview">
+			<h5 class="site-red">Comment</h5>
+			<span class="content site-init"></span>
+		<!-- <hr class="splitter"/>> -->
+		</div>
+		
+		<div id="savereview" class=" col-md-12 hide">
+			<!-- <a href="#" class="btn button-custom btn-custom-two pull-left">Save</a> -->
+			<a href="#" id="submitAll" class="btn button-custom btn-custom-two pull-right" onclick="submitAllRequest()">Submit All Requests</a>
+		</div>
+	</div>
+
+	</div>
+
+	<div class="row">
+		<div class="col-md-12 hide" id="clientsoverview">
+		<!-- Table OVERVIEW -->
+		<div class="col-md-12" id="cl_name_overview">
+			<h5 class="site-red">Name</h5>
+			<span class="content site-init"></span>
+		<hr class="splitter"/>
+		</div>
+
+		<!-- Level of Aggregation -->
+		<div class="col-md-12" id="cl_sex_overview">
+			<h5 class="site-red">Sex</h5>
+			<span class="content site-init"></span>
+		<hr class="splitter"/>
+		</div>
+
+		<!-- Cateory of Aggregation -->
+		<div class="col-md-12" id="cl_email_overview">
+			<h5 class="site-red">Email</h5>
+			<span class="content site-init"></span>
+		<hr class="splitter"/>
+		</div>
+
+		<!-- Cateory of Aggregation -->
+		<div class="col-md-12" id="cl_add_overview">
+			<h5 class="site-red">Address</h5>
+			<span class="content site-init"></span>
+		<hr class="splitter"/>
+		</div>
+	
+		<!-- Variables -->
+		<div class="col-md-12" id="cl_phone_overview">
+			<h5 class="site-red">Telephone</h5>
+			<span class="content site-init"></span>
+		<hr class="splitter"/>
+		</div>
+
+		<!-- Variables -->
+		<div class="col-md-12" id="cl_institution_overview">
+			<h5 class="site-red"> Institutional affiliation</h5>
+			<span class="content site-init"></span>
+		<hr class="splitter"/>
+		</div>
+
+		<!-- DATBASE OVERVIEW -->
+		<div class="col-md-12" id="cl_designation_overview">
+			<h5 class="site-red">Designation</h5>
+			<span class="content site-init"></span>
+		<hr class="splitter"/>
+		</div>
+
+		</div>
+	</div>
+
+</div>
+
+
+</div>
+</div>
+
+<!-- CLIENT FORM CONFIRM -->
+<div class="modal fade" id="clientconfirm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+       <h5 class="site-init"> Are you sure you want to submit all requests ?</h5>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default site-red" data-dismiss="modal">No Thanks!</button>
+        <button type="button" onclick="submitClientForm()" class="btn btn-default green">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- REQUEST DELETE CONFIRM BOX -->
+<div class="modal fade" id="deletePrompt" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+       <h5 class="site-init"> Are you sure you want to edit this request ?</h5>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default site-red" data-dismiss="modal">No Thanks!</button>
+        <button type="button" id="firedit" class="btn btn-default green">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WARNING -->
+<div class="modal fade" id="warningPrompt" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+       <h5 class="site-init">
+       <b class="site-red">Warning: </b> Date selected in <b class="site-red">To</b> field must be greater than <b class="site-red">From</b> field</h5>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default site-red" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</section>
+
+
+
+<!--CONTACT SECTION START-->
+<!--CONTACT SECTION END-->
+
+<!-- FOOTER -->
+<?php @include('partials/footer.phtml') ?>
+<!-- END FOOTER
