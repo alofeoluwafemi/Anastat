@@ -1,0 +1,92 @@
+<?php
+$viewpath = config('view_path');
+@include($viewpath.'partials/header.phtml')
+?>
+<!-- END HEADER -->
+
+<!-- MENU SECTION -->
+<?php @include($viewpath.'partials/frontmenu.phtml') ?>
+<!--MENU SECTION END-->
+
+<!--SERVICE SECTION START-->
+<br>
+<br>
+
+<section id="services">
+    <div class="container">
+
+        <div class="row text-center header">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 animate-in" data-anim-type="fade-in-up">
+                <h3 style="margin:0px;">REQUEST DATA</h3>
+                <hr style="margin-top:5px !mportant;margin-bottom:0px"/>
+            </div>
+        </div>
+
+        <div class="row animate-in" data-anim-type="fade-in-up">
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                <?php include($viewpath.'partials/databaselist.phtml') ?>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+                <div class="services-wrapper" id="financeplace">
+                    <h3><i class="ion-pie-graph"></i> Data Selection</h3>
+
+                    <?php if(isset($notification) && !empty($notification)) :?>
+                        <div class="notify" style="width:100% !important"><?php echo $notification ?></div>
+                    <?php endif ?>
+
+                    <div class="col-md-12" id="empty">
+                        <?php if(!empty($Surveys)) :?>
+                            <h5 class="text-center inline">Select Any To Download</h5>
+                            <a href="<?php echo geturl("surveyresearch") ?>" class="site-init action-btn pull-right">
+                                <i class="ion-ios-arrow-back fonts site-red"></i> Back</a>
+                            <hr>
+
+                            <ul class="sectorslist">
+                                <?php foreach($Surveys as $data) :?>
+                                    <li>
+                                        <a title="click to download pdf file" href="<?php echo geturl('download.php?action=download&filename='.$data['pathname']) ?>"
+                                           class="dart site-init surveydata">
+                                            <?php echo $data['filename'] ?></a>
+                                        <span class="ion-android-download pull-left site-red question"></span>
+                                    </li>
+                                <?php endforeach?>
+                            </ul>
+                        <?php else:?>
+                            <div class="notifystay" style="width:100% !important">Sorry there are no free database under this sub sector</div>
+                            <br><a href="<?php echo geturl("surveyresearch") ?>" class="site-init action-btn pull-right">
+                                <i class="ion-ios-arrow-back fonts site-red"></i> Back</a>
+                        <?php endif ?>
+                    </div>
+
+                    <?php include($viewpath.'partials/requestform.phtml') ?>
+                </div>
+
+                <?php include($viewpath.'partials/clientform.phtml') ?>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                <?php include($viewpath.'partials/requestoverview.phtml') ?>
+            </div>
+
+            <div class="row">
+                <?php include($viewpath.'partials/clientoverview.phtml') ?>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    </div>
+    </div>
+
+
+    <?php include($viewpath.'partials/prompts.phtml') ?>
+
+</section>
+
+
+<!-- FOOTER -->
+<?php include($viewpath.'partials/footer.phtml') ?>
+<!-- END FOOTER -->

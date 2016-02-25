@@ -40,18 +40,44 @@ function config($key)
 function views($view)
 {
 	return config('view_path').$view.'.phtml';
+	exit;
 }
 
 /**
  * Inlude a view path
 **/
-function view($view,$variables = array())
+function frontview($view,$variables = array())
+{
+	$viewpath = config('view_path');
+
+	// var_dump($variables);
+	//Import variables into the current page
+	extract($variables);
+
+	include_once( views('frontend/'.$view) );
+}
+
+/**
+ * Inlude a view path
+ **/
+function backview($view,$variables = array())
+{
+	extract($variables);
+	ob_flush();
+	include_once(views('backend/'.$view));
+	ob_clean();
+}
+
+/**
+ * Inlude a view path
+ **/
+function errorview($view,$variables = array())
 {
 	// var_dump($variables);
 	//Import variables into the current page
 	extract($variables);
 
-	include_once( views($view) );
+	include_once( views('errors/'.$view) );
 }
 
 function setupSession($session,$savepath = 'storage/sessions')
@@ -175,14 +201,16 @@ function login($details)
 {
 	// dd(md5('password'));
 	extract($details);
-    $hashkey  = hashkey($password);
+    $hashkey  = hashkey($password);//check
+
+    $url = geturl('login');
 
     if(!empty($username) || empty($password))
     {
         $db = App('App\DB')->conn();
 
         $user = App('App\Entities\User')->login($username,$hashkey);
-
+        
         if(!empty($user) && !is_null($user))
         {
             $data = serialize($user);
@@ -193,15 +221,23 @@ function login($details)
             session_put('site_logged_in',$site_logged_in);
 
 			$url = geturl('admin/dashboard');
-			redirect_to($url,array('as' => 'message','message' => 'Welcome to anastat admin : <span class="site-red">'.user('username') .'</span>'));
+			redirect_to($url,array('as' => 'notification','message' => 'Welcome to anastat admin : <span class="site-red">'.user('username') .'</span>'));
         }
         else{
-        	$url = geturl('login');
-			redirect_to($url,array('as' => 'notification','message' => 'Incorrect username or password supplied' ));
+
+        	$notification = 'Incorrect username or password supplied';
+
+			$url .= "?error={$notification}";
+
+			redirect_to($url,array('as' => 'notification','message' => $notification ));
         }
     }else{
-        	$url = geturl('login');
-			redirect_to($url,array('as' => 'notification','message' => 'Invalid username or password'));
+
+        	$notification = 'Invalid username or password';
+
+			$url .= "?error={$notification}";
+
+			redirect_to($url,array('as' => 'notification','message' => $notification));
     }
 }
 
@@ -211,6 +247,9 @@ function loginaffiliate($details)
 
     $hashkey  = hashkey($password);
 
+    $url = geturl('affiliate/login');
+
+
     if(!empty($username) || empty($password))
     {
         $db = App('App\DB')->conn();
@@ -219,6 +258,23 @@ function loginaffiliate($details)
 
         if(!empty($user) && !is_null($user))
         {
+        	$Affiliate  = App('App\Entities\Affiliate')->get($user['affiliate_id']);
+        	$status     = $Affiliate['status'];
+        	$balance    = $Affiliate['datasize'];
+
+        	$affiliate = $Affiliate['affiliate_name'];
+
+        	$notification = "Affiliate subscription may have being exhasted. Contact ADSR";
+
+        	if($status == 0 || $balance == 0) 
+        	{
+        		$url .= "?error={$notification}";
+
+        		return redirect_to($url,array('as' => 'notification','message' => $notification ));
+        	}
+
+        	$user['affiliate_name'] = $affiliate;
+        	
             $data = serialize($user);
 
             //Save details to session
@@ -227,15 +283,25 @@ function loginaffiliate($details)
             session_put('affiliate_logged_in',$affiliate_logged_in);
 
 			$url = geturl('affiliate/dashboard');
+
+			// $url .= "?error={$notification}";
+
 			redirect_to($url,array('as' => 'message','message' => 'Welcome to anastat affiliate manager : <span class="site-red">'.user('username') .'</span>'));
         }
         else{
-        	$url = geturl('affiliatelogin');
-			redirect_to($url,array('as' => 'notification','message' => 'Incorrect username or password supplied' ));
+
+        	$notification = 'Incorrect username or password supplied';
+
+        	$url .= "?error={$notification}";
+
+			redirect_to($url,array('as' => 'notification','message' => $notification ));
         }
     }else{
-        	$url = geturl('affiliatelogin');
-			redirect_to($url,array('as' => 'notification','message' => 'Invalid username or password'));
+    		$notification = 'Invalid username or password';
+
+    		$url .= "?error={$notification}";
+
+			redirect_to($url,array('as' => 'notification','message' => $notification));
     }
 }
 
@@ -277,7 +343,6 @@ function affiliate($key)
 
 function session_put($key,$value)
 {
-	// dd(func_get_args());
 	$_SESSION[$key] = $value;
 }
 
@@ -286,7 +351,7 @@ function session_get($key)
 	if(session_has($key)) 
 	{
 		$val = $_SESSION[$key];
-		// unset($_SESSION[$key]);
+		 unset($_SESSION[$key]);
 
 		return $val;
 	}
@@ -300,7 +365,7 @@ function session_has($key)
 	return FALSE;
 }
 
-function logout()
+function logout($url)
 {
 	//IF AFFILIATE AND ADMIN IS LOGGED ON THE SAME SYSTEM LOG THEM BOTH OUT
 	if(is_logged_and_is_admin() && is_logged_and_is_affiliate())
@@ -311,7 +376,7 @@ function logout()
         $_SESSION['affiliate_logged_in'] = [];
         unset( $_SESSION['affiliate_logged_in'] );
 
-        return redirect_to('/');
+        return redirect_to($url);
 	}
 
 	//LOGOUT ADMIN
@@ -320,7 +385,7 @@ function logout()
         $_SESSION['site_logged_in'] = [];
         unset( $_SESSION['site_logged_in'] );
 
-        return redirect_to('/');
+        return redirect_to('/admin/login');
         // return redirect_to('admin/login');
     }
 
@@ -330,7 +395,7 @@ function logout()
     	$_SESSION['affiliate_logged_in'] = [];
         unset( $_SESSION['affiliate_logged_in'] );
 
-        return redirect_to('/');
+        return redirect_to('/affiliate/login');
         // return redirect_to('admin/affiliatelogin');
     }
 }
@@ -398,4 +463,77 @@ function geturi()
 		return $uri = substr_replace($uri,"",$start,$end);
 	}
 	return ($uri);
+}
+
+function formatcode($jsonstring)
+{
+	$json = json_decode($jsonstring,true);
+
+	$code  = $json['database'];
+	$code .= " ";
+	$code .= implode(',',$json['variables']);
+	$code .= " ";
+	$code .= $json['table'].$json['level'].$json['frequency'];
+	$code .= " ";
+	$code .= implode(',',$json['categories']);
+
+	return $code;
+}
+
+function restrict_user()
+{
+	if(!super()) return redirect_to('dashboard',array('as' => 'message','message' => 'You don\'t have permission to perform action.contact super administrator '));
+}
+
+
+function token()
+{
+	$token = md5(rand(2,9));
+
+	$input = '<input name="token" value="{token}" type="hidden" />';
+
+	str_replace("{token}", $token, $input);
+
+	if(!session_has('token')) $_SESSION["token"] = [];
+
+	if(session_has('token')) $_SESSION["token"][] = $token;
+
+	echo $input;
+
+	dd($_SESSION);
+}
+
+
+function csrf($data)
+{
+	// dd(func_get_args());
+	extract($data);
+
+	$tokens = (session_has('token')) ? $_SESSION['token'] : array();
+
+	if($key = array_search($token,$tokens))
+	{
+		unset($_SESSION['token'][$key]);
+			$report = TRUE;
+	}
+	else{
+			$report =  FALSE;
+	}
+
+	dd($report);
+
+}
+
+/**
+ * @param $date
+ * @param $format
+ * @return bool|string
+ */
+function format_date($date, $format)
+{
+   $formated_date =  date($format,strtotime($date));
+
+    if($formated_date) return $formated_date;
+
+    return $date;
 }

@@ -1,6 +1,5 @@
 <?php
-//221Gorr362   africa23   http://africanphilosophicalinquiry.com/cpanel
-return array(
+return [
 
 		"sitename" => "ANASTAT",
 
@@ -25,4 +24,4 @@ return array(
 		"db_user" => "oluwaslim",
 
 		"db_pass" => "oluwaslim"
-);
+];

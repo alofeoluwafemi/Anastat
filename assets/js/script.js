@@ -111,7 +111,6 @@ $(function(){
 
 		//Display reviewsave
 		savereview(false);
-		hidemanualdate();
 
 		return false;
 	});
@@ -149,7 +148,6 @@ $(function(){
 
 		//Display reviewsave
 		savereview(false);
-		hidemanualdate();
 
 		return false;
 	});
@@ -184,7 +182,6 @@ $(function(){
 
 		//Display reviewsave
 		savereview(false);
-		hidemanualdate();
 
 		return false;
 	});
@@ -196,14 +193,10 @@ $(function(){
 		var url       = 'frequency/' + $('select[name=table]').find(':selected').data('id'),
 		id            = "#frequency",
 		data          =  {},
-		divs 		  =  ['#frequency','#variables','#period'],
+		divs 		  =  ['#period'],
 		datainput 	  =  $('select[name="caggregation[]"]').val();
 
-		//Clear succesive divs
-		for(selector in divs)
-		{
-			$(divs[selector]).html('');
-		}
+		console.log("category added here");
 
 		//Display loader notification
 		displayloader();
@@ -218,7 +211,6 @@ $(function(){
 
 		//Display reviewsave
 		savereview(false);
-		hidemanualdate();
 
 		return false;
 	});
@@ -227,7 +219,7 @@ $(function(){
 	* Retrieve variables
 	*/
 	$(document).on('change','select[name=frequency]',function(){
-		var url       = 'variable/' + $('select[name=table]').find(':selected').data('id') + '/' + $('select[name=laggregation]').find(':selected').data('id'),
+		var url       = 'variable/' + $('select[name=table]').find(':selected').data('id') + '/' + $('select[name=laggregation]').find(':selected').data('id') + '/' + $('select[name=frequency]').find(':selected').data('id'),
 		id            = "#variables",
 		url2          = 'periods/' + $('select[name=frequency]').find(':selected').data('id')
 		id2           = "#period",
@@ -256,7 +248,6 @@ $(function(){
 
 		//Display reviewsave
 		savereview(false);
-		hidemanualdate();
 
 		return false;
 	});
@@ -286,7 +277,6 @@ $(function(){
 
 		//Display reviewsave
 		savereview(false);
-		// hidemanualdate();
 
 		return false;
 	});
@@ -477,7 +467,7 @@ $(function(){
 	/**
 	*Toggle Client Type Details
 	**/
-	$('select[name=clienttype]').bind('click',function(){ 
+	$('select[name=clienttype]').bind('click',function(){
 		if($(this).val() == "affiliate")
 		{
 			$('.institution_detail').removeClass("hide");
@@ -503,9 +493,10 @@ $(function(){
 
 		if(code != $(this).val())
 		{
-			$('.codeinfo').removeClass('hide');
+			info = 'Provide correct institution code to activate submit button';
+			$('.codeinfo').html(info).removeClass('hide');
 			$('.clientsubmit').addClass("hide");												//If code match allow submit
-			$('input[name=instituition_code]').css('border','1px solid #FF8A00 !important');	//DIffrentiate border color if code is not correct
+			$('input[name=instituition_code]').css('border','1px solid #FF8A00 !important');	//Diffrentiate border color if code is not correct
 		}
 
 		return false;
@@ -695,7 +686,8 @@ $(function(){
 		$('#cl_name_overview').children('span.content').html( $(this).val() );
 	});
 
-	$('[name=address]').bind('keyup',function()
+
+	$('[name=address]',).bind('keyup',function()
 	{
 		$('#cl_add_overview').children('span.content').html( $(this).val() );
 	});
@@ -905,42 +897,45 @@ function submitClientForm()
 {
 	//All fields are required
 	var inputs = $.map($('form#addclient').find('input[type=text]'),function(input,index){
-		if(input.autocomplete != "off") return input.value;
+		if(input.autocomplete != "off" && input.required == true) return input.value;
 	});
 
 	var selects = $.map($('form#addclient').find('select'),function(input,index){
-		if(input.autocomplete != "off") return input.value;
+		if(input.autocomplete != "off" && input.required == true) return input.value;
 	});
 
 	//Disallow field submission is empty value is present
 	if($.inArray("",inputs) > -1)
 	{
+		$('#submitclientbutton').html('Yes');
 		$(document).find('.modal').modal('hide');														//Close any previous opened modal
 		showarning('<b class="site-red">Warning: </b> No required field in the bio form must be empty!');
 		return false;
 	}
 
-	if($.inArray("",selectval) > -1)
+	if($.inArray("",selects) > -1)
 	{
+		$('#submitclientbutton').html('Yes');
 		$(document).find('.modal').modal('hide');														//Close any previous opened modal
 		showarning('<b class="site-red">Warning: </b> No required field in the bio form must be empty!');
 		return false;
 	}
 	//End check
 
-	console.log('allow to submit');
-	return false
+	$('#submitclientbutton').html('<i class="fa fa-spinner fa-spin"></i> Submitting.....');
+	// return false;
 
 	$('#addclient').submit();
 }
 
 function loadpage(url,id,data)
 {
+	// console.log(url);
 		//Fetch Tables
 		$.get(url,data)
 
 		.done(function(response){
-
+			// console.log('response');
 			$(id).html(response);
 			//initialize chosen
 			init();
@@ -1173,7 +1168,7 @@ function deleteRequest(requestid)
 
 }
 
-//Gte site absolute url
+//Get site absolute url
 function getUrl()
 {
 	var host = window.location.host,
@@ -1301,7 +1296,7 @@ function getCookie(cname) {
 
 function clickADatabase(id)
 {
-	console.log(id);
+	// console.log(id);
 
 	var lastClickedFromSurvey = id;
 
@@ -1348,6 +1343,7 @@ function clickADatabase(id)
 				                    marginTop: '17%',
 				                    borderRadius: '0px !Important'
 				        });
+				        // instance.find('.ui-datepicker-month').css('display','none !important');
 		    		},
 		    	onClose: function() {
 		        		var iYear = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
@@ -1387,4 +1383,42 @@ function clickADatabase(id)
 	{
 		$('#deletePromptAdmin').find('a').attr('href',url);
 		$('#deletePromptAdmin').modal();
+	}
+
+	function deselectalloption(triggerer,selects)
+	{
+		//Deselect all variables once
+		$(document).on('change',triggerer,function(e){
+			var status = $(this).is(':checked');
+			val    = $(this).val();
+
+			if(status == true) 
+			{
+				$(selects).find('option').prop('selected',false);
+	   			$('.chosentable').trigger('chosen:updated');
+
+	   			$('input[name=selectall]').attr('checked',false);
+	   			$(triggerer).attr('checked',false);
+			}
+		});
+	}
+
+
+	function selectalloption(triggerer,selects)
+	{
+		$(document).on('change',triggerer,function(e){
+		var status = $(this).is(':checked');
+		val    = $(this).val();
+
+		if(status == true) 
+		{
+			$(selects).find('option').prop('selected',true);
+   			$('.chosentable').trigger('chosen:updated');
+
+   			$(triggerer).attr('checked',false);
+
+   			var data = $('.dvariable').val();
+		}
+
+	});
 	}

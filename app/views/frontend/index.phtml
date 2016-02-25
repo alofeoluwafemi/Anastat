@@ -1,0 +1,79 @@
+<?php
+$viewpath = config('view_path');
+@include($viewpath.'partials/header.phtml')
+?>
+<!-- END HEADER -->
+
+<!-- MENU SECTION -->
+<?php @include($viewpath.'partials/frontmenu.phtml') ?>
+<!--MENU SECTION END-->
+
+<!--SERVICE SECTION START-->
+<br>
+<br>
+
+<section id="services">
+<div class="container">
+
+    <div class="row text-center header">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 animate-in" data-anim-type="fade-in-up">
+    <h3 style="margin:0px;font-size:20px">REQUEST DATA</h3>
+    <hr style="margin-top:10px !important;margin-bottom:0px"/>
+    </div>
+    </div>
+
+    <div class="row animate-in" data-anim-type="fade-in-up">
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+            <?php include($viewpath.'partials/databaselist.phtml') ?>
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+            <div class="services-wrapper overviewdivbox" id="financeplace">
+            <h3><i class="ion-pie-graph"></i> Data Selection</h3>
+
+                <?php if(isset($notification) && !empty($notification)) :?>
+                    <div class="alert alert-warning alert-dismissible anasatnotification" role="alert">
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <i class="ion-information-circled anasatnotificationfont"></i> <?php echo $notification ?>
+                    </div>
+                <?php endif ?>
+
+                <div class="col-md-12" id="empty">
+                    <hr/>
+                    <h5 class="text-center site-init notifications">
+                        <i class="fa fa-info-circle site-red info"></i> Kindly Select From Database To Request Data
+                    </h5>
+                    <hr/>
+                </div>
+
+                <?php include($viewpath.'partials/requestform.phtml') ?>
+            </div>
+
+            <?php include($viewpath.'partials/clientform.phtml') ?>
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+            <?php include($viewpath.'partials/requestoverview.phtml') ?>
+        </div>
+
+        <div class="row">
+            <?php include($viewpath.'partials/clientoverview.phtml') ?>
+        </div>
+
+    </div>
+
+</div>
+
+
+</div>
+</div>
+
+
+<?php include($viewpath.'partials/prompts.phtml') ?>
+
+</section>
+
+
+<!-- FOOTER -->
+<?php include($viewpath.'partials/footer.phtml') ?>
+<!-- END FOOTER -->

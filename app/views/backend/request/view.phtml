@@ -1,0 +1,278 @@
+<!--HEADER -->
+<?php
+$viewpath = config('view_path');
+include($viewpath.'/partials/adminheader.phtml');
+?>
+<!-- END HEADER -->
+
+<!-- MENU SECTION -->
+<?php include($viewpath.'partials/backendmenu.phtml') ?>
+<!--MENU SECTION END-->
+
+<!--SERVICE SECTION START-->
+<!--HOME SECTION END-->
+<!--SERVICE SECTION START-->
+<section id="services" style="padding-top:55px">
+<div class="container">
+<div class="row text-center header">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 animate-in" data-anim-type="fade-in-up">
+<h3 class="" style="color:#444;font-size:18px">REQUEST DATA OVERVIEW</h3>
+</div>
+</div>
+<div class="row animate-in" data-anim-type="fade-in-up">
+
+<div class="col-md-12">
+	<ol class="breadcrumb">
+			<li><a href="<?php echo geturl('admin/dashboard')?>">Dashboard</a></li>
+			<li><a href="<?php echo geturl("admin/requests")?>">Requests</a></li>
+			<li class="active">View</li>
+	</ol>
+</div>
+<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+<div class="services-wrapper">
+	
+	<div class="row bioform" id="requestlists">
+		<h5 class="client-title site-init no-margin" style="">BIO FORM</h5>
+		<div class="col-md-12">
+			<h5 class="site-red">Name</h5>
+			<span class="content site-init"><?php echo $Client['name'] ?></span>
+			<hr class="splitter"/>
+		</div>
+		<div class="col-md-12">
+			<h5 class="site-red">Sex</h5>
+			<span class="content site-init"><?php echo $Client['sex'] ?></span>
+			<hr class="splitter"/>
+		</div>
+		<div class="col-md-12">
+			<h5 class="site-red">Email</h5>
+			<span class="content site-init"><?php echo $Client['email'] ?></span>
+			<hr class="splitter"/>
+		</div>
+		<div class="col-md-12">
+			<h5 class="site-red">Phone</h5>
+			<span class="content site-init"><?php echo $Client['phone'] ?></span>
+			<hr class="splitter"/>
+		</div>
+		<div class="col-md-12">
+			<h5 class="site-red">Address</h5>
+			<span class="content site-init"><?php echo $Client['address'] ?></span>
+			<hr class="splitter"/>
+		</div>
+		
+		<?php if(!empty($Client['affiliate_id'])) :?>
+		<div class="col-md-12">
+			<h5 class="site-red">Designation</h5>
+			<span class="content site-init"><?php echo $Client['position_instituition'] ?></span>
+			<hr class="splitter"/>
+		</div>
+		<div class="col-md-12">
+			<h5 class="site-red">Identification No</h5>
+			<span class="content site-init"><?php echo $Client['identification_no'] ?></span>
+		</div>
+		<div class="col-md-12">
+			<h5 class="site-red">Institution</h5>
+			<span class="content site-init"><?php echo $Client['affiliate_name'] ?></span>
+		</div>
+		<?php endif ?>
+
+		<div class="col-md-12">
+			<h5 class="site-red">Approval Status</h5>
+			<button class="btn button-custom btn-custom-two  only-margin-top-3
+			<?php echo ($Client['approved'] == 'awaiting') ? 'ion-ios-reload' :
+			 (($Client['approved'] == 'approved') ? 'ion-checkmark' : 'ion-close-round') ?>">
+			
+			<?php echo ucfirst($Client['approved']) ?>
+			</button>
+		</div>
+		
+
+		<div class="col-md-12 nopad">
+		<br>
+		<h5 class="client-title site-init no-margin" style="">MANGERS COMMENT</h5>
+		<div class="col-md-12">
+			<span class="content site-init">
+			<?php echo ($Client['manager_comment'] == NULL) || empty($Client['manager_comment']) ? 'No comment!' : $Client['manager_comment']  ?>
+			</span>
+		</div>
+		</div>
+
+		<div class="col-md-12 nopad">
+		<br>
+		<h5 class="client-title site-init no-margin" style="">ACTIONS</h5>
+		<br>
+
+		<form action="#" method="POST" class="">
+
+		<input type="hidden" name="affiliateid"   		  value="<?php echo $Client['affiliate_id'] ?>" />
+		<input type="hidden" name="transactionid" 		  value="<?php echo $Client['transactionid'] ?>" />
+		<input type="hidden" name="billed" 		  		  value="<?php echo $Client['billed'] ?>" />
+		<input type="hidden" name="balance_after" 		  value="<?php echo $Client['balance_after'] ?>" />
+		<input type="hidden" name="data" 		  		  value="<?php echo $Client['data'] ?>" />
+		<input type="hidden" name="datacost" 		      value="<?php echo $Client['datacost'] ?>" />
+
+		<div class="col-md-6 nopad full-chosen" id="logindiv">
+			<select name="delivery" class="chosentable form-control font12">
+				<option  value="0">Delivery Status</option>
+				<option <?php echo ($Client['delivery'] == "1" ) ? 'selected' : '' ?> value="1">Yes</option>
+				<option <?php echo ($Client['delivery'] == "0" ) ? 'selected' : '' ?> value="0">No</option>
+			</select>
+		</div>
+
+		<?php if(!empty($Client['affiliate_id'])) :?>
+		<div class="col-md-6 nopad" id="logindiv">
+			<input type="text" name="datasize" <?php echo ($Client['billed'] == 1) ? 'disabled title="Already billed" ' : '' ?>  required placeholder="Enter data size(kb)" value="<?php echo $Client['data'] ?>" 
+			class="form-control min-input font12 numlock" /> 
+		</div>
+		<?php else: ?>
+		<div class="col-md-6" id="logindiv">
+			<input type="text" name="datasize" <?php echo ($Client['billed'] == 1) ? 'disabled title="Already billed"' : '' ?> required placeholder="Enter data cost(N)" value="<?php echo $Client['datacost'] ?>"  
+			class="form-control min-input font12 numlock" /> 
+		</div>
+		<?php endif ?>
+
+		<div class="col-md-12 nopad">
+		<!-- Billing & Delivery Status Action -->
+		<div class="col-md-6 nopad">
+		<button class="btn button-custom btn-custom-two ion-android-done-all">&nbsp;Perform Action</button>
+		</div>
+		</form>
+		
+		<?php if(!empty($Client['affiliate_id'])) :?>
+		<!-- UPDATE PAYMENT STATUS -->
+		<div class="col-md-12 nopad">
+		<br>
+		<h5 class="client-title site-init no-margin" style="">UPDATE STATUS</h5>
+
+		<form action="#" method="POST" class="">
+		<input type="hidden" name="transactionid" 		  value="<?php echo $Client['transactionid'] ?>" />
+
+		<input type="hidden" name="action" value="updatestatus">
+			<div class="col-md-5 nopad" id="logindiv">
+				<select name="approval" class="chosentable form-control font12">
+					<option value="not paid">Approval Status</option>
+					<option <?php echo ($Client['approved'] == "paid" ) ? 'selected' : '' ?> value="paid">Paid</option>
+					<option <?php echo ($Client['approved'] == "not paid" ) ? 'selected' : '' ?> value="not paid">Not Paid</option>
+				</select>
+				<br>
+			</div>
+
+			<div class="col-md-12 nopad">
+			<div class="col-md-5 nopad">
+			<button class="btn button-custom btn-custom-two">Update Status</button>
+			</div>
+			</div>
+		</form>
+		</div>
+		<?php endif ?>
+
+		<div class="col-md-12 nopad">
+		<hr class="splitter"/>
+		
+		<a class="btn button-custom btn-custom-two ion-ios-trash" href="#" onclick="Anastat.Mixing.AdminPromptDelete('<?php echo "/admin/requests/{$Client['transactionid']}/drop" ?>')">&nbsp;Delete Requests</a>
+		</div>
+
+		</div>
+
+
+		</div>
+
+
+	</div>
+</div>
+</div>
+
+<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+	<div class="services-wrapper">
+	<div class="row">
+
+				<?php include($viewpath.'partials/notification.phtml') ?>
+
+				<div class="col-md-12 nopad">
+				<h5 class="client-title site-init bold no-margin" style="">
+				<span class="site-red">Submission Code :</span> <?php echo $Client['transaction_id']  ?>
+				</h5>
+				</div>
+				<?php foreach($Requests as $key => $request): ?>
+				<div class="row" id="requestlists">
+				<h5 class="client-title site-init no-margin" style="">REQUEST <?php echo $key + 1 ?></h5>
+				<!-- DATBASE OVERVIEW -->
+				<div class="col-md-6" id="">
+					<h5 class="site-red">Database</h5>
+					<span class="content site-init"><?php echo $request['databasename'] ?></span>
+				<hr class="splitter"/>
+				</div>
+
+				<!-- Table OVERVIEW -->
+				<div class="col-md-6" id="">
+					<h5 class="site-red">Table</h5>
+					<span class="content site-init"><?php echo $request['datatable'] ?></span>
+				<hr class="splitter"/>
+				</div>
+
+				<!-- Level of Aggregation -->
+				<div class="col-md-6" id="">
+					<h5 class="site-red">Level Of Aggregation</h5>
+					<span class="content site-init"><?php echo $request['level_aggregation'] ?></span>
+				<hr class="splitter"/>
+				</div>
+
+				<!-- Cateory of Aggregation -->
+				<div class="col-md-6" id="">
+					<h5 class="site-red">Cateory Of Aggregation</h5>
+					<span class="content site-init"><?php echo implode(",", json_decode($request['category_aggregation'],true) ) ?></span>
+				<hr class="splitter"/>
+				</div>
+			
+				<!-- Variables -->
+				<div class="col-md-12" id="">
+					<h5 class="site-red">Frequency</h5>
+					<span class="content site-init"><?php echo $request['frequency'] ?></span>
+				<hr class="splitter"/>
+				</div>
+
+				<!-- Variables -->
+				<div class="col-md-12" id="">
+					<h5 class="site-red">Variables</h5>
+					<span class="content site-init">
+					<?php echo wordwrap( strtoupper( implode(",", json_decode($request['variable'],true) ) ),100,"<br />\n" ) ?></span>
+				<hr class="splitter"/>
+				</div>
+
+				<!-- Periods -->
+				<div class="col-md-12" id="">
+					<h5 class="site-red">Periods</h5>
+					<span class="content site-init"><?php echo implode("&nbsp; , &nbsp;", json_decode($request['period'],true) ) ?></span>
+				<hr class="splitter"/>
+				</div>
+
+				<!-- Note -->
+				<div class="col-md-6" id="">
+					<h5 class="site-red">Comment</h5>
+					<span class="content site-init"><?php echo empty($request['comment']) ? 'No comment' : $request['comment'] ?></span>
+				</div>
+
+				<div class="col-md-6" id="">
+					<h5 class="site-red">Time Requested</h5>
+					<span class="content site-init"><?php echo date_create($request['created_at'])->format('d M Y  h:i:s') ?></span>
+				</div>
+			</div>
+			<?php endforeach ?>
+	</div>
+
+	</div>
+
+</div>
+
+
+</div>
+</div>
+</section>
+
+
+
+<!--CONTACT SECTION START-->
+<!--CONTACT SECTION END-->
+
+<!-- FOOTER -->
+<?php @include($viewpath.'partials/footer.phtml') ?>
+<!-- END FOOTER

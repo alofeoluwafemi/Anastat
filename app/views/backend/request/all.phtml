@@ -1,0 +1,240 @@
+<!--HEADER -->
+<?php
+$viewpath = config('view_path');
+include($viewpath.'/partials/adminheader.phtml');
+?>
+<!-- END HEADER -->
+
+<!-- MENU SECTION -->
+<?php include($viewpath.'partials/backendmenu.phtml') ?>
+<!--MENU SECTION END-->
+
+
+<!--HOME SECTION END-->
+<!--SERVICE SECTION START-->
+<br>
+<br>
+<section id="services" >
+<div class="container nopad">
+<div class="row text-center header">
+<!-- <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 animate-in" data-anim-type="fade-in-up">
+<h3 style="margin:0px;">REQUEST DATA</h3>
+<hr style="margin-top:5px !mportant;margin-bottom:0px"/>
+</div> -->
+</div>
+<div class="row animate-in" data-anim-type="fade-in-up">
+
+<!-- <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"> -->
+	<?php //include($viewpath."partials/adminmenu.phtml") ?>
+<!-- </div> -->
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 nopad">
+	<div class="services-wrapper">
+	<div class="col-md-12 nopad">
+    
+    <?php include($viewpath.'partials/notification.phtml') ?>
+
+	<ol class="breadcrumb">
+			<li><a href="<?php echo geturl('admin/dashboard')?>">Dashboard</a></li>
+			<li class="active">Requests</li>
+	</ol>
+	</div>
+
+	<div class="col-md-12 nopad" id="sortdiv">
+		<form class="form-horizontal" action="<?php echo geturl('admin/requests') ?>" method="get">
+		<input type="hidden" value="sort" name="for" />
+		<div class="form-group nopad" id="logindiv">
+
+		<div class="col-md-2">
+			<select name="type" class="form-control">
+				<option value="">By Type</option>
+				<option <?php echo !empty($_GET['type']) ? (($_GET['type'] == 'affiliate') ? 'selected' : '') : '' ?> value="affiliate">Affiliated</option>
+				<option <?php echo !empty($_GET['type']) ? (($_GET['type'] == 'personal') ? 'selected' : '') : '' ?>  value="personal">Independent</option>
+			</select>
+		</div>
+
+		<div class="col-md-3" id="byaffiliate">
+			<select name="affiliate" class="form-control chosentable">
+				<option value="">By Affiliated Instituition</option>
+				<?php foreach($Affiliates as $data) :?>
+				<option <?php echo !empty($affiliateview) ?  (($affiliateview == $data['affiliate_id']) ? 'selected' : '') : '' ?>  
+				<?php echo !empty($_GET['affiliate']) ? (($_GET['affiliate'] == $data['affiliate_id']) ? 'selected' : '') : '' ?> 
+				value="<?php echo $data['affiliate_id'] ?>">
+				<?php echo $data['affiliate_name'] ?></option>
+				<?php endforeach ?>
+			</select>
+		</div>
+
+		<div class="col-md-2 noleftpad">
+			<select name="approved" class="form-control">
+				<option value="">By Approval/Payment</option>
+				<option <?php echo !empty($_GET['approved']) ? (($_GET['approved'] == 'approved') ? 'selected' : '') : '' ?> value="approved">
+				Approved
+				</option>
+				<option value="not approved" <?php echo !empty($_GET['approved']) ? (($_GET['approved'] == 'not approved') ? 'selected' : '') : '' ?>>
+				Not Approved</option>
+				<option value="awaiting" <?php echo !empty($_GET['approved']) ? (($_GET['approved'] == 'awaiting') ? 'selected' : '') : '' ?>>
+				Awaiting</option>
+				<option value="paid" <?php echo !empty($_GET['approved']) ? (($_GET['approved'] == 'paid') ? 'selected' : '') : '' ?>>
+				Paid</option>
+				<option value="not paid" <?php echo !empty($_GET['approved']) ? (($_GET['approved'] == 'not paid') ? 'selected' : '') : '' ?>>
+				Not Paid</option>
+			</select>
+		</div>
+
+		
+
+		<div class="col-md-2">
+			<select name="status" class="form-control">
+				<option value="">By Delivery</option>
+				<option <?php echo !empty($_GET['status']) ? ((intval($_GET['status']) == 1) ? 'selected' : '') : '' ?> value="1">Yes</option>
+				<option <?php echo !empty($_GET['status']) ? ((intval($_GET['status']) == 0) ? 'selected' : '') : '' ?> value="0">No</option>
+			</select>
+		</div>
+
+		
+
+		<div class="col-md-1">
+		<button class="ion-funnel btn button-custom btn-custom-two"> &nbsp;Filter </button>
+		</div>
+
+		<div class="col-md-2">
+		<a href="<?php echo geturl('admin/requests') ?>" class="ion-android-close btn button-custom btn-custom-two">&nbsp;Clear Filter </a>
+		</div>
+
+		</div>
+
+		</form>
+
+
+	</div>
+
+	<br>
+		<div class="row dash-row">
+			
+			<div class="col-md-12 theaders">
+					<!-- START Databases -->
+					<div class="col-md-half text-left site-red font10">
+					S/N
+					</div>
+					<div class="col-md-2 text-left site-red font10">
+					NAME OF REQUESTER
+					</div>
+					
+					<div class="col-md-1 site-red font10">
+					DATE/TIME
+					</div>
+
+					<div class="col-md-1 site-red font10">
+					TYPE
+					</div>
+
+					<div class="col-md-2 site-red font10">
+					AFFILIATED INSTITUTION
+					</div>
+
+					<div class="col-md-1 site-red font10">
+					APPROVAL
+					</div>
+					
+					<div class="col-md-1 site-red font10">
+					DELIVERY
+					</div>
+
+					<div class="col-md-1 site-red font10">
+					DATA-SIZE
+					</div>
+
+					<div class="col-md-1 site-red font10">
+					DATA COST
+					</div>
+
+					<div class="col-md-1 site-red font10">
+					BALANCE
+					</div>
+					<div class="col-md-half text-left site-red font10">
+					ACTIONS
+					</div>
+			</div>
+
+			<?php foreach($Requests as $key => $request): ?>
+			<div class="col-md-12 tdbody">
+					<!-- START Databases -->
+					<div class="col-md-half text-left site-red font10">
+					<?php echo $key + 1?>
+					</div>
+					<div class="col-md-2 text-left site-init font10">
+					<?php echo $request['name'] ?>
+					</div>
+					
+					<div class="col-md-1 site-init font10">
+					<?php echo format_date($request['created_at'],'d M Y h:i:s') ?>
+					</div>
+
+					<div class="col-md-1 site-init font10">
+					<?php echo empty($request['affiliate_id']) ||  $request['affiliate_id'] == 0 ? 'Independent' : 'Affiliated'?>
+					</div>
+
+					<div class="col-md-2 site-init font10">
+					<?php echo ($request['affiliate_name']) ?>
+					</div>
+
+					<div class="col-md-1 font10 
+					<?php echo ($request['approved'] == 'awaiting') ? 'site-blue' : (($request['approved'] == 'approved') ? 'green' : 'site-red') ?> ">
+					<?php echo ucfirst($request['approved']) ?>
+					</div>
+					
+					<div class="col-md-1 site-init font10">
+					<?php echo ($request['delivery'] == 0) ? "No" : "Yes"  ?>
+					</div>
+
+					<div class="col-md-1 site-init font10">
+					<?php echo ($request['data']) ? $request['data'].'(kb)' : "NIL" ?>
+					</div>
+
+					<div class="col-md-1 site-init font10">
+					<?php echo ($request['datacost']) ? $request['datacost'].'(N)' : "NIL"?>
+					</div>
+
+					<div class="col-md-1 site-init font10">
+					<?php echo ($request['balance_after']) ? $request['balance_after'].'(kb)' : "NIL" ?>
+					</div>
+					<div class="col-md-half text-left site-red font10">
+					<a title="view"  href="<?php echo geturl("admin/requests/{$request['transactionid']}/view" ) ?>" class="site-init action-btn">
+					<i class="ion-ios-eye-outline fonts site-red"></i>
+					</a>
+					</div>
+			</div>
+			<?php endforeach ?>
+			
+			<?php if(!empty($Requests)) :?>
+
+			<div class="col-md-12">
+				<?php echo $Links ?>
+			</div>
+			<?php else :?>
+			<div class="col-md-12">
+			  <div class="notify row">Requests List Empty!</div>
+			</div>
+			<?php endif ?>
+
+		</div>
+		<!-- END Databases -->
+
+	</div>
+</div>
+
+
+
+</div>
+</div>
+</section>
+
+
+
+<!--CONTACT SECTION START-->
+<!--CONTACT SECTION END-->
+
+<!-- FOOTER -->
+<?php @include($viewpath.'partials/footer.phtml') ?>
+<!-- END FOOTER

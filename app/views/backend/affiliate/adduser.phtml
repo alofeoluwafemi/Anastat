@@ -1,0 +1,94 @@
+<!--HEADER -->
+<?php
+$viewpath = config('view_path');
+include($viewpath.'/partials/adminheader.phtml');
+?>
+<!-- END HEADER -->
+
+<!-- MENU SECTION -->
+<?php include($viewpath.'partials/backendmenu.phtml') ?>
+<!--MENU SECTION END-->
+
+
+<!--HOME SECTION END-->
+<!--SERVICE SECTION START-->
+<br>
+<br>
+<section id="services" >
+<div class="container">
+<div class="row text-center header">
+<!-- <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 animate-in" data-anim-type="fade-in-up">
+<h3 style="margin:0px;">REQUEST DATA</h3>
+<hr style="margin-top:5px !mportant;margin-bottom:0px"/>
+</div> -->
+</div>
+<div class="row animate-in" data-anim-type="fade-in-up">
+
+<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+	<?php include($viewpath."partials/adminmenu.phtml") ?>
+</div>
+
+<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 main-body">
+	<div class="services-wrapper">
+	<ol class="breadcrumb">
+		<li><a href="<?php echo geturl('admin/dashboard')?>">Dashboard</a></li>
+		<li><a href="<?php echo geturl("admin/affiliate/{$id}/view")?>"><?php echo $AffiliateName ?></a></li>
+		<li><a href="#">Manager</a></li>
+		<li class="active">Add-New</li>
+	</ol>
+		<hr>
+		<div class="row font12">
+		<?php if(isset($notification) && !empty($notification)) :?>
+			<div class="notify"><?php echo $notification ?></div>
+		<?php endif ?>
+
+		<!-- ADD NEW DATABASE -->
+		<form class="form-horizontal" method="post" action="" enctype="multipart/form-data">
+			<div class="col-md-12" id="logindiv">
+					<div class="col-md-9 nopad">
+
+					<input type="hidden" name="role" value="0">
+					<input type="hidden" name="affiliate_id" value="<?php echo $id ?>">
+
+					<input type="email" class="form-control" name="username" required placeholder="Username" value="<?php echo isset($_POST['username']) ? $_POST['username'] : "" ?>"/>
+					</div>
+					
+					<div class="col-md-4 nopad">
+					<input type="password" class="form-control" name="password" required  placeholder="Password"/>
+					</div>
+					
+					<div class="col-md-4 col-md-offset-1 nopad">
+						<input type="password" class="form-control no-margin" name="password_confirm" required  id="passwordcheck" 
+						placeholder="Confirm password"/>
+						
+						<small id="passwordmatch" class="site-init codeinfo"></small>
+					</div>
+
+						
+				
+				<div id="submitdiv" class="col-md-12 nopad">
+				<button  class="btn button-custom btn-custom-two">Add</button>
+				</div>
+
+			</div>
+
+		</form>
+		<!-- END DATABASE -->
+
+	</div>
+</div>
+
+
+
+</div>
+</div>
+</section>
+
+
+
+<!--CONTACT SECTION START-->
+<!--CONTACT SECTION END-->
+
+<!-- FOOTER -->
+<?php @include($viewpath.'partials/footer.phtml') ?>
+<!-- END FOOTER

@@ -10,7 +10,6 @@ class Caggregation {
 
 	use Singleton;
 	
-
 	private $db;
 
 	private $results;
@@ -27,7 +26,13 @@ class Caggregation {
 	**/
 	public function getcategories($level_aggregation_id)
 	{
-		$stmt = $this->db->query("SELECT * FROM `category_aggregations` WHERE level_aggregation_id = {$level_aggregation_id} ");
+		$stmt = $this->db->prepare("SELECT * FROM `category_aggregations` 
+								  INNER JOIN category_level ON category_aggregations.id = category_level.category_id
+								  WHERE category_level.level_id = :level ");
+
+		$stmt->bindParam(':level',$level_aggregation_id,PDO::PARAM_INT);
+
+		$stmt->execute();
 
 		$stmt->setFetchMode(\PDO::FETCH_ASSOC);
 

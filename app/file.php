@@ -145,6 +145,7 @@ function register_hook($event,$func)
 function mailadmin()
 {
     $data = $_POST;
+    $email = ""; $phone = "";
     extract($data);
 
         //send email to notify admin of new request
@@ -164,7 +165,6 @@ function mailadmin()
 
 function sendmail($email,$name,$subject,$body)
 {
-
                 //SMTP needs accurate times, and the PHP time zone MUST be set
                 //This should be done in your php.ini, but this is how to do it if you don't have access to that
                 date_default_timezone_set('Etc/UTC');
@@ -192,8 +192,8 @@ function sendmail($email,$name,$subject,$body)
                 $mail->SMTPSecure = 'tls';
                 //Whether to use SMTP authentication
                 $mail->SMTPAuth = true;
-                //$mail->Username = 'eniolasadiq@gmail.com';                    // SMTP username
-                //$mail->Password = 'phpartisanserve';                          // SMTP password
+                // $mail->Username = 'eniolasadiq@gmail.com';                    // SMTP username
+                // $mail->Password = 'phpartisanserve';                          // SMTP password
                 $mail->Username = 'anastat2015@gmail.com';                     // SMTP username
                 $mail->Password = 'anastat2015!!';                             // SMTP password
                 //Set who the message is to be sent from
@@ -211,6 +211,6 @@ function sendmail($email,$name,$subject,$body)
                 // $mail->addAttachment('images/phpmailer_mini.png');
                 //send the message, check for errors
                 if (!$mail->send()) {
-                    echo "Mailer Error: " . $mail->ErrorInfo;
+                    // echo "Mailer Error: " . $mail->ErrorInfo;
                 }
 }

@@ -29,7 +29,8 @@ class Table {
 	**/
 	public function gettables($databaseid)
 	{
-		$stmt = $this->db->query("SELECT * FROM `tables` WHERE database_id = {$databaseid} ");
+		$stmt = $this->db->query("SELECT * FROM `tables` INNER JOIN database_table 
+								  ON tables.id = database_table.table_id WHERE database_table.database_id = {$databaseid} ");
 
 		$stmt->setFetchMode(\PDO::FETCH_ASSOC);
 
@@ -41,6 +42,7 @@ class Table {
 			$this->results[] = $result;
 		}
 		
+		// dd($this->results);
 		return $this->results;
 	}
 

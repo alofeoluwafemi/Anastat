@@ -1,0 +1,48 @@
+<form class="form-horizontal ajaxForm" method="post" action="<?php echo  geturl('newrequest') ?>">
+    <div class="row" id="finance">
+        <input type="hidden" name="submissiontype" id="submissiontype" value="nomore" />
+
+        <input type="hidden" name="databasename" value="" />
+
+        <!-- TABLE PLACEHOLDERS -->
+        <div class="col-md-12" id="tables">
+
+        </div>
+
+        <!-- LEVEL OF AGGREGATION -->
+        <div class="col-md-12" id="laggregation">
+
+        </div>
+
+        <!-- CATEGORY OF AGGREGATION -->
+        <div class="col-md-12" id="caggregation">
+
+        </div>
+
+        <!-- FREQUENCY OF DATA -->
+        <div class="col-md-12" id="frequency">
+
+        </div>
+
+        <!-- VARIABLES -->
+        <div class="col-md-12" id="variables">
+
+        </div>
+
+        <!-- PERIOD -->
+        <div class="col-md-12 nopad" id="period">
+
+        </div>
+
+        <div id="submitdiv" class="hide col-md-12">
+        <br>
+            <h5 class="site-init font12">Do you have additional instruction/comments? Please type</h5>
+            <textarea name="comment" required class="form-control comment dcomment"></textarea>
+            <a href="#" class="btn button-custom btn-custom-two pull-left font12" id="addnew" onclick="Anastat.Request.SubmitRequest(this.id,'addnew')">
+                Save &amp; Make Additional Request</a>
+        <a href="#" class="btn button-custom btn-custom-two pull-right font12" id="addproceed" onclick="Anastat.Request.SubmitRequest(this.id,'add')">
+                Submit Request</a>
+        </div>
+
+    </div>
+</form>

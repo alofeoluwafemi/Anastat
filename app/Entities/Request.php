@@ -14,15 +14,6 @@ class Request{
 	{
 		$this->db = App('App\DB')->conn();
 	}
-
-	public function count()
-	{
-		$query = $this->db->query("SELECT COUNT(*) AS count FROM `requests` WHERE display = TRUE");
-		
-		$this->results = $query->fetch();
-		// var_dump($this->results);
-		return (is_null($this->results) OR empty($this->results)) ? 0 : $this->results['count'];
-	}
 	
 	/**
 	 * Insert a new request into the database
@@ -33,20 +24,24 @@ class Request{
 
 		extract($array);
 
-		$comma = ',';
-		$space = ' ';
-		$code = $databasename.$space;
-		$code .= $table.$space;
-		$code .= $laggregation.$space;
-		$code .= implode($comma,$caggregation) . $space;
-		$code .= $frequency.$space;
-		$code .= implode($comma,$variable) . $space;
+		$variable     = array_filter($variable);
+		$caggregation = array_filter($caggregation);
 
-		$period = [];
-		$variable    = array_filter($variable);
+		$code              = array();
+		$code['database']  = explode('::',$databasename)[1];
+		$code['table']     = explode('::',$table)[1];
+		$code['level']     = explode('::',$laggregation)[1];
+		$code['frequency'] = explode('::',$frequency)[1];
+		$code['variables'] = array_map(function($data)
+										{
+											return explode('::',$data)[1];
+										}, $variable);
+		$code['categories']  = array_map(function($data)
+										{
+											return explode('::',$data)[1];
+										}, $caggregation);
 
-
-		$variables    = json_encode($variable,JSON_FORCE_OBJECT);
+		$code = json_encode($code);
 
 		//If additional manual periods was entered add to $periods array
 		if(isset($from) && !empty($from) && isset($to) && !empty($to))
@@ -56,13 +51,10 @@ class Request{
 			$period[] = $addperiod;
 		}
 
- 		// if($index = array_search('manualperiod',$period))
- 		// {
- 		// 	unset($period[$index]);
- 		// }
-
+		$variables    = json_encode($variable,JSON_FORCE_OBJECT);
 		$periods      = json_encode($period,JSON_FORCE_OBJECT);
 		$caggregation = json_encode(array_filter($caggregation),JSON_FORCE_OBJECT);
+
 
 		 $query = $this->db->prepare('INSERT INTO requests (databasename,datatable,level_aggregation,category_aggregation,frequency,variable,period,comment,code) 
                       VALUES (:database,:table,:level_aggregation,:category_aggregation,:frequency,:variable,:period,:comment,:code)');
@@ -92,17 +84,26 @@ class Request{
 	{
 		extract($array);
 
-		$comma = ',';
-		$space = ' ';
-		$code = $databasename.$space;
-		$code .= $table.$space;
-		$code .= $laggregation.$space;
-		$code .= implode($comma,$caggregation) . $space;
-		$code .= $frequency.$space;
-		$code .= implode($comma,$variable) . $space;
+		$variable     = array_filter($variable);
+		$caggregation = array_filter($caggregation);
+
+		$code              = array();
+		$code['database']  = explode('::',$databasename)[1];
+		$code['table']     = explode('::',$table)[1];
+		$code['level']     = explode('::',$laggregation)[1];
+		$code['frequency'] = explode('::',$frequency)[1];
+		$code['variables'] = array_map(function($data)
+										{
+											return explode('::',$data)[1];
+										}, $variable);
+		$code['categories']  = array_map(function($data)
+										{
+											return explode('::',$data)[1];
+										}, $caggregation);
+
+		$code = json_encode($code);
 
 		$period = [];
-		$variable    = array_filter($variable);
 
 		//If additional manual periods was entered add to $periods array
 		if(isset($from) && !empty($from) && isset($to) && !empty($to))
@@ -112,10 +113,6 @@ class Request{
 			$period[] = $addperiod;
 		}
 
- 		// if($index = array_search('manualperiod',$period))
- 		// {
- 		// 	unset($period[$index]);
- 		// }
 
 		$periods      = json_encode($period,JSON_FORCE_OBJECT);
 		$caggregation = json_encode(array_filter($caggregation),JSON_FORCE_OBJECT);
@@ -149,7 +146,8 @@ class Request{
 	 */
 	public function getrequest($id)
 	{
-		$stmt = $this->db->prepare("SELECT * FROM `requests` WHERE id =  :id");
+		$stmt = $this->db->prepare("SELECT * FROM `requests`
+									WHERE id =  :id");
 
 		$stmt->bindParam(':id',$id,PDO::PARAM_INT);
 
@@ -163,14 +161,17 @@ class Request{
 	*/
 	public function get($id)
 	{
-		$stmt = $this->db->prepare("SELECT clients.name,clients.id as clientid,clients.sex,clients.email,clients.phone,clients.address,
-										  	clients.position_instituition,requests.id as id,requests.databasename,requests.datatable,
-											requests.client_id,requests.code,requests.approved,requests.level_aggregation,requests.category_aggregation,requests.frequency,
-									 		requests.variable,requests.period,requests.comment,requests.status,affiliates.affiliate_name,affiliates.affiliate_code
-									 		 FROM requests
-									INNER JOIN clients ON clients.id = requests.client_id
+		$stmt = $this->db->prepare("SELECT requests.id as id,requests.datatable,requests.databasename,requests.level_aggregation,requests.category_aggregation,
+				 		 requests.frequency,requests.variable,requests.period,requests.comment,requests.client_id,requests.transaction_id,
+				 		 requests.code,requests.created_at,clients.name,clients.sex,clients.email,clients.phone,clients.address,clients.position_instituition,
+				 		 clients.identification_no,affiliates.affiliate_name,affiliates.affiliate_code,affiliates.id as affiliate_id,affiliates.affiliate_email,affiliates.affiliate_type,
+				 		 transactions.id as transactionid,transactions.transaction_id,transactions.billed,transactions.data,transactions.balance_after,transactions.approved,
+				 		 transactions.delivery,transactions.manager_comment,transactions.datacost
+									FROM `requests` INNER JOIN clients 
+									ON requests.client_id = clients.id
+									INNER JOIN transactions ON requests.transaction_id = transactions.id
 									LEFT JOIN affiliates ON clients.affiliate_id = affiliates.id
-									WHERE requests.id =  :id AND display = TRUE");
+									WHERE display = TRUE AND requests.id = :id GROUP BY transactions.transaction_id  ORDER BY transactions.created_at DESC");
 
 		$stmt->bindParam(':id',$id,PDO::PARAM_INT);
 
@@ -180,20 +181,75 @@ class Request{
 	}
 
 	/**
+	 * Get a particular request details from storage
+	*/
+	public function getByTransaction($id)
+	{
+		$stmt = $this->db->prepare("SELECT requests.id as id,requests.datatable,requests.databasename,requests.level_aggregation,requests.category_aggregation,
+				 		 requests.frequency,requests.variable,requests.period,requests.comment,requests.client_id,requests.transaction_id,
+				 		 requests.code,requests.created_at,clients.name,clients.sex,clients.email,clients.phone,clients.address,clients.position_instituition,
+				 		 clients.identification_no,affiliates.affiliate_name,affiliates.affiliate_code,affiliates.id as affiliate_id,affiliates.affiliate_email,affiliates.affiliate_type,
+				 		 transactions.id as transactionid,transactions.transaction_id,transactions.billed,transactions.data,transactions.balance_after,transactions.approved,
+				 		 transactions.delivery,transactions.manager_comment,transactions.datacost
+									FROM `requests` INNER JOIN clients 
+									ON requests.client_id = clients.id
+									INNER JOIN transactions ON requests.transaction_id = transactions.id
+									LEFT JOIN affiliates ON clients.affiliate_id = affiliates.id
+									WHERE display = TRUE AND transactions.id = :id ");
+
+		$stmt->bindParam(':id',$id,PDO::PARAM_INT);
+
+		$stmt->execute();
+
+		return $data = $stmt->fetchAll();
+	}
+
+	/**
+	 * Get a particular request details from storage
+	*/
+	public function getByTransactionId($id)
+	{
+		$stmt = $this->db->prepare("SELECT requests.id as id,requests.datatable,requests.databasename,requests.level_aggregation,requests.category_aggregation,
+				 		 requests.frequency,requests.variable,requests.period,requests.comment,requests.client_id,requests.transaction_id,
+				 		 requests.code,requests.created_at,clients.name,clients.sex,clients.email,clients.phone,clients.address,clients.position_instituition,
+				 		 clients.identification_no,affiliates.affiliate_name,affiliates.affiliate_code,affiliates.id as affiliate_id,affiliates.affiliate_email,affiliates.affiliate_type,
+				 		 transactions.id as transactionid,transactions.transaction_id,transactions.billed,transactions.data,transactions.balance_after,transactions.approved,
+				 		 transactions.delivery,transactions.manager_comment,transactions.datacost
+									FROM `requests` INNER JOIN clients 
+									ON requests.client_id = clients.id
+									INNER JOIN transactions ON requests.transaction_id = transactions.id
+									LEFT JOIN affiliates ON clients.affiliate_id = affiliates.id
+									WHERE display = TRUE AND transactions.transaction_id = :id ");
+
+		$stmt->bindParam(':id',$id,PDO::PARAM_INT);
+
+		$stmt->execute();
+
+		return $data = $stmt->fetchAll();
+	}
+
+	/**
 	 * Fetch all tables for
 	 * a database
 	**/
 	public function lists($paginate = false)
 	{
-		$query = "SELECT requests.client_id,requests.code,requests.approved,requests.databasename,requests.status,clients.instituition,clients.name,requests.id,affiliates.affiliate_name
-									FROM `requests` INNER JOIN clients ON clients.id = requests.client_id
+		$query = "SELECT requests.id as id,requests.datatable,requests.databasename,requests.level_aggregation,requests.category_aggregation,
+				 		 requests.frequency,requests.variable,requests.period,requests.comment,requests.client_id,requests.transaction_id,
+				 		 requests.code,requests.created_at,clients.name,clients.sex,clients.email,clients.phone,clients.address,clients.position_instituition,
+				 		 clients.identification_no,affiliates.affiliate_name,affiliates.affiliate_code,affiliates.id as affiliate_id,affiliates.affiliate_email,affiliates.affiliate_type,
+				 		 transactions.id as transactionid,transactions.transaction_id,transactions.billed,transactions.data,transactions.balance_after,transactions.approved,
+				 		 transactions.delivery,transactions.manager_comment,transactions.datacost
+									FROM `requests` INNER JOIN clients 
+									ON requests.client_id = clients.id
+									INNER JOIN transactions ON requests.transaction_id = transactions.id
 									LEFT JOIN affiliates ON clients.affiliate_id = affiliates.id
-									WHERE display = TRUE ORDER BY requests.created_at DESC";
+									WHERE display = TRUE GROUP BY transactions.transaction_id  ORDER BY transactions.created_at DESC";
 
 		//Return Paginated data else
 		if($paginate)
 		{
-			$pagination = new Paginator(null,$query,20);
+			$pagination = new Paginator(null,$query,30);
 			return $pagination;
 		}
 		else {
@@ -214,18 +270,21 @@ class Request{
 	}
 
 	/**
-	 * Fetch all tables for
-	 * a database
-	**/
+	 * Fetch all requests ina sorted manner
+	*/
 	public function sort($affiliate,$type,$status,$approval)
 	{
-		// dd(func_get_args());
-
-		$query = "SELECT requests.client_id,requests.code,requests.approved,requests.databasename,requests.status,clients.instituition,clients.name,requests.id,affiliates.affiliate_name
-									FROM `requests` INNER JOIN clients ON clients.id = requests.client_id
+		$query = "SELECT requests.id as id,requests.datatable,requests.databasename,requests.level_aggregation,requests.category_aggregation,
+				 		 requests.frequency,requests.variable,requests.period,requests.comment,requests.client_id,requests.transaction_id,
+				 		 requests.code,requests.created_at,clients.name,clients.sex,clients.email,clients.phone,clients.address,clients.position_instituition,
+				 		 clients.identification_no,affiliates.affiliate_name,affiliates.affiliate_code,affiliates.id as affiliate_id,affiliates.affiliate_email,affiliates.affiliate_type,
+				 		 transactions.id as transactionid,transactions.transaction_id,transactions.billed,transactions.data,transactions.balance_after,transactions.approved,
+				 		 transactions.delivery,transactions.manager_comment,transactions.datacost
+									FROM `requests` INNER JOIN clients 
+									ON requests.client_id = clients.id
+									INNER JOIN transactions ON requests.transaction_id = transactions.id
 									LEFT JOIN affiliates ON clients.affiliate_id = affiliates.id
 									WHERE display = TRUE ";
-
 
 		/**
 		 * Build Sorting
@@ -249,23 +308,20 @@ class Request{
 		{
 			$query .= " AND ";
 
-			$query .= "  status = {$status} ";
+			$query .= "  transactions.delivery = {$status} ";
 		}
 
 		if(!empty($approval)) 
 		{
 			$query .= " AND ";
 
-			$query .= "  approved = '{$approval}' ";
+			$query .= "  transactions.approved = '{$approval}' ";
 		}
 
-		$query .= " ORDER BY requests.created_at DESC";
+		$query .= "GROUP BY transactions.transaction_id ORDER BY transactions.created_at DESC";
 
-		$stmt = $this->db->query($query);
 
-		$stmt->setFetchMode(\PDO::FETCH_ASSOC);
-
-		$pagination = new Paginator(null,$query,20);
+		$pagination = new Paginator(null,$query,30);
 		return $pagination;
 	}
 
@@ -313,54 +369,21 @@ class Request{
 	**/
 	public function listByAffiliate($id)
 	{
-		$stmt = $this->db->prepare("SELECT clients.name,clients.id as clientid,clients.name,clients.sex,clients.email,clients.phone,clients.address,
-										  	clients.position_instituition,requests.id as id,requests.databasename,requests.datatable,
-											requests.client_id,requests.code,requests.approved,requests.level_aggregation,requests.category_aggregation,requests.frequency,
-									 		requests.variable,requests.period,requests.comment,requests.status,affiliates.affiliate_name,affiliates.affiliate_code
-									 		FROM `clients`
-											INNER JOIN requests ON clients.id = requests.client_id 
-											LEFT JOIN affiliates ON clients.affiliate_id = affiliates.id
-											WHERE clients.affiliate_id = :id
-											");
-		
-		$stmt->bindParam(':id',$id,PDO::PARAM_STR);
+		$query = "SELECT requests.id as id,requests.datatable,requests.databasename,requests.level_aggregation,requests.category_aggregation,
+				 		 requests.frequency,requests.variable,requests.period,requests.comment,requests.client_id,requests.transaction_id,
+				 		 requests.code,requests.created_at,clients.name,clients.sex,clients.email,clients.phone,clients.address,clients.position_instituition,
+				 		 clients.identification_no,affiliates.affiliate_name,affiliates.affiliate_code,affiliates.id as affiliate_id,affiliates.affiliate_email,affiliates.affiliate_type,
+				 		 transactions.id as transactionid,transactions.transaction_id,transactions.billed,transactions.data,transactions.balance_after,transactions.approved,
+				 		 transactions.delivery,transactions.manager_comment,transactions.datacost
+									FROM `requests` INNER JOIN clients 
+									ON requests.client_id = clients.id
+									INNER JOIN transactions ON requests.transaction_id = transactions.id
+									LEFT JOIN affiliates ON clients.affiliate_id = affiliates.id
+									WHERE display = TRUE AND clients.affiliate_id = {$id} GROUP BY transactions.transaction_id  ORDER BY transactions.created_at DESC";
 
-		$stmt->execute();
+		$pagination = new Paginator(null,$query,40);
 
-		$stmt->setFetchMode(\PDO::FETCH_ASSOC);
-
-		//If PDO error
-		getError($stmt);
-
-		while($result = $stmt->fetch())
-		{
-			$results[] = $result;
-		}
-		
-		return (is_null($results) OR empty($results)) ? array() : $results;
-	}
-
-	public function DatabasePair()
-	{
-		$stmt = $this->db->query("SELECT databasename,shortcode FROM `databases`");
-		
-		$stmt->setFetchMode(\PDO::FETCH_ASSOC);
-
-		//If PDO error
-		getError($stmt);
-
-		while($result = $stmt->fetch())
-		{
-			$this->results[] = $result;
-		}
-
-		$library = array();
-
-		foreach ($this->results as $key => $value) {
-			$library[ strtolower($value['databasename'])] = $value['shortcode'];
-		}
-
-		return $library;
+		return $pagination;
 	}
 
 	/**
@@ -400,13 +423,13 @@ class Request{
 	/**
 	 * Update request status
 	 */
-	public function updateStatus($id,$status)
+	public function updateStatus($id,$approval)
 	{
-		// dd($status);
-		$stmt = $this->db->prepare("UPDATE `requests` SET status = :status WHERE id = :id"); 
+		// dd(func_get_args());
+		$stmt = $this->db->prepare("UPDATE `transactions` SET approved = :approval WHERE id = :id"); 
 
-				$stmt->bindParam(':status', $status, PDO::PARAM_INT);       
-				$stmt->bindParam(':id', $id, PDO::PARAM_INT); 
+		$stmt->bindParam(':approval', $approval, PDO::PARAM_STR);       
+		$stmt->bindParam(':id', $id, PDO::PARAM_INT); 
 
 	    $stmt->errorInfo();
 
@@ -416,13 +439,18 @@ class Request{
 	/**
 	 * Approve request status
 	 */
-	public function approve($id)
+	public function updateTransaction($data)
 	{
-		$status = 'YES';
-		$stmt = $this->db->prepare("UPDATE `requests` SET approved = :status WHERE id = :id"); 
+		// dd($data);
+		extract($data);
 
-				$stmt->bindParam(':status', $status, PDO::PARAM_INT);       
-				$stmt->bindParam(':id', $id, PDO::PARAM_INT); 
+		$approval = empty($approval) ? 'awaiting' : $approval;
+
+		$stmt = $this->db->prepare("UPDATE `transactions` SET approved = :approved,manager_comment = :comment WHERE id = :id"); 
+
+				$stmt->bindParam(':approved', $approval, PDO::PARAM_INT);       
+				$stmt->bindParam(':comment', $comment, PDO::PARAM_INT); 
+				$stmt->bindParam(':id', $transaction, PDO::PARAM_INT);
 
 	    $stmt->errorInfo();
 
@@ -430,42 +458,140 @@ class Request{
 	}
 
 	/**
-	 * Approve request status
+	 * Process transaction from admin end
+	 * Change delivery status
+	 * Add data size
+	 * Deduct datasize from affiliate data account
 	 */
-	public function disapprove($id)
+	public function processTransaction($data)
 	{
-		$status = 'NO';
-		$stmt = $this->db->prepare("UPDATE `requests` SET approved = :status WHERE id = :id"); 
+		extract($data);
 
-				$stmt->bindParam(':status', $status, PDO::PARAM_INT);       
-				$stmt->bindParam(':id', $id, PDO::PARAM_INT); 
+			//Bill this transaction if
+			//it has not yet being billed
+			if($billed == 0)
+			{	
+				//If client is an affiliated instituition
+				//Deduct data
+				if(!empty($affiliateid))
+				{
+					$this->deductData($affiliateid,$datasize,$transactionid);
 
-	    $stmt->errorInfo();
+					//Set billings to true
+					$billed = 1;
+
+					$balance_after = $this->balanceAfter;
+				}
+			}
+
+					//Update affiliate billing
+					if(!empty($affiliateid))
+					{	
+						//Set new inputed datasize || already inputed datasize as charge 
+						$datasize = empty($data) ? $datasize : $data;
+
+						$stmt = $this->db->prepare("UPDATE `transactions` SET billed = 1,delivery = :delivery,data = :data,balance_after = :balance_after WHERE id = :id"); 
+
+						$stmt->bindParam(':delivery', $delivery, PDO::PARAM_INT);       
+						$stmt->bindParam(':data',     $datasize, PDO::PARAM_INT); 
+						$stmt->bindParam(':balance_after',     $balance_after, PDO::PARAM_INT); 
+						$stmt->bindParam(':id',       $transactionid, PDO::PARAM_INT);
+
+					    $stmt->errorInfo();
+
+						$stmt->execute();
+
+						//Bill affiliate account
+						$this->updateBalance($affiliateid);
+
+						// dd(['delivery' => $delivery,'data' => $datasize,'balance_after' => $balance_after,'id' => $transactionid]);
+
+					}else{
+
+						$stmt = $this->db->prepare("UPDATE `transactions` SET billed = 1,delivery = :delivery,datacost = :datacost WHERE id = :id"); 
+
+						$stmt->bindParam(':delivery', 			$delivery, PDO::PARAM_INT);       
+						$stmt->bindParam(':datacost',     		$datasize, PDO::PARAM_STR); 
+						$stmt->bindParam(':id',       		   $transactionid, PDO::PARAM_INT);
+
+					    $stmt->errorInfo();
+
+						$stmt->execute();
+
+						// dd(['delivery' => $delivery,'data' => $datasize,'balance_after' => $balance_after,'id' => $transactionid]);
+
+					}
+			
+		
+	}
+
+	/**
+	 * Deduct a certain kb data from an affiliate account
+	 */
+	private function deductData($affiliateid,$charge,$transactionid)
+	{
+
+		$datasize = $this->getBalance($affiliateid);
+
+		$this->balanceAfter = intval($datasize) - intval($charge);
+
+		//Check if databalane is zero
+		//Cut Off Affiliate
+		if($this->balanceAfter == 0)
+		{
+			$status = 0;
+
+			$stmt = $this->db->prepare("UPDATE `affiliate_plan` SET status = :status WHERE affiliate_id = :id AND status = 1"); 
+
+						$stmt->bindParam(':status', 		   $status, PDO::PARAM_INT);       
+						$stmt->bindParam(':id',       		   $transactionid, PDO::PARAM_INT);
+
+					    $stmt->errorInfo();
+
+						$stmt->execute();
+		}
+	}
+
+	/**
+	 * Get data account balance for an affiliate
+	 */
+	public function getBalance($affiliateid)
+	{
+		$stmt = $this->db->prepare("SELECT datasize FROM affiliate_plan WHERE status = 1 AND affiliate_id = :id ");
+
+		$stmt->bindParam(':id',$affiliateid,PDO::PARAM_INT);
+
+		$stmt->execute();
+
+		return $data = $stmt->fetch()['datasize'];
+	}
+
+	/**
+	 * Deduct charge from affiliate datasize
+	 */
+	private function updateBalance($affiliateid)
+	{
+		$stmt = $this->db->prepare("UPDATE `affiliate_plan` SET datasize = :size WHERE affiliate_id = :id AND status = 1"); 
+
+		$stmt->bindParam(':size', 		   $this->balanceAfter, PDO::PARAM_INT);       
+		$stmt->bindParam(':id',       	   $affiliateid, PDO::PARAM_INT);
+
+		$stmt->errorInfo();
 
 		$stmt->execute();
 	}
+
 
 	/**
 	 * Delete from storage
 	*/
 	public function drop($id)
 	{
-		$stmt = $this->db->prepare("DELETE FROM `requests` WHERE id =  :id");
+		$stmt = $this->db->prepare("DELETE FROM `transactions` WHERE id =  :id");
 
 		$stmt->bindParam(':id',$id,PDO::PARAM_INT);
 
 		$stmt->execute();
 	}
 
-	/**
-	 * 
-	 */
-	public function dropWithoutClient($id)
-	{
-		$stmt = $this->db->prepare("DELETE FROM `requests` WHERE client_id = 0 AND id =  :id");
-
-		$stmt->bindParam(':id',$id,PDO::PARAM_INT);
-
-		$stmt->execute();
-	}
 }

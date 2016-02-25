@@ -20,7 +20,7 @@ class User{
 		**/
 	public function lists()
 	{
-		$stmt = $this->db->query("SELECT * FROM `users` ORDER BY id");
+		$stmt = $this->db->query("SELECT * FROM `users` WHERE type != 'affiliate' ORDER BY id");
 
 		$stmt->setFetchMode(\PDO::FETCH_ASSOC);
 
@@ -41,14 +41,14 @@ class User{
 	*/
 	public function get($id)
 	{
-
 		$stmt = $this->db->prepare("SELECT * FROM `users` WHERE id =  :id");
 
 		$stmt->bindParam(':id',$id,PDO::PARAM_INT);
 
 		$stmt->execute();
 
-		return $data = $stmt->fetch();
+		$results = $stmt->fetch();
+		return (is_null($results) OR empty($results)) ? array() : $results;
 	}
 
 	/**
@@ -78,7 +78,8 @@ class User{
 
 		$stmt->execute();
 
-		return $data = $stmt->fetch();
+		$results = $stmt->fetch();
+		return (is_null($results) OR empty($results)) ? array() : $results;
 	}
 
 	/**
@@ -86,7 +87,6 @@ class User{
 	*/
 	public function login($username,$password)
 	{
-		// dd(func_get_args());
 		$stmt = $this->db->prepare("SELECT * FROM `users` WHERE username =  :username AND password = :password AND type = 'admin' ");
 
 		$stmt->bindParam(':username',$username,PDO::PARAM_STR);
@@ -94,7 +94,6 @@ class User{
 
 		$stmt->execute();
 
-		// dd($stmt->fetch());
 		return $data = $stmt->fetch();
 	}
 
@@ -142,12 +141,10 @@ class User{
 	*/
 	public function addnewaffiliate($array)
 	{
-		// dd($array);
 		extract($array);
 
 		$password = md5($password);
 		$type     = "affiliate";
-		$role     = 0;
 
 		$query = $this->db->prepare('INSERT INTO `users`(username,password,type,role,affiliate_id) 
 												VALUES (:username,:password,:type,:role,:affiliateid)');
@@ -156,7 +153,7 @@ class User{
 	        $query->bindParam(':password', 	$password,PDO::PARAM_STR);
 	        $query->bindParam(':type', 			$type,PDO::PARAM_STR);
 	        $query->bindParam(':role', 			$role,PDO::PARAM_INT);
-	        $query->bindParam(':affiliateid', 	$affiliateid,PDO::PARAM_INT);
+	        $query->bindParam(':affiliateid', 	$affiliate_id,PDO::PARAM_INT);
 	             
 	    $query->execute();
 

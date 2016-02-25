@@ -1,0 +1,112 @@
+<?php
+$viewpath = config('view_path');
+@include($viewpath.'partials/header.phtml')
+?>
+<!-- END HEADER -->
+
+<!-- MENU SECTION -->
+<?php @include($viewpath.'partials/frontmenu.phtml') ?>
+<!--MENU SECTION END-->
+
+<!--SERVICE SECTION START-->
+<br>
+<br>
+
+<!--HOME SECTION END-->
+<!--SERVICE SECTION START-->
+<section id="services" style="padding-top:55px">
+<div class="container">
+<div class="row text-center header">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 animate-in" data-anim-type="fade-in-up">
+<h3 class="" style="color:#444;font-size:18px">REQUEST DATA OVERVIEW</h3>
+</div>
+</div>
+<div class="row animate-in" data-anim-type="fade-in-up">
+
+<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-md-offset-2 col-lg-offset-2">
+	<div class="services-wrapper">
+	<div class="row" id="requestlists" style="padding: 2%;">
+					<div class="row" id="requestlists">
+				<!-- DATBASE OVERVIEW -->
+				<div class="col-md-6" id="databaseoverview">
+					<h5 class="site-red">Database</h5>
+					<span class="content site-init"><?php echo $Request['databasename'] ?></span>
+				<hr class="splitter"/>
+				</div>
+
+				<!-- Table OVERVIEW -->
+				<div class="col-md-6" id="tableoverview">
+					<h5 class="site-red">Table</h5>
+					<span class="content site-init"><?php echo $Request['datatable'] ?></span>
+				<hr class="splitter"/>
+				</div>
+
+				<!-- Level of Aggregation -->
+				<div class="col-md-6" id="lagoverview">
+					<h5 class="site-red">Level Of Aggregation</h5>
+					<span class="content site-init"><?php echo $Request['level_aggregation'] ?></span>
+				<hr class="splitter"/>
+				</div>
+
+				<!-- Cateory of Aggregation -->
+				<div class="col-md-6" id="cagoverview">
+					<h5 class="site-red">Cateory Of Aggregation</h5>
+					<span class="content site-init"><?php echo implode(",", json_decode($Request['category_aggregation'],true) ) ?></span>
+				<hr class="splitter"/>
+				</div>
+			
+				<!-- Variables -->
+				<div class="col-md-12" id="freqoverview">
+					<h5 class="site-red">Frequency</h5>
+					<span class="content site-init"><?php echo $Request['frequency'] ?></span>
+				<hr class="splitter"/>
+				</div>
+
+				<!-- Variables -->
+				<div class="col-md-12" id="variableoverview">
+					<h5 class="site-red">Variables</h5>
+					<span class="content site-init">
+					<?php echo wordwrap( strtoupper( implode(",", json_decode($Request['variable'],true) ) ),100,"<br />\n" ) ?></span>
+				<hr class="splitter"/>
+				</div>
+
+				<!-- Periods -->
+				<div class="col-md-12" id="periodoverview">
+					<h5 class="site-red">Periods</h5>
+					<span class="content site-init"><?php echo implode("&nbsp; , &nbsp;", json_decode($Request['period'],true) ) ?></span>
+				<hr class="splitter"/>
+				</div>
+
+				<!-- Note -->
+				<div class="col-md-6" id="commentoverview">
+					<h5 class="site-red">Comment</h5>
+					<span class="content site-init"><?php echo empty($Request['comment']) ? 'No comment' : $Request['comment'] ?></span>
+				<hr class="splitter"/>
+				</div>
+
+				<!-- Note -->
+				<div class="col-md-6" id="commentoverview">
+					<h5 class="site-red">Time Requested</h5>
+					<span class="content site-init"><?php echo date_create($Request['created_at'])->format('d M Y  h:i:s') ?></span>
+				<hr class="splitter"/>
+				</div>
+			</div>
+	</div>
+
+	</div>
+
+</div>
+
+
+</div>
+</div>
+</section>
+
+
+
+<!--CONTACT SECTION START-->
+<!--CONTACT SECTION END-->
+
+<!-- FOOTER -->
+<?php @include($viewpath.'partials/footer.phtml') ?>
+<!-- END FOOTER

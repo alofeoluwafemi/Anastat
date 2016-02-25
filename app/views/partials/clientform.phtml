@@ -1,0 +1,92 @@
+	<div class="services-wrapper hide" id="clientdetails">
+		<h4 class="site-red" style="font-size:16px">Terms &amp; Conditions Apply</h4>
+		<span class="site-init font12">
+		There are terms and conditions attached to the use and dissemination of this database.
+		Make sure you review them before submission.
+		<br>
+		<a href="#" onclick=window.open("agreement","Ratting","width=550,height=300,left=500,top=200,status=0,scrollbars=1")> 
+		Read terms &amp; conditions</a>
+		</span>
+		  <div class="checkbox font12">
+		    <label class="">
+		      <input type="checkbox" name="agreement" value="yes"> I have read and agreed to the terms &amp; condition
+		    </label>
+		 </div>
+
+		
+		<form class="form-horizontal ClientBioForm" method="post" action="<?php echo geturl('/') ?>" id="addclient">
+
+		<input type="hidden" name="requestid[]" value="" />
+		<br>
+			<div class="form-group bio-form hide" id="logindiv">
+
+				<h5 class="site-red text-center" style="font-size:16px">BIO FORM</h5>
+
+				<input type="text" class="form-control min-input" name="name"  required placeholder="Name"/>
+
+				<div class="col-md-6 nopad">
+				<input type="email" class="form-control min-input"  id="clientemail" name="email" required placeholder="Email"/>
+				</div>
+
+				<div class="col-md-5 col-md-offset-1 nopad">
+				<input type="text" class="form-control numlock min-input" name="phone" required placeholder="Telephone"/>
+				</div>
+
+				<input type="text" class="form-control min-input" name="address" required placeholder="Address"/>
+
+				<div class="col-md-6 nopad">
+					<select name="clienttype" required class="form-control min-input">
+							<option value="">Select Client Type</option>
+							<option value="personal">Independent</option>
+							<option value="affiliate">Registered/Affiliated</option>
+					</select>
+				</div>
+				
+				<div class="col-md-5 col-md-offset-1 nopad">
+					<select name="sex" required class="form-control min-input">
+							<option value="">Select Gender</option>
+							<option value="Male">Male</option>
+							<option value="Female">Female</option>
+					</select>
+				</div>
+
+			<div class="institution_detail logindiv hide col-md-12">
+			<br>
+				<select name="instituition" class="form-control min-input">
+					<option value="">Select Institution</option>
+					<?php foreach($Instituitions as $institute) :?>
+						<option data-status="<?php echo $institute['status'] ?>"
+						data-code="<?php echo 
+							($institute['status'] == 0 || $institute['datasize'] == 0) ? 'cb5e1' : $institute['affiliate_code'] 
+							?>" 
+						value="<?php echo $institute['affiliate_id'] ?>"><?php echo $institute['affiliate_name'] ?></option>
+					<?php endforeach ?>
+				</select>
+
+				<input type="text" class="form-control no-margin min-input" name="instituition_code" autocomplete="off" placeholder="Institution Code"/>
+				<small class="site-init codeinfo"><i class="fonts ion-information-circled site-red"></i>Provide correct institution code to activate submit button</small>
+				
+				<div class="col-md-6 nopad">
+				<input type="text" class="form-control min-input" name="designation"   placeholder="Designation"/>
+				</div>
+
+				<div class="col-md-5 col-md-offset-1 nopad">
+				<input type="text" class="form-control min-input" name="idn" placeholder="Identification Number"/>
+				</div>
+
+			</div>
+
+
+			<div id="submitdiv" class="col-md-12 clientsubmit">
+				<br>
+				<a  data-toggle="modal" data-target="#clientconfirm" class="btn button-custom btn-custom-two pull-right font12">
+				OK Submit
+				</a>
+			</div>
+
+			</div> <!--End Form Group -->
+
+
+		</form>
+
+	</div>

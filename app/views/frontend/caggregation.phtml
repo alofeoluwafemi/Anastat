@@ -1,0 +1,30 @@
+<div class="col-md-12 nopad">
+<select data-placeholder="Select Category Of Aggregation..." class="chosentablemultiple dcaggregation" multiple tabindex="3"  required name="caggregation[]">
+	<?php if(count($Caggregation) > 0) :?>
+	<?php foreach($Caggregation as $aggregation) :?> 
+	<option data-id="<?php echo $aggregation['category_id'] ?>" value="<?php echo strtoupper($aggregation['category_aggregation_name'].'::'.$aggregation['code']) ?>">
+	<?php echo strtoupper($aggregation['category_aggregation_name']) ?></option>
+	<?php endforeach ?>
+	<?php else :?>
+		<option value="">No results returned!</option>
+	<?php endif ?>
+</select>
+</div>
+
+<div class="col-md-12 coverbd nopad">
+<div class="col-md-6 nopad">
+	<div class="checkbox font12">
+		<label>
+			<input type="checkbox" name="all"> Select All Categories
+		 </label>
+	</div>
+</div>
+
+<div class="col-md-6 nopad">
+	<div class="checkbox font12 text-right">
+		<label>
+			<input type="checkbox" name="notall"> Deselect All Categories
+		 </label>
+	</div>
+</div>
+</div>

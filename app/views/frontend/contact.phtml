@@ -1,0 +1,125 @@
+<?php
+$viewpath = config('view_path');
+@include($viewpath.'partials/header.phtml')
+?>
+<!-- END HEADER -->
+
+<!-- MENU SECTION -->
+<?php @include($viewpath.'partials/frontmenu.phtml') ?>
+<!--MENU SECTION END-->
+
+
+<section id="contact" style="padding-top: 40px !important;">
+<div class="container">
+<!-- <div class="row text-center header animate-in" data-anim-type="fade-in-up">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+<h3>Contact Details </h3>
+<hr />
+
+</div>
+</div> -->
+
+<br>
+<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+	<div class="row animate-in" data-anim-type="fade-in-up">
+	
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+	<div class="contact-wrapper">
+	<h3>Address : </h3>
+	<h4>38 Oyo Road (Sango-UI road) Old
+	Airport Bus stop,</h4><h4>Samonda, Ibadan, Oyo State</h4>
+
+	</div>
+	</div>
+	
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+	<div class="contact-wrapper">
+	<h3>Quick Contact</h3>
+	<h4><strong>Email : </strong> info@adsr.com.ng</h4>
+	<h4><strong>Call : </strong> +234-703 747 0047 </h4>
+	<!-- <h4><strong>Skype : </strong> Eweb </h4> -->
+	</div>
+
+	</div>
+	
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+	<div class="contact-wrapper">
+	<h3>We Are Social</h3>
+	<p>
+	Connect with us.
+	</p>
+	<div class="social-below">
+	<a href="https://www.facebook.com/adsr" class="btn button-custom btn-custom-two"> Facebook</a>
+	<a href="https://twitter.com/adsr" class="btn button-custom btn-custom-two"> Twitter</a>
+	<a href="#" class="btn button-custom btn-custom-two"> Google +</a>
+	</div>
+	</div>
+
+	</div>
+</div>
+
+</div>
+
+<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+	<div class="contact-wrapper" id="logindiv">
+	<h4 class="text-center ">SEND US AN EMAIL</h4>
+	<br>
+	<?php if(isset($notification) && !empty($notification)) :?>
+			<div class="notify"><?php echo $notification ?></div>
+			<br>
+	<?php endif ?>
+		<form class="form-horizontal" action="" method="POST">
+			<div class="form-group">
+				<label for="title" class="col-md-1 site-red text-center font12">Firstname</label>
+				<div class="col-md-3">
+				<input type="text" name="firstname" value="" class="form-control" required placeholder="Jane"/>
+				</div>
+
+				<label for="lastname" class="col-md-1 site-red text-center font12">Lastname</label>
+				<div class="col-md-3">
+				<input type="text" name="lastname" value="" class="form-control" required placeholder="Doe"/>
+				</div>
+
+				<label for="email" class="col-md-1 site-red text-center font12">Email</label>
+				<div class="col-md-3">
+				<input type="email" name="email" value="" class="form-control" required placeholder="example@email.com"/>
+				</div>
+
+			</div>
+
+			<div class="form-group">
+				<label for="subject" class="col-md-1 site-red text-center font12">Subject</label>
+				<div class="col-md-7">
+				<input type="text" name="subject" value="" class="form-control" required placeholder="A brief description..."/>
+				</div>
+
+				<label for="phone" class="col-md-1 site-red text-center font12">Phone</label>
+				<div class="col-md-3">
+				<input type="text" name="phone" value="" class="form-control numlock" required placeholder="2348012345678">
+				</div>
+
+				<div class="col-md-11 col-md-offset-1">
+				<textarea class="form-control" style="height: 150px" name="message" required placeholder="Message..."></textarea>
+				</div>
+				
+				<div class="pull-right col-md-3 text-right">
+					<button href="#" class="btn button-custom btn-custom-two font12"><i class="ion-android-send"></i> Send Us A Message</button>
+				</div>
+			</div>
+<!-- 			<div class="form-group">
+				
+			</div> -->
+
+		</form>
+	</div>
+</div>
+
+</div>
+</section>
+
+
+
+<!-- FOOTER -->
+<?php @include($viewpath.'partials/footer.phtml') ?>
+<!-- END FOOTER

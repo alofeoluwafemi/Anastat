@@ -1,0 +1,35 @@
+<div class="services-wrapper" style="padding:6px !important">
+    <h3><i class="ion-social-buffer-outline"></i> Databases</h3>
+    <hr style="margin-top:10px;margin-bottom:5px"/>
+    <h3  class="text-center" style="margin-top:5px;margin-bottom:5px;font-size:20px;">Micro Data</h3>
+    <hr style="margin-top:5px;margin-bottom:10px"/>
+    <ul class="database">
+        <?php if(!empty($Micros)) :?>
+            <?php foreach($Micros as $database) :?>
+                <li><span class="dart fa fa-caret-right databaselist" id="<?php echo 'data'.$database['id']?>"
+                          data-code="<?php echo $database['databasename'].'::'.$database['shortcode'] ?>"
+                          data-type="<?php echo $database['type'] ?>" data-fetch="<?php echo "database/{$database['id']}" ?>">
+		<?php echo $database['databasename'] ?></span>
+                    <span class="ion-ios-help-outline pull-right site-init question" title="Click To View Help" onclick=window.open("help/<?php echo $database['id'] ?>","Ratting","width=550,height=300,left=500,top=200,status=0,scrollbars=1")></span>
+                </li>
+            <?php endforeach?>
+            <li><a href="<?php echo geturl('surveyresearch') ?>" title="download database sectors free" class="dart fa fa-caret-right site-init surveydata">RESEARCH &amp; SURVEY RESOURCES</a>
+            <span class="get_free">Get Free <i class="ion-chevron-right"></i></span>
+            </li>
+        <?php endif ?>
+    </ul>
+    <hr style="margin-top:15px;margin-bottom:5px"/>
+    <h3  class="text-center" style="margin-top:5px;margin-bottom:5px;font-size:20px;">Macro Data</h3>
+    <hr style="margin-top:5px;margin-bottom:10px"/>
+    <ul class="database">
+        <?php if(!empty($Macros)) :?>
+            <?php foreach($Macros as $database) :?>
+                <li><span class="dart fa fa-caret-right databaselist" id="<?php echo 'data'.$database['id']?>"
+                          data-code="<?php echo $database['databasename'].'::'.$database['shortcode'] ?>" data-type="<?php echo $database['type'] ?>"
+                          data-fetch="<?php echo "database/{$database['id']}" ?>">
+		<?php echo $database['databasename'] ?></span>
+                    <span class="ion-ios-help-outline pull-right site-init question" title="Click To View Help" onclick=window.open("help/<?php echo $database['id'] ?>","Ratting","width=550,height=300,left=500,top=200,status=0,scrollbars=1")></span></li>
+            <?php endforeach?>
+        <?php endif ?>
+    </ul>
+</div>

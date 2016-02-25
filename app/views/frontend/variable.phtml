@@ -1,0 +1,31 @@
+<div class="col-md-12 nopad">
+<select data-placeholder="Select Variables From Table..." required class="chosentablemultiple dvariable" multiple="" tabindex="3" name="variable[]">
+	<?php if(count($Variables) > 0) :?>
+	<?php foreach($Variables as $variable) :?>
+		<option value="<?php echo  strtoupper($variable['variable_name'].'::'.$variable['code']) ?>">
+		<?php echo  strtoupper($variable['variable_name'])?>
+		</option>
+	<?php endforeach?>
+	<?php else :?>
+		<option value="">No results returned!</option>
+	<?php endif ?>
+</select>
+</div>
+
+<div class="col-md-12 coverbd nopad">
+<div class="col-md-6 nopad">
+	<div class="checkbox  font12">
+		<label>
+			<input type="checkbox" name="all"> Select All Variables
+		 </label>
+	</div>
+</div>
+
+<div class="col-md-6 nopad">
+	<div class="checkbox  font12 text-right">
+		<label>
+			<input type="checkbox" name="notall"> Deselect All Variables
+		 </label>
+	</div>
+</div>
+</div>

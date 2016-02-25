@@ -1,0 +1,12 @@
+<select data-placeholder="Select Level Of Aggregation..." required class="chosentablesingle dlaggregation" tabindex="3" name="laggregation">
+	<option value=""></option>
+	<?php if(count($Laggregation) > 0) :?>
+	<?php foreach($Laggregation as $aggregation) :?> 
+		<option data-id="<?php echo $aggregation['level_id']?>" 
+		value="<?php echo strtoupper($aggregation['level_aggregation_name'].'::'.$aggregation['code']) ?>">
+		<?php echo $aggregation['level_aggregation_name']?></option>
+	<?php endforeach ?>
+	<?php else :?>
+		<option value="">No results returned!</option>
+	<?php endif ?>
+</select>

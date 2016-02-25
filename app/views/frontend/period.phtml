@@ -1,0 +1,40 @@
+<?php if(strtolower($calendar_type) == 'calendar') : ?>
+
+<div class="col-md-12" id="logindiv">
+		<br>
+		<label for="from" class="col-md-6 site-init nopad normal">From</label>
+		<label for="to" class="col-md-5 col-md-offset-1 site-init nopad normal">To</label>
+		<div class="col-md-5 nopad">
+		<input type="text" required class="form-control dperiod datepicker" name="from" id="from" placeholder="MM/DD/YY" >
+		</div>
+		<div class="col-md-5 col-md-offset-1 pull-right nopad">
+		<input type="text" required class="form-control dperiod datepicker calendar_to" name="to" id="to" placeholder="MM/DD/YY" >
+		</div>
+</div>
+
+<?php else: ?>
+<div class="col-md-12 nopad" id="logindiv">
+	<br>
+	<label for="from" class="col-md-6 site-init normal">From</label>
+	<label for="to" class="col-md-5  site-init normal">To</label>
+	<div class="col-md-5" id="logindiv">
+		<select name="from" required class="form-control dperiod chosentable no-margin" 
+		data-placeholder="From">
+		<option value="">Choose Year</option>
+		<?php for($year = $from; $year < $to; $year++) :?>
+		<option value="<?php echo $year ?>"><?php echo $year ?></option>
+		<?php endfor?>
+		</select>
+	</div>
+
+	<div class="col-md-5 col-md-offset-1" id="logindiv">
+		<select name="to" required class="form-control dperiod chosentable no-margin calendar_to" 
+		data-placeholder="To">
+		<option value="">Choose Year</option>
+		<?php for($year = $from; $year < $to; $year++) :?>
+		<option value="<?php echo $year ?>"><?php echo $year ?></option>
+		<?php endfor?>
+		</select>
+	</div>
+</div>
+<?php endif ?>

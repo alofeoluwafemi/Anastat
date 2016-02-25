@@ -1,0 +1,882 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="28700513-ad0a-4a52-9107-d8316901d341" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Entities/Subscription.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/backend/affiliate/view.phtml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/backend/database/tables.phtml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/backend/frequency/assignfrequency.phtml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/backend/subscriptions/add.phtml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/backend/subscriptions/all.phtml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/backend/subscriptions/edit.phtml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/frontend/frequency.phtml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/frontend/laggregation.phtml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/frontend/tables.phtml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/frontend/test.phtml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/partials/clientoverview.phtml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/partials/databaselist.phtml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/partials/notification.phtml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/partials/prompts.phtml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/partials/requestform.phtml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/partials/requestoverview.phtml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/SecureSessionHandler.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/addvariable.phtml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/backend/table/addtables.phtml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/backend/table/assigntable.phtml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/backend/table/editable.phtml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/backend/table/reassigntables.phtml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/backend/table/tablelists.phtml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/backend/variable/addvariable.phtml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/backend/variable/editvariable.phtml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/backend/variable/variablelists.phtml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/frequency.phtml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/laggregation.phtml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/partials/tempalte.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/tables.phtml" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/AdminController.php" afterPath="$PROJECT_DIR$/app/Controller/AdminController.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/AffiliateController.php" afterPath="$PROJECT_DIR$/app/Controller/AffiliateController.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/Controller.php" afterPath="$PROJECT_DIR$/app/Controller/BaseController.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/Report.php" afterPath="$PROJECT_DIR$/app/Classes/Report.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/404.phtml" afterPath="$PROJECT_DIR$/app/views/errors/404.phtml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/addaffiliate.phtml" afterPath="$PROJECT_DIR$/app/views/backend/affiliate/add.phtml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/addaffiliateduser.phtml" afterPath="$PROJECT_DIR$/app/views/backend/affiliate/adduser.phtml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/addaggregations.phtml" afterPath="$PROJECT_DIR$/app/views/backend/level/add.phtml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/addatabase.phtml" afterPath="$PROJECT_DIR$/app/views/backend/database/add.phtml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/addcategory.phtml" afterPath="$PROJECT_DIR$/app/views/backend/category/add.phtml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/addfrequency.phtml" afterPath="$PROJECT_DIR$/app/views/backend/frequency/add.phtml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/addperiod.phtml" afterPath="$PROJECT_DIR$/app/views/backend/period/addperiod.phtml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/addsector.phtml" afterPath="$PROJECT_DIR$/app/views/backend/survey/addsector.phtml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/addsurvey.phtml" afterPath="$PROJECT_DIR$/app/views/backend/survey/addsurvey.phtml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/adduser.phtml" afterPath="$PROJECT_DIR$/app/views/backend/user/adduser.phtml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/affiliate.phtml" afterPath="$PROJECT_DIR$/app/views/backend/affiliate/all.phtml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/affiliatedashboard.phtml" afterPath="$PROJECT_DIR$/app/views/backend/affiliate/dashboard.phtml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/affiliatelogin.phtml" afterPath="$PROJECT_DIR$/app/views/frontend/affiliatelogin.phtml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/caggregation.phtml" afterPath="$PROJECT_DIR$/app/views/frontend/caggregation.phtml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/categorylists.phtml" afterPath="$PROJECT_DIR$/app/views/backend/category/all.phtml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/client.phtml" afterPath="$PROJECT_DIR$/app/views/backend/client/client.phtml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/clientarea.phtml" afterPath="$PROJECT_DIR$/app/views/frontend/clientarea.phtml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/clientrequests.phtml" afterPath="$PROJECT_DIR$/app/views/backend/client/clientrequests.phtml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/clients.phtml" afterPath="$PROJECT_DIR$/app/views/backend/client/clients.phtml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/contact.phtml" afterPath="$PROJECT_DIR$/app/views/frontend/contact.phtml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/dashboard.phtml" afterPath="$PROJECT_DIR$/app/views/backend/dashboard.phtml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/database.phtml" afterPath="$PROJECT_DIR$/app/views/backend/database/all.phtml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/editaffiliate.phtml" afterPath="$PROJECT_DIR$/app/views/backend/affiliate/edit.phtml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/editcategory.phtml" afterPath="$PROJECT_DIR$/app/views/backend/category/edit.phtml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/editdatabase.phtml" afterPath="$PROJECT_DIR$/app/views/backend/database/edit.phtml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/editfrequency.phtml" afterPath="$PROJECT_DIR$/app/views/backend/frequency/edit.phtml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/editlaggregation.phtml" afterPath="$PROJECT_DIR$/app/views/backend/level/edit.phtml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/editperiod.phtml" afterPath="$PROJECT_DIR$/app/views/backend/period/editperiod.phtml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/editrequest.phtml" afterPath="$PROJECT_DIR$/app/views/frontend/editrequest.phtml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/edituser.phtml" afterPath="$PROJECT_DIR$/app/views/backend/user/edituser.phtml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/frequencylists.phtml" afterPath="$PROJECT_DIR$/app/views/backend/frequency/all.phtml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/index.phtml" afterPath="$PROJECT_DIR$/app/views/frontend/index.phtml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/jserror.phtml" afterPath="$PROJECT_DIR$/app/views/errors/jserror.phtml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/laggregationlists.phtml" afterPath="$PROJECT_DIR$/app/views/backend/level/all.phtml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/login.phtml" afterPath="$PROJECT_DIR$/app/views/frontend/login.phtml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/period.phtml" afterPath="$PROJECT_DIR$/app/views/frontend/period.phtml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/periodlists.phtml" afterPath="$PROJECT_DIR$/app/views/backend/period/periodlists.phtml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/request.phtml" afterPath="$PROJECT_DIR$/app/views/frontend/request.phtml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/requests.phtml" afterPath="$PROJECT_DIR$/app/views/backend/request/requests.phtml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/sectorlists.phtml" afterPath="$PROJECT_DIR$/app/views/backend/survey/sectorlists.phtml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/surveylists.phtml" afterPath="$PROJECT_DIR$/app/views/backend/survey/surveylists.phtml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/surveyresearch.phtml" afterPath="$PROJECT_DIR$/app/views/frontend/surveyresearch.phtml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/surveysectors.phtml" afterPath="$PROJECT_DIR$/app/views/frontend/surveysectors.phtml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/users.phtml" afterPath="$PROJECT_DIR$/app/views/backend/user/users.phtml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/variable.phtml" afterPath="$PROJECT_DIR$/app/views/frontend/variable.phtml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/viewrequest.phtml" afterPath="$PROJECT_DIR$/app/views/backend/request/viewrequest.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/ircmaxell/password-compat" afterPath="$PROJECT_DIR$/vendor/ircmaxell/password-compat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Affiliate.php" afterPath="$PROJECT_DIR$/app/Entities/Affiliate.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Caggregation.php" afterPath="$PROJECT_DIR$/app/Entities/Caggregation.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Client.php" afterPath="$PROJECT_DIR$/app/Entities/Client.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Frequency.php" afterPath="$PROJECT_DIR$/app/Entities/Frequency.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Laggregation.php" afterPath="$PROJECT_DIR$/app/Entities/Laggregation.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Period.php" afterPath="$PROJECT_DIR$/app/Entities/Period.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Request.php" afterPath="$PROJECT_DIR$/app/Entities/Request.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Table.php" afterPath="$PROJECT_DIR$/app/Entities/Table.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/User.php" afterPath="$PROJECT_DIR$/app/Entities/User.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Entities/Variable.php" afterPath="$PROJECT_DIR$/app/Entities/Variable.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config.php" afterPath="$PROJECT_DIR$/app/config.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/file.php" afterPath="$PROJECT_DIR$/app/file.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/functions.php" afterPath="$PROJECT_DIR$/app/functions.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/partials/adminfooter.phtml" afterPath="$PROJECT_DIR$/app/views/partials/adminfooter.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/partials/adminmenu.phtml" afterPath="$PROJECT_DIR$/app/views/partials/adminmenu.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/partials/backendmenu.phtml" afterPath="$PROJECT_DIR$/app/views/partials/backendmenu.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/partials/footer.phtml" afterPath="$PROJECT_DIR$/app/views/partials/footer.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/partials/frontmenu.phtml" afterPath="$PROJECT_DIR$/app/views/partials/frontmenu.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/partials/header.phtml" afterPath="$PROJECT_DIR$/app/views/partials/header.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/css/overide.css" afterPath="$PROJECT_DIR$/assets/css/overide.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/js/script.js" afterPath="$PROJECT_DIR$/assets/js/script.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/autoload.php" afterPath="$PROJECT_DIR$/autoload.php" />
+    </list>
+    <ignored path="adsr.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <ignored path=".idea/dataSources.local.xml" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="adsr" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="mixings.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/assets/js/anastat/mixings.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="70" column="35" selection-start-line="70" selection-start-column="35" selection-end-line="70" selection-end-column="35" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="database.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/assets/js/anastat/database.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="442" column="0" selection-start-line="442" selection-start-column="0" selection-end-line="442" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="script.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/assets/js/anastat/script.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="bootstrap.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/assets/js/anastat/bootstrap.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.53125">
+              <caret line="141" column="10" selection-start-line="141" selection-start-column="10" selection-end-line="141" selection-end-column="10" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/app/views/frontend/index.phtml" />
+        <option value="$PROJECT_DIR$/app/views/frontend/surveysectors.phtml" />
+        <option value="$PROJECT_DIR$/app/views/frontend/surveyresearch.phtml" />
+        <option value="$PROJECT_DIR$/app/Controller/AffiliateController.php" />
+        <option value="$PROJECT_DIR$/app/Classes/Mailer.php" />
+        <option value="$PROJECT_DIR$/app/Classes/Report.php" />
+        <option value="$PROJECT_DIR$/app/file.php" />
+        <option value="$PROJECT_DIR$/app/Controller/Controller.php" />
+        <option value="$PROJECT_DIR$/autoload.php" />
+        <option value="$PROJECT_DIR$/app/views/partials/adminheader.phtml" />
+        <option value="$PROJECT_DIR$/app/views/frontend/contact.phtml" />
+        <option value="$PROJECT_DIR$/app/views/partials/header.phtml" />
+        <option value="$PROJECT_DIR$/app/views/partials/adminfooter.phtml" />
+        <option value="$PROJECT_DIR$/app/views/backend/dashboard.phtml" />
+        <option value="$PROJECT_DIR$/app/views/backend/subscriptions/add.phtml" />
+        <option value="$PROJECT_DIR$/app/views/backend/subscriptions/edit.phtml" />
+        <option value="$PROJECT_DIR$/app/views/backend/subscriptions/all.phtml" />
+        <option value="$PROJECT_DIR$/app/views/partials/notification.phtml" />
+        <option value="$PROJECT_DIR$/app/views/backend/affiliate/list.phtml" />
+        <option value="$PROJECT_DIR$/app/Entities/Period.php" />
+        <option value="$PROJECT_DIR$/app/views/frontend/login.phtml" />
+        <option value="$PROJECT_DIR$/app/functions.php" />
+        <option value="$PROJECT_DIR$/assets/css/overide.css" />
+        <option value="$PROJECT_DIR$/app/Entities/Subscription.php" />
+        <option value="$PROJECT_DIR$/app/views/partials/adminmenu.phtml" />
+        <option value="$PROJECT_DIR$/app/views/partials/footer.phtml" />
+        <option value="$PROJECT_DIR$/app/views/backend/database/edit.phtml" />
+        <option value="$PROJECT_DIR$/app/views/backend/database/add.phtml" />
+        <option value="$PROJECT_DIR$/app/views/backend/level/add.phtml" />
+        <option value="$PROJECT_DIR$/app/views/backend/level/edit.phtml" />
+        <option value="$PROJECT_DIR$/app/views/frontend/test.phtml" />
+        <option value="$PROJECT_DIR$/app/views/backend/database/tables.phtml" />
+        <option value="$PROJECT_DIR$/app/Entities/Laggregation.php" />
+        <option value="$PROJECT_DIR$/app/views/backend/database/all.phtml" />
+        <option value="$PROJECT_DIR$/app/views/backend/frequency/all.phtml" />
+        <option value="$PROJECT_DIR$/app/views/backend/level/all.phtml" />
+        <option value="$PROJECT_DIR$/app/views/backend/affiliate/all.phtml" />
+        <option value="$PROJECT_DIR$/app/Entities/Affiliate.php" />
+        <option value="$PROJECT_DIR$/app/views/backend/affiliate/edit.phtml" />
+        <option value="$PROJECT_DIR$/app/views/backend/affiliate/add.phtml" />
+        <option value="$PROJECT_DIR$/app/views/backend/affiliate/view.phtml" />
+        <option value="$PROJECT_DIR$/app/views/backend/frequency/add.phtml" />
+        <option value="$PROJECT_DIR$/app/Entities/Frequency.php" />
+        <option value="$PROJECT_DIR$/app/views/backend/frequency/edit.phtml" />
+        <option value="$PROJECT_DIR$/app/Controller/AdminController.php" />
+        <option value="$PROJECT_DIR$/app/views/backend/category/all.phtml" />
+        <option value="$PROJECT_DIR$/app/Controller/BaseController.php" />
+        <option value="$PROJECT_DIR$/assets/js/anastat/mixings.js" />
+        <option value="$PROJECT_DIR$/assets/js/anastat/database.js" />
+        <option value="$PROJECT_DIR$/assets/js/anastat/bootstrap.js" />
+        <option value="$PROJECT_DIR$/assets/js/anastat/script.js" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" />
+  <component name="JsBuildToolPackageJson" detection-done="true" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+  </component>
+  <component name="PhpServers">
+    <servers />
+  </component>
+  <component name="PhpTemplates">
+    <option name="NEW_PHP_FILE_LAST_EXTENSION" value="phtml" />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="65" />
+    <option name="y" value="24" />
+    <option name="width" value="1301" />
+    <option name="height" value="744" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="2" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="adsr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="adsr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="adsr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="adsr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="adsr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="adsr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="adsr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="adsr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="adsr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="anastat" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="adsr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="adsr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="ignore_missing_gitignore" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/Classes" />
+      <recent name="$PROJECT_DIR$/app/Controller" />
+      <recent name="$PROJECT_DIR$/app/views/backend/request" />
+      <recent name="$PROJECT_DIR$/app/views/backend/survey" />
+      <recent name="$PROJECT_DIR$/app/views/backend/variable" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <TestRunner />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpBehatConfigurationType" factoryName="Behat">
+      <BehatRunner />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpLocalRunConfigurationType" factoryName="PHP Console">
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.npm" factoryName="npm">
+      <command value="run-script" />
+      <scripts />
+      <envs />
+      <method />
+    </configuration>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="28700513-ad0a-4a52-9107-d8316901d341" name="Default" comment="" />
+      <created>1454993099263</created>
+      <option name="number" value="Default" />
+      <updated>1454993099263</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="65" y="24" width="1301" height="744" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24827056" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3283582" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+    </layout>
+    <layout-to-restore>
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24827056" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3283582" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+    </layout-to-restore>
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/app/views/backend/frequency/all.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="34" column="45" selection-start-line="34" selection-start-column="45" selection-end-line="34" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/partials/clientform.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.46103895">
+          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/frontend/contact.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.09902597">
+          <caret line="89" column="4" selection-start-line="89" selection-start-column="4" selection-end-line="89" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/frontend/index.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.0">
+          <caret line="28" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="75" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/autoload.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.53733766">
+          <caret line="49" column="0" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/partials/header.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.375">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/partials/adminheader.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.75">
+          <caret line="17" column="28" selection-start-line="17" selection-start-column="12" selection-end-line="17" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/backend/subscriptions/edit.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-14.416667">
+          <caret line="42" column="39" selection-start-line="42" selection-start-column="39" selection-end-line="42" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/partials/notification.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.75">
+          <caret line="6" column="14" selection-start-line="6" selection-start-column="14" selection-end-line="6" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/backend/dashboard.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.08928572">
+          <caret line="12" column="23" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/backend/subscriptions/add.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-19.375">
+          <caret line="43" column="34" selection-start-line="0" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/frontend/frequency.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.0">
+          <caret line="0" column="88" selection-start-line="0" selection-start-column="71" selection-end-line="0" selection-end-column="88" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Entities/Period.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.38961038">
+          <caret line="42" column="5" selection-start-line="27" selection-start-column="4" selection-end-line="42" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Entities/Client.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-20.291666">
+          <caret line="156" column="46" selection-start-line="156" selection-start-column="34" selection-end-line="156" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/frontend/login.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6103896">
+          <caret line="64" column="10" selection-start-line="64" selection-start-column="10" selection-end-line="64" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/functions.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-16.916666">
+          <caret line="488" column="17" selection-start-line="488" selection-start-column="17" selection-end-line="488" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/css/overide.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.5">
+          <caret line="331" column="32" selection-start-line="331" selection-start-column="32" selection-end-line="331" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Entities/Subscription.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="20.833334">
+          <caret line="65" column="20" selection-start-line="65" selection-start-column="20" selection-end-line="65" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/partials/adminmenu.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.1666665">
+          <caret line="9" column="26" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/partials/adminfooter.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7305195">
+          <caret line="30" column="7" selection-start-line="1" selection-start-column="0" selection-end-line="30" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/partials/footer.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-14.375">
+          <caret line="23" column="77" selection-start-line="23" selection-start-column="77" selection-end-line="23" selection-end-column="77" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/backend/database/edit.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.666667">
+          <caret line="43" column="4" selection-start-line="43" selection-start-column="4" selection-end-line="43" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/js/script.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="915" column="45" selection-start-line="915" selection-start-column="45" selection-end-line="915" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/backend/level/edit.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.291667">
+          <caret line="41" column="33" selection-start-line="41" selection-start-column="33" selection-end-line="41" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/backend/database/tables.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.3409091">
+          <caret line="37" column="25" selection-start-line="37" selection-start-column="25" selection-end-line="37" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/backend/database/add.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.121753246">
+          <caret line="36" column="13" selection-start-line="32" selection-start-column="7" selection-end-line="36" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/backend/level/add.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-20.75">
+          <caret line="81" column="22" selection-start-line="63" selection-start-column="16" selection-end-line="81" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/frontend/test.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="2" column="81" selection-start-line="2" selection-start-column="81" selection-end-line="2" selection-end-column="81" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/backend/subscriptions/all.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.46266234">
+          <caret line="35" column="80" selection-start-line="35" selection-start-column="23" selection-end-line="35" selection-end-column="80" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/backend/level/all.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4788961">
+          <caret line="41" column="69" selection-start-line="41" selection-start-column="69" selection-end-line="41" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Entities/Laggregation.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.875">
+          <caret line="225" column="12" selection-start-line="214" selection-start-column="8" selection-end-line="238" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/backend/affiliate/all.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.43993506">
+          <caret line="84" column="0" selection-start-line="84" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/backend/affiliate/edit.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.375">
+          <caret line="50" column="154" selection-start-line="50" selection-start-column="154" selection-end-line="50" selection-end-column="154" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/backend/affiliate/view.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4383117">
+          <caret line="59" column="73" selection-start-line="59" selection-start-column="73" selection-end-line="59" selection-end-column="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/backend/affiliate/adduser.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.8766234">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/backend/affiliate/add.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.26785713">
+          <caret line="54" column="25" selection-start-line="50" selection-start-column="16" selection-end-line="54" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/frontend/caggregation.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/frontend/tables.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Entities/Frequency.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="295" column="0" selection-start-line="295" selection-start-column="0" selection-end-line="295" selection-end-column="0" />
+          <folding>
+            <marker date="1455659823613" expanded="true" signature="340:515" placeholder="SELECT * FRO... frequency_datas" />
+            <marker date="1455659823613" expanded="true" signature="845:876" placeholder="SELECT * FRO... frequency_datas" />
+            <marker date="1455659823613" expanded="true" signature="904:1045" placeholder="SELECT * FRO... frequency_table" />
+            <marker date="1455659823613" expanded="true" signature="1522:1664" placeholder="SELECT * FRO... frequency_table" />
+            <marker date="1455659823613" expanded="true" signature="2116:2334" placeholder="SELECT frequ... frequency_datas" />
+            <marker date="1455659823613" expanded="true" signature="2357:2531" placeholder="SELECT DISTI... frequency_datas" />
+            <marker date="1455659823613" expanded="true" signature="3145:3188" placeholder="DELETE FROM " />
+            <marker date="1455659823613" expanded="true" signature="3452:3549" placeholder="INSERT INTO frequency_datas" />
+            <marker date="1455659823613" expanded="true" signature="4160:4238" placeholder="INSERT INTO frequency_table... " />
+            <marker date="1455659823613" expanded="true" signature="4555:4602" placeholder="SELECT * FRO... frequency_datas" />
+            <marker date="1455659823613" expanded="true" signature="4806:4962" placeholder="SELECT * FRO... frequency_datas" />
+            <marker date="1455659823613" expanded="true" signature="5322:5373" placeholder="SELECT * FRO... frequency_table" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/backend/frequency/edit.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="88" column="79" selection-start-line="88" selection-start-column="79" selection-end-line="88" selection-end-column="79" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/backend/database/all.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.65909094">
+          <caret line="40" column="69" selection-start-line="40" selection-start-column="12" selection-end-line="40" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Controller/AdminController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="559" column="7" selection-start-line="559" selection-start-column="7" selection-end-line="559" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/backend/category/all.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="79" column="0" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Controller/BaseController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.24512987">
+          <caret line="97" column="51" selection-start-line="97" selection-start-column="51" selection-end-line="97" selection-end-column="51" />
+          <folding>
+            <element signature="e#34#56#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Entities/Affiliate.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
+          <folding>
+            <marker date="1455583570278" expanded="true" signature="279:321" placeholder="SELECT COUNT... " />
+            <marker date="1455583570278" expanded="true" signature="750:878" placeholder="INSERT INTO affiliates... " />
+            <marker date="1455583570278" expanded="true" signature="1500:1542" placeholder="SELECT * FRO... affiliates" />
+            <marker date="1455583570278" expanded="true" signature="1758:1808" placeholder="SELECT * FRO... affiliates" />
+            <marker date="1455583570278" expanded="true" signature="2295:2542" placeholder="UPDATE `affi... " />
+            <marker date="1455583570278" expanded="true" signature="3175:3213" placeholder="DELETE FROM " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/backend/frequency/all.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="34" column="45" selection-start-line="34" selection-start-column="45" selection-end-line="34" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/backend/frequency/add.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.024350649">
+          <caret line="35" column="13" selection-start-line="32" selection-start-column="8" selection-end-line="36" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/js/anastat/mixings.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="70" column="35" selection-start-line="70" selection-start-column="35" selection-end-line="70" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/js/anastat/database.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="442" column="0" selection-start-line="442" selection-start-column="0" selection-end-line="442" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/js/anastat/script.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/js/anastat/bootstrap.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.53125">
+          <caret line="141" column="10" selection-start-line="141" selection-start-column="10" selection-end-line="141" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

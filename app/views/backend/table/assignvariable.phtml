@@ -1,0 +1,177 @@
+<!--HEADER -->
+<?php
+$viewpath = config('view_path');
+include($viewpath.'/partials/adminheader.phtml');
+?>
+<!-- END HEADER -->
+
+<!-- MENU SECTION -->
+<?php include($viewpath.'partials/backendmenu.phtml') ?>
+<!--MENU SECTION END-->
+
+
+<!--HOME SECTION END-->
+<!--SERVICE SECTION START-->
+<br>
+<br>
+<section id="services" >
+<div class="container">
+<div class="row text-center header">
+<!-- <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 animate-in" data-anim-type="fade-in-up">
+<h3 style="margin:0px;">REQUEST DATA</h3>
+<hr style="margin-top:5px !mportant;margin-bottom:0px"/>
+</div> -->
+</div>
+<div class="row animate-in" data-anim-type="fade-in-up">
+
+<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+	<?php include($viewpath."partials/adminmenu.phtml") ?>
+</div>
+
+<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 main-body">
+	<div class="services-wrapper">
+	<ol class="breadcrumb">
+        <li><a href="<?php echo geturl('admin/dashboard')?>">Dashboard</a></li>
+        <li><a href="#">Database</a></li>
+        <li><a href="<?php echo geturl("admin/database/{$Table['id']}/variables")?>">Variable</a></li>
+        <li class="active">Assign-Variable</li>
+    </ol>
+		<hr>
+		<div class="row">
+		<?php if(isset($notification) && !empty($notification)) :?>
+			<div class="notify"><?php echo $notification ?></div>
+		<?php endif ?>
+
+		<!-- ADD NEW DATABASE -->
+		<form class="form-horizontal" method="post" action="">
+					<div class="col-md-10" id="logindiv">
+						<input type="text" class="form-control disabled" disabled value="<?php echo $Table['table_name'] ?>"/>
+						<input type="hidden" name="table" value="<?php echo $Table['id'] ?>"/>
+					</div>
+					
+					<div class="col-md-10">
+						<select name="level" required class="form-control no-margin chosentable selectlevel" 
+						data-placeholder="<?php echo !empty($Levels) ? 'Select Level' : 'No Result Returned!' ?>" >
+
+						<?php if(!empty($Levels)): ?>
+						<?php foreach($Levels as $data) :?>
+						<option value="<?php echo $data['level_id'] ?>"><?php echo $data['level_aggregation_name'] ?></option>
+						<?php endforeach ?>
+						<?php else: ?>
+						<option value="">No Result Returned!</option>
+						<?php endif ?>
+
+						</select>
+						<small class="site-init codeinfo">
+						<i class="fonts ion-information-circled site-red"></i>Only level assigned to this table will be availale here
+						</small>
+					</div>
+
+					<div class="col-md-10">
+						<select name="frequency" required class="form-control chosentable no-margin selectlevel2" 
+						data-placeholder="<?php echo !empty($Frequencies) ? 'Select Frequency' : 'No Result Returned!' ?>">
+
+						<?php if(!empty($Frequencies)): ?>
+						<?php foreach($Frequencies as $data) :?>
+						<option value="<?php echo $data['frequency_id'] ?>"><?php echo $data['frequency_data_name'] ?></option>
+						<?php endforeach ?>
+						<?php else: ?>
+						<option value="">No Result Returned!</option>
+						<?php endif ?>
+
+						</select>
+						<small class="site-init codeinfo"><i class="fonts ion-information-circled site-red"></i>Only frequency assigned to this table will be availale here</small>
+					</div>
+					
+						
+					<div class="col-md-10">
+						<select name="variables[]" multiple class="form-control chosentable" 
+						data-placeholder="<?php echo !empty($Variables) ? ' Select Variable' : 'No Result Returned!' ?>">
+
+						<?php if(!empty($Variables)): ?>
+						<?php foreach($Variables as $data) :?>
+						<option value="<?php echo $data['id'] ?>"><?php echo strtoupper($data['variable_name']) ?></option>
+						<?php endforeach ?>
+						<?php else: ?>
+						<option value="">No Result Returned!</option>
+						<?php endif ?>
+
+						</select>
+					</div>
+					
+					<div class="col-md-10 coverbd">
+					<!-- SELECT ALL -->
+						<div class="col-md-6 no-margin">
+							<div class="checkbox site-init font12">
+								<label>
+									<input type="checkbox" name="all"> Select All Variables
+								 </label>
+							</div>
+						</div>
+
+						<div class="col-md-6 nopad no-margin">
+							<div class="checkbox site-init font12">
+								<label>
+									<input type="checkbox" name="notall">Deselect All Variables
+								 </label>
+							</div>
+						</div>
+						<!-- END -->
+					</div>
+					
+					<div class="col-md-12 nopad" id="logindiv">
+					<br>
+						<div class="col-md-4" id="logindiv">
+						<select name="from" required class="form-control chosentable no-margin" 
+						data-placeholder="From">
+							<?php for($year = 1980; $year < 2017; $year++) :?>
+								<option value="<?php echo $year ?>"><?php echo $year ?></option>
+							<?php endfor?>
+						</select>
+						</div>
+
+						<div class="col-md-4" id="logindiv">
+						<select name="to" required class="form-control chosentable no-margin" 
+						data-placeholder="To">
+							<?php for($year = 1980; $year < 2017; $year++) :?>
+								<option value="<?php echo $year ?>"><?php echo $year ?></option>
+							<?php endfor?>
+						</select>
+						</div>
+					</div>
+
+					<div class="col-md-12" id="logindiv">
+					<small class="site-init codeinfo">
+						<i class="fonts ion-information-circled site-red"></i>
+						Range In Which Data Is Available
+					</small>
+					</div>
+
+					<div  class="col-md-12">
+					<br>
+						<button  class="btn button-custom btn-custom-two">Assign</button>
+					</div>
+
+			</form>
+
+		</div>
+
+		<!-- END DATABASE -->
+
+	</div>
+</div>
+
+
+
+</div>
+</div>
+</section>
+
+
+
+<!--CONTACT SECTION START-->
+<!--CONTACT SECTION END-->
+
+<!-- FOOTER -->
+<?php @include($viewpath.'partials/footer.phtml') ?>
+<!-- END FOOTER

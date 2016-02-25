@@ -1,0 +1,11 @@
+
+<select data-placeholder="Select Tables..." class="chosentablesingle dtable" required tabindex="3" name="table">
+	<option value=""></option>
+	<?php if(count($Tables) > 0) :?>
+	<?php foreach($Tables as $table) :?>
+		<option data-id="<?php echo $table['table_id']?>" value="<?php echo strtoupper($table['table_name'].'::'.$table['code']) ?>"> <?php echo $table['table_name']?> </option>
+	<?php endforeach ?>
+	<?php else :?>
+		<option value="">No results returned!</option>
+	<?php endif ?>
+</select>

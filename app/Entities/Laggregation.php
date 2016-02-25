@@ -22,25 +22,50 @@ class Laggregation {
 
 
 	/**
-	 * Fetch all tables for
-	 * a database
+	 * Fetch all
 	**/
-	public function getaggregations($table_id)
+	public function TableAggregations($table_id)
 	{
-		$stmt = $this->db->query("SELECT DISTINCT level_aggregation_name,id,code,table_id
-		 						 FROM `level_aggregations` WHERE table_id = {$table_id} ");
+		$stmt = $this->db->prepare("SELECT * FROM `level_aggregations` 
+								  	INNER JOIN level_table ON level_aggregations.id = level_table.level_id
+								  	WHERE level_table.table_id = :table_id");
 
+		$stmt->bindParam(':table_id',$table_id,PDO::PARAM_INT);
+
+		$stmt->execute();
+	
 		$stmt->setFetchMode(\PDO::FETCH_ASSOC);
-
-		//If PDO error
-		getError($stmt);
 
 		while($result = $stmt->fetch())
 		{
-			$this->results[] = $result;
+			$results[] = $result;
 		}
 		
-		return $this->results;
+		return (is_null($results) OR empty($results)) ? array() : $results;
+	}
+
+	/**
+	 * Fetch all tables for
+	 * a database
+	**/
+	public function getTableaggregations($table_id)
+	{
+		$stmt = $this->db->prepare("SELECT * FROM `level_aggregations` 
+								  	INNER JOIN level_table ON level_aggregations.id = level_table.level_id
+								  	WHERE level_table.table_id = :table_id");
+
+		$stmt->bindParam(':table_id',$table_id,PDO::PARAM_INT);
+
+		$stmt->execute();
+	
+		$stmt->setFetchMode(\PDO::FETCH_ASSOC);
+
+		while($result = $stmt->fetch())
+		{
+			$results[] = $result['level_id'];
+		}
+		
+		return (is_null($results) OR empty($results)) ? array() : $results;
 	}
 
 	/**
@@ -57,11 +82,11 @@ class Laggregation {
 
 		while($result = $stmt->fetch())
 		{
-			$this->results[] = $result;
+			$results[] = $result;
 		}
 		
-		// return $this->results;
-		return (is_null($this->results) OR empty($this->results)) ? array() : $this->results;
+		// return $results;
+		return (is_null($results) OR empty($results)) ? array() : $results;
 	}
 
 	/**
@@ -69,7 +94,6 @@ class Laggregation {
 	*/
 	public function all($paginate = false)
 	{
-		// $query = "SELECT * FROM `level_aggregations` INNER JOIN `tables` ON level_aggregations.id = level_table.table_id";
 		$query = "SELECT * FROM `level_aggregations`";
 		
 		$childquery = "SELECT * FROM `level_table` INNER JOIN `tables` 
@@ -95,7 +119,7 @@ class Laggregation {
 
 			while($result = $stmt->fetch())
 			{
-				$this->results[$key] = $result;
+				$results[$key] = $result;
 
 				$query = "SELECT * FROM `level_table` INNER JOIN `tables` 
 						ON level_table.table_id = tables.id
@@ -105,14 +129,14 @@ class Laggregation {
 
 				while($data = $tables->fetch())
 				{
-					$this->results[$key]['tables'][] = $data['table_name'];
+					$results[$key]['tables'][] = $data['table_name'];
 				}
 
 				$key++;
 
 			}
 
-			return (is_null($this->results) OR empty($this->results)) ? array() : $this->results;
+			return (is_null($results) OR empty($results)) ? array() : $results;
 
 			}
 	}
@@ -134,9 +158,12 @@ class Laggregation {
 	 */
 	public function addnew($array)
 	{
+		$level = "";
+		$code = "";
+		$tables = "";
+
 		// dd($array);
 		extract($array);
-
 
 		$query = $this->db->prepare('INSERT INTO level_aggregations (level_aggregation_name,code) VALUES (:level,:code)');
 			 
@@ -152,7 +179,6 @@ class Laggregation {
 	    $data = ['level' => $id,'tables' => $tables];
 
 	    $this->assign($data);
-
 	}
 
 	/**
@@ -160,6 +186,9 @@ class Laggregation {
 	 */
 	public function assign($array)
 	{
+		$level = "";
+		$tables = "";
+
 		// dd($array);
 		extract($array);
 
@@ -213,8 +242,12 @@ class Laggregation {
 	 * Update table details
 	 */
 	public function update($data)
-	{		
-		// dd($data);
+	{
+		$level = "";
+		$tables = "";
+		$code = "";
+		$id = "";
+
 		extract($data);
 		
 		$oldname  = $this->edit($id)['level_aggregation_name'];
@@ -241,6 +274,9 @@ class Laggregation {
 	*/
 	public function sync($data)
 	{
+		$level = "";
+		$tables = "";
+
 		extract($data);
 
 		$stmt = $this->db->prepare("DELETE FROM level_table WHERE level_id =  :id");

@@ -1,0 +1,68 @@
+<?php
+$viewpath = config('view_path');
+include($viewpath.'/partials/adminheader.phtml');
+?>
+
+<!-- MENU SECTION -->
+<?php include($viewpath.'partials/backendmenu.phtml') ?>
+<!--MENU SECTION END -->
+
+<br>
+<br>
+<section id="services" >
+    <div class="container">
+        <div class="row text-center header">
+
+        </div>
+        <div class="row animate-in" data-anim-type="fade-in-up">
+
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                <?php include($viewpath."partials/adminmenu.phtml") ?>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 main-body">
+                <div class="services-wrapper">
+                    <ol class="breadcrumb">
+                        <li><a href="<?php echo geturl('admin/dashboard')?>">Dashboard</a></li>
+                        <li><a href="<?php echo geturl('admin/subscriptions')?>">Subscription</a></li>
+                        <li class="active">Edit</li>
+                    </ol>
+
+                    <hr>
+                    <div class="row">
+                        <?php if(isset($notification) && !empty($notification)) :?>
+                            <div class="notify"><?php echo $notification ?></div>
+                        <?php endif ?>
+
+                        <!-- ADD NEW -->
+                        <form class="form-horizontal" method="post" action="">
+                            <div class="col-md-12" id="logindiv">
+                                <input type="text" class="form-control"  value="<?php echo $Plan['name'] ?>" name="name" required placeholder="Name"/>
+                            </div>
+                            <div class="col-md-6" id="logindiv">
+                                <input type="text" class="form-control numlock" value="<?php echo $Plan['validity_days'] ?>" name="validity" required placeholder="Validity"/>
+                            </div>
+                            <div class="col-md-6" id="logindiv">
+                                <input type="text" class="form-control numlock" value="<?php echo $Plan['size'] ?>" name="size" required placeholder="Data Size"/>
+                            </div>
+
+                            <input type="hidden" name="id" value="<?php echo $Plan['id'] ?>">
+
+                            <div id="submitdiv" class="col-md-12">
+                                <button  class="btn button-custom btn-custom-two pull-right">Update</button>
+                            </div>
+                        </form>
+                        <!-- END -->
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</section>
+
+
+
+<?php @include($viewpath.'partials/footer.phtml') ?>s

@@ -18,6 +18,12 @@ span.databaselist:hover,span.question:hover{
 	color: rgba(228, 79, 79, 0.8);
 }
 
+.question{
+    font-size: 18px;
+    line-height: 18px;
+    font-weight: bolder;
+}
+
 .surveydata{
     color: rgba(228, 79, 79, 0.8);
 }
@@ -97,11 +103,63 @@ div.chosen-container{
 	margin-top:4%;
 }
 
+/*Select2 Customization*/
+.select2-container{
+    width: 100% !important;
+}
+
+.select2-selection{
+    border: 1px solid rgba(228, 79, 79, 0.79) !important;
+    margin-top:4% !important;
+    border-radius: 0px !important;
+    font-size: 12px !important;
+}
+
+.select2-results__option{
+    font-size: 12px !important;
+}
+
+.select2-selection__choice{
+    border-radius: 0px !important;
+}
+
+.select2-selection__choice{
+    color: rgba(228, 79, 79, 0.79);
+}
+
+.select2-selection__choice span{
+    color: #000 !important;
+}
+
+.select2-results__option{
+    color: #000 !important;
+}
+
 select.chosentable{
     width:100%;
     margin-left:auto;
     margin:auto;
 }
+
+.select2-selection__arrow {
+    top: 15px !important;
+}
+
+.checkbox label{
+    color: #444 !important;
+}
+
+input#to, input#from{
+    height: 28px;
+    color: #444 !important;
+}
+
+.min-input{
+    height: 28px;
+    color: #444 !important;
+    font-size: 12px;
+}
+/*End Select Customization*/
 
 .info{
     font-size:24px !important;
@@ -251,6 +309,10 @@ div#logindiv  input,div#logindiv  select,div#logindiv  textarea,div.logindiv  in
     font-size: 12px !important;
 }
 
+.font10{
+    font-size: 10px !important;
+}
+
 .counter{
     margin: auto !important;
     width: 3%;
@@ -274,26 +336,24 @@ div#logindiv  input,div#logindiv  select,div#logindiv  textarea,div.logindiv  in
 }
 
 div#sortdiv{
-    border-top: 1px solid white;
     padding-top: 1% !important;
-    margin-bottom: 2% !important;
-    border-bottom: 1px solid white;
 }
 
 div#sortdiv select,div#sortdiv button{
-        height: 29px;
-    line-height: 28px;
-    font-size: 12px;
+    height: 27px;
+    line-height: 27px;
+    font-size: 11px;
 }
 
-div#sortdiv button,div#sortdiv a{
-    border: 1px solid rgb(228, 79, 79);
-    height: 29px;
-    line-height: 28px;
-    font-size: 12px;
-    display: inline-block;
-    width: 29px;
-    text-align: center;
+div#sortdiv div button,div#sortdiv div a{
+    font-size: 11px;
+    display: block;
+    margin-top: 0px !important;
+    height: 27px;
+    line-height: 16px;
+    width: 100%;
+    padding: 3px;
+    font-weight: bold;
 }
 
 .margin-top-3{
@@ -301,7 +361,7 @@ div#sortdiv button,div#sortdiv a{
 }
 
 .white{
-        color: white;
+        color: white !important;
 }
 
 .norightpad{
@@ -330,4 +390,158 @@ div#sortdiv button,div#sortdiv a{
     margin: 30px;
     color: rgb(228, 79, 79);
     font-size: 20px;
+}
+
+/*//Adjust date picker
+.ui-datepicker-month{
+    display
+}*/
+
+.breadcrumb{
+    display: inline !important;
+    background: rgba(255, 255, 255, 0.20) !important;
+    border-radius: 0px !important;
+}
+
+.normal{
+    font-weight: normal !important;
+}
+
+.dcomment{
+    border: 1px solid rgb(228, 79, 79);
+    height: 90px !important;
+    overflow: hidden;
+    margin-bottom: 10px !important;
+}
+
+.client-title{
+    border-top: 1px solid rgba(0, 0, 0, 0.4);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+    padding: 5px 0px !important;
+    text-align: center;;
+}
+
+ #databaseoverview,#tableoverview,#lagoverview,#cagoverview,#freqoverview,#variableoverview,#periodoverview,#commentoverview{
+    font-size: 12px !important;
+    padding: 0px !important;
+ }
+
+ #cl_name_overview,#cl_sex_overview,#cl_email_overview,#cl_add_overview,#cl_phone_overview,#cl_institution_overview,#cl_designation_overview{
+    font-size: 12px !important;
+    padding: 0px !important;
+ }
+
+div.services-wrapper{
+    padding-top: 1% !important;
+}
+
+ div.services-wrapper>h3{
+    font-size: 20px;
+    margin-top: 10px !important;
+ }
+
+section#services {
+    padding-top: 15px !important;
+}
+
+@media (min-width: 1200px)
+{
+    .container {
+        width: 1220px;
+    }
+}
+
+.overviewdivbox{
+    min-height: 232px !important;
+}
+
+.get_free{
+    float: right;
+    border: 1px solid rgba(68, 68, 68, 0.9);
+    color: rgb(228, 79, 79);
+    padding: 2px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.28);
+}
+
+.get_free i{
+    font-size: 8px !important;
+}
+
+.link-color{
+    color: #23527c !important;
+}
+
+.anasatnotificationfont {
+    font-size: 16px !important;
+}
+
+.theaders{
+    border-top: 1px solid #444;
+    border-bottom: 1px solid #444;
+}
+
+.theaders  div{
+    border-right: 1px solid #444;
+}
+
+.tdbody{
+    /*border-right: 1px solid #444;*/
+}
+
+.tdbody{
+    border-bottom: 1px solid #444;
+}
+
+#byaffiliate .chosen-container{
+    margin-top: 0px;
+}
+
+#byaffiliate .chosen-container .chosen-single{
+    font-weight: normal !important;
+}
+
+.site-blue{
+    color:blue !important;
+}
+
+#requestlists{
+    /*border-right: 1px solid #444;*/
+    /*border-left: 1px solid #444;*/
+    padding-bottom: 2%;
+    padding-left: 2%;
+    padding-right: 2%;
+    margin-bottom:1%;
+}
+
+.requestlists div{
+    /*padding: 1% !important;*/
+}
+
+.bioform div h5{
+    margin-bottom: 0px !important;
+}
+
+.col-md-half{
+    width: 4% !important;
+    float: left;
+}
+
+.margin-top-3{
+    margin-top: 3% !important;
+}
+
+.only-margin-top-3{
+    margin: 0px !important;
+    margin-top: 3% !important;
+}
+
+.full-chosen .chosen-container{
+    width: 80% !important;
+    padding: 0px !important;
+    margin-top: 0px !important;
+}
+
+#contact .contact-wrapper{
+    margin-bottom: 5px !important;
 }

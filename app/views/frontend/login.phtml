@@ -1,0 +1,65 @@
+<?php
+$viewpath = config('view_path');
+include($viewpath.'/partials/header.phtml');
+?>
+<!-- END HEADER -->
+
+<br>
+<br>
+<section id="services" style="padding-bottom: 20%;">
+<div class="container">
+<div class="row text-center header">
+</div>
+<div class="row animate-in" data-anim-type="fade-in-up">
+
+<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+	
+</div>
+
+<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+	<div class="services-wrapper">
+	<?php if(!empty($_GET['error'])) :?>
+			<div class="notify"><?php echo $_GET['error'] ?></div>
+	<?php endif ?>
+	<h4 class="site-init"><i class="ion-ios-locked site-red"></i>Secure Login</h4>
+		
+		<form class="form-horizontal" method="post" action="<?php echo geturl('login') ?>">
+			<div class="row" id="">
+
+				<!-- PERIOD -->
+				<div class="col-md-12" id="logindiv">
+					<input type="text" name="username" class="form-control" placeholder="username" value="<?php echo get('username') ?>" />
+					<input type="password" name="password" class="form-control" placeholder="*********"/>
+				</div>
+
+				<div id="submitdiv" class="col-md-12">
+						<button  class="btn button-custom btn-custom-two pull-right">
+						Login
+						</button>
+				</div>
+
+			</div>
+		</form>
+		<br>
+		<br>
+	</div>
+		
+</div>
+
+<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+</div>
+
+
+</div>
+</div>
+</section>
+
+
+
+<!--CONTACT SECTION START-->
+
+<!--CONTACT SECTION END-->
+
+<!-- FOOTER -->
+<?php include($viewpath.'/partials/footer.phtml') ?>
+<!-- END FOOTER

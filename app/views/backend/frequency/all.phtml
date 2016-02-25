@@ -1,0 +1,114 @@
+<!--HEADER -->
+<?php
+$viewpath = config('view_path');
+include($viewpath.'/partials/adminheader.phtml');
+?>
+<!-- END HEADER -->
+
+<!-- MENU SECTION -->
+<?php include($viewpath.'partials/backendmenu.phtml') ?>
+<!--MENU SECTION END-->
+
+
+<!--HOME SECTION END-->
+<!--SERVICE SECTION START-->
+<br>
+<br>
+<section id="services" >
+<div class="container">
+<div class="row text-center header">
+<!-- <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 animate-in" data-anim-type="fade-in-up">
+<h3 style="margin:0px;">REQUEST DATA</h3>
+<hr style="margin-top:5px !mportant;margin-bottom:0px"/>
+</div> -->
+</div>
+<div class="row animate-in" data-anim-type="fade-in-up">
+
+<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+	<?php include($viewpath."partials/adminmenu.phtml") ?>
+</div>
+
+<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 main-body">
+	<div class="services-wrapper">
+		<ol class="breadcrumb">
+			<li><a href="<?php echo geturl('admin/dashboard')?>">Dashboard</a></li>
+			<li class="active">Frequency</li>
+		</ol>
+	<a href="<?php echo geturl("admin/addfrequency") ?>" class="site-init action-btn pull-right">
+	<i class="ion-plus fonts site-red"></i> Add New</a>
+		<hr>
+		<div class="row dash-row">
+
+            <?php include($viewpath.'partials/notification.phtml') ?>
+
+			<!-- START TABLES -->
+			<div class="col-md-1 site-red">
+			S/N
+			</div>
+			<div class="col-md-5 site-red">
+			Frequency
+			</div>
+
+			<div class="col-md-4 site-red">
+				Tables
+			</div>
+
+			<div class="col-md-2 site-red">
+			Actions
+			</div>
+			<hr>
+			
+			<?php if(!empty($Frequencies)) :?>
+			<?php foreach($Frequencies as $key => $data) :?>
+			<div class="col-md-1 site-init">
+			<?php echo $key + 1 ?>
+			</div>
+
+			<div class="col-md-5 site-init">
+			<?php echo strtoupper($data['frequency_data_name']) ?>
+			</div>
+
+			<div class="col-md-4 site-init">
+				<?php echo strtoupper(implode("<br/>",$data['tables'])) ?>
+			</div>
+
+			<div class="col-md-2">
+			<a title="delete" href="#" onclick='Anastat.Mixing.AdminPromptDelete("<?php echo geturl("admin/frequency/{$data['id']}/drop" ) ?>")'
+			class="site-init action-btn">
+			<i class="ion-ios-trash fonts site-red"></i></a>
+			<a title="edit" href="<?php echo geturl("admin/frequency/{$data['id']}/edit" ) ?>" class="site-init action-btn">
+			<i class="ion-edit fonts site-red"></i></a>
+			</div>
+
+			<div class="col-md-12">
+			<hr class="split-list">
+			</div>
+
+			<?php endforeach ?>
+			<div class="col-md-12">
+				<?php echo $Links ?>
+			</div>
+			<?php else :?>
+			<div class="notify">Frequency List Empty!</div>
+			<?php endif ?>
+
+		</div>
+		<!-- END AFFILIATES -->
+
+	</div>
+</div>
+
+
+
+</div>
+</div>
+</section>
+
+
+
+<!--CONTACT SECTION START-->
+<!--CONTACT SECTION END-->
+
+<!-- FOOTER -->
+<?php @include($viewpath.'partials/footer.phtml') ?>
+<!-- END FOOTER

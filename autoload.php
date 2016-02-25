@@ -1,5 +1,6 @@
 <?php
 use App\Entities\Database;
+use App\Controller\BaseController;
 
 $requested_page = trim( config('url') );
 
@@ -7,7 +8,7 @@ $requested_page = trim( config('url') );
  * If no page is request show index else
  * Call method from controller
  * Pass arguements if any
- * Load Page Or perform action dpending on request type
+ * Load Page Or perform action depending on request type
  */
 if(empty($requested_page))
 {
@@ -20,7 +21,14 @@ if(empty($requested_page))
 	{
 		$data = $_POST;
 
-		App('App\Entities\Client')->addclient($data);
+
+		/**
+		 * @return array
+		 * transactionid & clientid
+		 */
+		$detail = App('App\Entities\Client')->addclient($data);
+
+		App('App\Classes\Mailer')->mailRequest($data,$detail);
 
 		if($data['clienttype'] == "personal")
 			{
@@ -30,16 +38,16 @@ if(empty($requested_page))
 		if($data['clienttype'] == "affiliate")
 			{
 				$notification = 'Thank you for using the Anastat Platform. Our systems are already processing your request. 
-				Kindly contact the help desk in your Instituition';
+				Kindly contact the <strong>Affiliate Manager</strong> in your Instituition';
 			}
 
 	}
 
-	view('index',compact('Micros','Macros','Instituitions','notification'));
+	frontview('index',compact('Micros','Macros','Instituitions','notification'));
 
 }else{
 
-	$Controller = new App\Controller();
+	$Controller = new BaseController;
 
 	if(preg_match("#\/#", $requested_page))
 	{

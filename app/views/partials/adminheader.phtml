@@ -46,8 +46,7 @@
 <span class="icon-bar"></span>
 </button>
 <a class="navbar-brand" href="#">
-
-ADMIN
+<?php echo (!empty($environment) && $environment == 'affiliate') ? ucfirst(affiliate('affiliate_name')) : 'ADMIN MANAGER' ?> 
 
 </a>
 </div>

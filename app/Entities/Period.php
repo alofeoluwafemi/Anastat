@@ -38,9 +38,8 @@ class Period {
 		{
 			$this->results[] = $result;
 		}
-		
-		// var_dump( $this->results );
-		return $this->results;
+
+		return (is_null($this->results) OR empty($this->results)) ? array() : $this->results;
 	}
 
 	/**
@@ -62,7 +61,6 @@ class Period {
 			$this->results[] = $result;
 		}
 		
-		// var_dump($this->results);
 		return (is_null($this->results) OR empty($this->results)) ? array() : $this->results;
 	}
 
@@ -127,6 +125,28 @@ class Period {
 	    getError($stmt);
 		
 		$stmt->execute();
+	}
+
+	public function getDateRange($table,$level,$frequency)
+	{
+		$query = "SELECT * FROM `variables` INNER JOIN `frequency_table_variable` 
+				 ON variables.id = frequency_table_variable.variable_id
+				 WHERE table_id =  {$table} AND level_id = {$level} AND frequency_id = {$frequency} LIMIT 1";
+
+		$stmt = $this->db->query($query);
+
+		$stmt->setFetchMode(\PDO::FETCH_ASSOC);
+
+		//If PDO error
+		getError($stmt);
+
+		while($result = $stmt->fetch())
+		{
+			$results['from'] = $result['date_from'];
+			$results['to']   = $result['date_to'];
+		}
+		
+		return (is_null($results) OR empty($results)) ? array() : $results;
 	}
 
 }

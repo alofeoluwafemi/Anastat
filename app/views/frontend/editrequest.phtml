@@ -1,0 +1,74 @@
+<?php
+$viewpath = config('view_path');
+@include($viewpath.'partials/header.phtml')
+?>
+<!-- END HEADER -->
+
+<!-- MENU SECTION -->
+<?php @include($viewpath.'partials/frontmenu.phtml') ?>
+<!--MENU SECTION END-->
+
+<!--HOME SECTION END-->
+<!--SERVICE SECTION START-->
+<section id="services" style="padding-top:55px">
+<div class="container">
+<div class="row text-center header">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 animate-in" data-anim-type="fade-in-up">
+</div>
+</div>
+<div class="row animate-in" data-anim-type="fade-in-up">
+
+<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-md-offset-2 col-lg-offset-2">
+	<div class="services-wrapper">
+	<div class="row" id="requestlists">
+
+			<div class="row" id="">
+			<div class="col-md-12 notifications site-red text-center">
+			</div>
+				<div class="col-md-12" id="editrequest">
+					<!-- PLACEHOLDER -->
+					<h5 class="site-red text-center">Please wait while data is being retrieved...</h5>
+				</div>
+			</div>
+	</div>
+	</div>
+
+	</div>
+
+</div>
+
+
+</div>
+</div>
+</section>
+
+
+<!-- FOOTER -->
+<?php @include($viewpath.'partials/footer.phtml') ?>
+<!-- END FOOTER -->
+
+<script type="text/javascript">
+	$(document).ready(function(e){
+
+		$('.navbar').remove();
+
+		setTimeout(function(){
+
+			stashname = window.location.search.split('=')[1];					//Div to stashname into new frame
+
+			requesteditform = window.opener.Anastat.Request.AllStashes[stashname].file;
+
+			$('div#editrequest').html(requesteditform);
+
+			$('div#editrequest').find("form").removeClass('hide');
+
+			if(window.opener.Anastat.Request.AllStashes[stashname].isset == false) Anastat.Intialization.select();
+
+			window.opener.Anastat.Request.AllStashes[stashname].isset = true;
+
+				
+		},9000);
+
+		
+	});
+</script>

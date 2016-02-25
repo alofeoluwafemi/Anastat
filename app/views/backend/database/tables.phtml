@@ -1,0 +1,104 @@
+<!--HEADER -->
+<?php
+$viewpath = config('view_path');
+include($viewpath.'/partials/adminheader.phtml');
+?>
+<!-- END HEADER -->
+
+<!-- MENU SECTION -->
+<?php include($viewpath.'partials/backendmenu.phtml') ?>
+<!--MENU SECTION END-->
+
+
+<!--HOME SECTION END-->
+<!--SERVICE SECTION START-->
+<br>
+<br>
+<section id="services" >
+    <div class="container">
+        <div class="row text-center header">
+            <!--  -->
+        </div>
+        <div class="row animate-in" data-anim-type="fade-in-up">
+
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                <?php include($viewpath."partials/adminmenu.phtml") ?>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 main-body">
+                <div class="services-wrapper">
+                    <ol class="breadcrumb">
+                        <li><a href="<?php echo geturl('admin/dashboard')?>">Dashboard</a></li>
+                        <li><a href="<?php echo geturl('admin/database')?>">Database</a></li>
+                        <li class="active"><?php echo $Database['shortcode']  ?></li>
+                    </ol>
+
+
+                        <?php if(!empty($Tables)): ?>
+                            <a href="<?php echo geturl("admin/database/{$Database['id']}/r_tables") ?>"class="site-init action-btn pull-right">
+                                <i class="ion-edit fonts site-red"></i> Edit Tables
+                            </a>
+                        <?php else: ?>
+                            <a href="<?php echo geturl("admin/database/{$Database['id']}/a_tables") ?>"class="site-init action-btn pull-right">
+                                <i class="ion-plus fonts site-red"></i> Assign Tables
+                            </a>
+                        <?php endif ?>
+
+                    <hr>
+                    <div class="row dash-row">
+
+                    <?php include($viewpath.'partials/notification.phtml') ?>
+
+                        <!-- START TABLES -->
+                        <div class="col-md-1 site-red">
+                            S/N
+                        </div>
+                        <div class="col-md-10 site-red">
+                            Table Name
+                        </div>
+
+                        <hr>
+                        <?php if(!empty($Tables)) :?>
+                            <?php foreach($Tables as $key => $table) :?>
+                                <div class="col-md-1 site-init">
+                                    <?php echo $key + 1 ?>
+                                </div>
+
+                                <div class="col-md-10 site-init">
+                                <?php
+                                $database = base64_encode($Database['id']);
+                                ?>
+                                    <a href="<?php echo geturl("admin/tables/{$table['id']}/variables?dt={$database}") ?>" class="site-init">
+                                        <?php echo strtoupper($table['table_name']) ?>
+                                    </a>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <hr class="split-list">
+                                </div>
+
+                            <?php endforeach ?>
+                        <?php else :?>
+                            <div class="notify">Tables List Empty!</div>
+                        <?php endif ?>
+
+                    </div>
+                    <!-- END AFFILIATES -->
+
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</section>
+
+
+
+<!--CONTACT SECTION START-->
+<!--CONTACT SECTION END-->
+
+<!-- FOOTER -->
+<?php @include($viewpath.'partials/footer.phtml') ?>
+<!-- END FOOTER

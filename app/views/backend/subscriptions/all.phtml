@@ -1,0 +1,109 @@
+<?php
+$viewpath = config('view_path');
+include($viewpath.'/partials/adminheader.phtml');
+?>
+
+<!-- MENU SECTION -->
+<?php include($viewpath.'partials/backendmenu.phtml') ?>
+<!--MENU SECTION END -->
+
+<br>
+<br>
+<section id="services">
+    <div class="container">
+        <div class="row text-center header">
+
+        </div>
+        <div class="row animate-in" data-anim-type="fade-in-up">
+
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                <?php include($viewpath."partials/adminmenu.phtml") ?>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 main-body">
+                <div class="services-wrapper">
+                        <ol class="breadcrumb">
+                            <li><a href="<?php echo geturl('admin/dashboard')?>">Dashboard</a></li>
+                            <li class="active">subscription</li>
+                        </ol>
+
+                    <a href="<?php echo geturl('admin/addsubscription') ?>" class="site-init action-btn pull-right">
+                        <i class="ion-plus fonts site-red"></i> Add New</a>
+
+                    <hr>
+                    <div class="row dash-row">
+
+                       <?php include($viewpath.'partials/notification.phtml') ?>
+
+                        <div class="col-md-1 site-red">
+                            S/N
+                        </div>
+
+                        <div class="col-md-5 site-red">
+                            Subscription Name
+                        </div>
+
+                        <div class="col-md-2 site-red">
+                            Valid Days
+                        </div>
+
+                        <div class="col-md-2 site-red">
+                            Size(kb)
+                        </div>
+
+                        <div class="col-md-2 site-red">
+                            Actions
+                        </div>
+                        <hr>
+
+                        <?php if(!empty($Subscriptions)) :?>
+                            <?php foreach($Subscriptions as $key => $data) :?>
+                                <div class="col-md-1 site-init">
+                                    <?php echo $key + 1 ?>
+                                </div>
+
+                                <div class="col-md-5 site-init">
+                                    <?php echo strtoupper($data['name']) ?>
+                                </div>
+
+                                <div class="col-md-2 site-init">
+                                    <?php echo strtoupper($data['validity_days']) ?>
+                                </div>
+
+                                <div class="col-md-2 site-init">
+                                    <?php echo strtoupper($data['size']) ?>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <a title="Edit Plan" href='<?php echo geturl("admin/subscription/{$data['id']}/edit") ?>'
+                                       class="site-init action-btn">
+                                        <i class="ion-edit fonts site-red"></i>
+                                    </a>
+                                    <a title="delete file" href="#" onclick='Anastat.Mixing.AdminPromptDelete("<?php echo geturl("admin/subscription/{$data['id']}/drop") ?>")'
+                                       class="site-init action-btn">
+                                        <i class="ion-ios-trash fonts site-red"></i>
+                                    </a>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <hr class="split-list">
+                                </div>
+
+                            <?php endforeach ?>
+                        <?php else :?>
+                            <div class="notify">Subscription List Empty!</div>
+                        <?php endif ?>
+
+                    </div>
+                    <!-- END AFFILIATES -->
+
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</section>
+
+<?php include($viewpath.'partials/footer.phtml') ?>

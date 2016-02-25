@@ -1,0 +1,46 @@
+<!-- CLIENT FORM CONFIRM -->
+<div class="modal fade" id="clientconfirm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <h5 class="site-init font12"> Are you sure you want to submit all requests ?</h5>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default site-red font12" data-dismiss="modal">No Thanks!</button>
+                <button type="button" onclick="Anastat.Request.SubmitClientDetails()" id="submitclientbutton" class="btn btn-default green font12">
+                Yes
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- REQUEST DELETE CONFIRM BOX -->
+<div class="modal fade" id="deletePrompt" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <h5 class="site-init font12"> Are you sure you want to edit this request ?</h5>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default site-red font12" data-dismiss="modal">No Thanks!</button>
+                <button type="button" id="firedit" class="btn btn-default green font12">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- WARNING -->
+<div class="modal fade" id="warningPrompt" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                     <h5 class="site-init font12">
+                    <b class="site-red">Warning: </b> Date selected in <b class="site-red">To</b> field must be greater than <b class="site-red">From</b> field</h5>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default site-red" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
