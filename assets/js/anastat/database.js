@@ -42,7 +42,7 @@ Anastat.Database = (function(){
         Privateremovespinner();
         
         $('#finance').append('<div class="text-center" id="select-spinner">' +
-                            '<i class="fa fa-spinner fa-spin"></i><br><span class="site-init">Fetching data...</span>' +
+                            '<i class="ion-load-c fa fa-spin"></i><br><span class="site-init">Fetching data...</span>' +
                             '</div>');
     };
 
@@ -63,6 +63,8 @@ Anastat.Database = (function(){
 
                     $(id).html(response);
 
+                    $(id).focus();
+
                     //Initialize Chosen & Datepicker
                     Privateinit();
 
@@ -76,7 +78,7 @@ Anastat.Database = (function(){
                     console.log("Cannot fetch data at this moment try back!!");
 
                     //Try back
-                    Anastat.Database.Privateloadpage(url,id,data);
+                    Privateloadpage(url,id,data);
                 });
 
         },timeset);
@@ -128,8 +130,8 @@ Anastat.Database = (function(){
                 Anastat.Mixing.setCookie('databaseClickedFromSurvey','',-1);
             }
 
-            var generalclass  = 'dart fa fa-caret-right databaselist',
-                selectedclass = 'check fa fa-check databaselist',
+            var generalclass  = 'ion-android-arrow-dropright dart databaselist',
+                selectedclass = 'ion-android-arrow-dropright dart databaselist',
                 type          = e.data('type'),
                 url           = e.data('fetch'),
                 id            = "#tables",
@@ -139,14 +141,14 @@ Anastat.Database = (function(){
 
             //Set same class for all
             $('.databaselist').map(function(database){
-                $(this).attr('class',generalclass).css('color','initial');
+                $(this).attr('class',generalclass).css('color','#444');
             });
 
             //Clear successive divs
             PrivateClearSuccessiveDiv(divs);
 
             //Excempt clicked one
-            $(this).attr('class',selectedclass).css('color','rgba(228, 79, 79, 0.8)');
+            e.attr('class',selectedclass).css('color','rgba(107, 21, 161, 0.57)');
 
             //Hide empty notification
             $('#empty').addClass('hide');

@@ -80,7 +80,8 @@ class Affiliate {
 	{
 		$stmt = $this->db->prepare("SELECT affiliates.id,affiliates.affiliate_name,affiliates.affiliate_code,affiliates.affiliate_email,
 									affiliates.affiliate_type,affiliate_plan.status,affiliate_plan.datasize,affiliate_plan.plan_id,affiliate_plan.affiliate_id
-		 							FROM `affiliates` INNER JOIN affiliate_plan ON  affiliates.id = affiliate_plan.affiliate_id WHERE affiliates.id =  :id");
+		 							FROM `affiliates` INNER JOIN affiliate_plan ON  affiliates.id = affiliate_plan.affiliate_id WHERE affiliates.id =  :id
+		 							ORDER BY affiliate_plan.id DESC ");
 
 		$stmt->bindParam(':id',$id,PDO::PARAM_INT);
 
@@ -97,7 +98,7 @@ class Affiliate {
 	{
 		$this->cutOffExpiredAffiliate();
 
-		$stmt = $this->db->query("SELECT * FROM `affiliates` INNER JOIN affiliate_plan 
+		$stmt = $this->db->query("SELECT * FROM `affiliates` LEFT JOIN affiliate_plan
 								  ON affiliates.id = affiliate_plan.affiliate_id 
 								  ORDER BY affiliate_name");
 

@@ -4,28 +4,29 @@ ul.database{
 }
 
 ul.database li{
-	list-style: none;
+    list-style: none;
     display: block;
     width: 100%;
     padding-left: 2px;
     margin-bottom: 2%;
-    /*border-bottom: 1px solid white;*/
     font-size: 11px;
     color: initial;
+    font-family: 'Ubuntu', sans-serif;
 }
 
 span.databaselist:hover,span.question:hover{
-	color: rgba(228, 79, 79, 0.8);
+	color: rgba(107, 21, 161, 0.57);
 }
 
 .question{
     font-size: 18px;
     line-height: 18px;
     font-weight: bolder;
+    padding-right: 3%;
 }
 
 .surveydata{
-    color: rgba(228, 79, 79, 0.8);
+    color: rgba(107, 21, 161, 0.57);
 }
 
 .sectorslist{
@@ -37,33 +38,21 @@ span.databaselist:hover,span.question:hover{
 }
 
 .sectorslist li a{
-    font-size: 12px;
+    font-size: 13px;
+    font-family: 'Ubuntu', sans-serif;
     padding-left:2%;
     text-decoration: none !important;
 }
 
 .dart::before {
-    display: inline-block;
+    /*display: inline-block;*/
     margin-right: .5em;
-    font: normal normal normal 14px/1 FontAwesome;
-    font-size: inherit;
-    text-rendering: auto;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    transform: translate(0, 0);
-    color:rgb(228, 79, 79);
+    color:rgba(107, 21, 161, 0.57);
 }
 
 .check::before {
-    display: inline-block;
     margin-right: .5em;
-    font: normal normal normal 14px/1 FontAwesome;
-    font-size: inherit;
-    text-rendering: auto;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    transform: translate(0, 0);
-    color:green;
+    color:rgba(107, 21, 161, 0.57);
 }
 
 .site-red{
@@ -71,7 +60,7 @@ span.databaselist:hover,span.question:hover{
 }
 
 .site-init{
-    color: initial;
+    color: #444;
 }
 
 .bold{
@@ -89,7 +78,7 @@ span.databaselist:hover,span.question:hover{
 
 /*OVERIDE CHOSEN CSS*/
 li.search-choice{
-	color: rgb(228, 79, 79) !important;
+	color: #2882B5 !important;
     border: 1px solid gray;
     font-size: 14px;
 }
@@ -99,7 +88,7 @@ li.search-choice{
 }
 
 div.chosen-container{
-	border: 1px solid rgba(228, 79, 79, 0.79);
+	border: 1px solid #2882B5;
 	margin-top:4%;
 }
 
@@ -109,7 +98,7 @@ div.chosen-container{
 }
 
 .select2-selection{
-    border: 1px solid rgba(228, 79, 79, 0.79) !important;
+    border: 1px solid #2882B5 !important;
     margin-top:4% !important;
     border-radius: 0px !important;
     font-size: 12px !important;
@@ -117,6 +106,7 @@ div.chosen-container{
 
 .select2-results__option{
     font-size: 12px !important;
+    text-transform: capitalize;
 }
 
 .select2-selection__choice{
@@ -124,7 +114,7 @@ div.chosen-container{
 }
 
 .select2-selection__choice{
-    color: rgba(228, 79, 79, 0.79);
+    color: #2882B5;
 }
 
 .select2-selection__choice span{
@@ -147,6 +137,8 @@ select.chosentable{
 
 .checkbox label{
     color: #444 !important;
+    font-family: initial;
+    font-size: 13px;
 }
 
 input#to, input#from{
@@ -190,7 +182,7 @@ hr.splitter{
 }
 
 div#logindiv  input,div#logindiv  select,div#logindiv  textarea,div.logindiv  input,div.logindiv  select,div.site-input input,div.site-input  select{
-    border: 1px solid rgb(228, 79, 79);
+    border: 1px solid #2882B5;
     border-radius: 0px;
     margin-bottom: 4%;
 }
@@ -210,6 +202,7 @@ div#logindiv  input,div#logindiv  select,div#logindiv  textarea,div.logindiv  in
     margin-bottom: 2px;
     display: block;
     text-decoration: none;
+    border: 1px solid lightgrey;
 }
 
 .admin-menu:hover{
@@ -219,7 +212,8 @@ div#logindiv  input,div#logindiv  select,div#logindiv  textarea,div.logindiv  in
 
 .activated{
     opacity: 0.7;
-    border: 1px solid rgb(228, 79, 79);
+    border: 2px solid rgba(107, 21, 161, 0.57);
+    text-decoration: none;
 }
 
 .admin-menu > i{
@@ -232,11 +226,12 @@ div#logindiv  input,div#logindiv  select,div#logindiv  textarea,div.logindiv  in
 
 .action-btn{
     text-decoration: none;
-    border: 1px solid rgb(226, 118, 118);
-    padding: 2px 4px;
+    border: 1px solid rgba(107, 21, 161, 0.57);
+    padding: 3px 6px;
     background: white;
-    color: black;
+    color: rgba(107, 21, 161, 0.57);
     margin: 0px 2px;
+    font-size: 12px;
 }
 
 .action-btn:hover{
@@ -356,8 +351,12 @@ div#sortdiv div button,div#sortdiv div a{
     font-weight: bold;
 }
 
-.margin-top-3{
-    margin-top:3% !important;
+.margin-top-1{
+    margin-top:1% !important;
+}
+
+.margin-top-4{
+    margin-top:4% !important;
 }
 
 .white{
@@ -408,7 +407,7 @@ div#sortdiv div button,div#sortdiv div a{
 }
 
 .dcomment{
-    border: 1px solid rgb(228, 79, 79);
+    border: 1px solid #2882B5;
     height: 90px !important;
     overflow: hidden;
     margin-bottom: 10px !important;
@@ -433,6 +432,8 @@ div#sortdiv div button,div#sortdiv div a{
 
 div.services-wrapper{
     padding-top: 1% !important;
+    border-radius: 0px !important;
+    background-color: #F5F8FA !important;
 }
 
  div.services-wrapper>h3{
@@ -442,6 +443,7 @@ div.services-wrapper{
 
 section#services {
     padding-top: 15px !important;
+    padding-bottom: 0px !important;
 }
 
 @media (min-width: 1200px)
@@ -460,6 +462,7 @@ section#services {
     border: 1px solid rgba(68, 68, 68, 0.9);
     color: rgb(228, 79, 79);
     padding: 2px;
+    padding-left: 8px;
     border-radius: 8px;
     background: rgba(255, 255, 255, 0.28);
 }
@@ -544,4 +547,164 @@ section#services {
 
 #contact .contact-wrapper{
     margin-bottom: 5px !important;
+}
+
+.fitchosen .chosen-container{
+    margin: 0px !important;
+}
+
+/*NEW THEME*/
+
+.navbar-inverse {
+    background-color: #2882B5 !important;
+    border-color: transparent;
+}
+
+.services-wrapper{
+    background-color: #F5F8FA;
+    border: 1px solid lightgrey;
+}
+
+@media(min-width: 800px)
+{
+    .services-wrapper{
+        min-height: 550px !important;
+    }
+
+}
+
+@media(max-width: 400px)
+{
+    .question{
+        font-size: 14px;
+        line-height: 14px;
+    }
+
+    .notifications{
+        font-size: 12px !important;
+    }
+
+    ul.database li{
+        font-size: 9px;
+    }
+
+}
+
+
+#services .services-wrapper i {
+    color: rgba(107, 21, 161, 0.57);
+}
+
+#services h3 {
+    color: #444 !important;
+}
+
+#indexinfo{
+    position: relative;
+    top: 2px;
+    color: #8a6d3b !important;
+}
+
+.notifications{
+    margin-bottom: 6px;
+    margin-top: 6px;
+}
+
+.navbar-inverse .navbar-nav > li > a:hover{
+    color: #eee;
+}
+
+.alert-color{
+    color: #8a6d3b !important;
+}
+
+.btn-custom-two {
+    color: rgba(107, 21, 161, 0.57) !important;
+    font-size: 13px !important;
+    border: 2px solid rgba(107, 21, 161, 0.57) !important;
+}
+
+#contact .contact-wrapper{
+    background-color: #F5F8FA;
+    color: #444 !important;
+    border-radius: 0px !important;
+    border: 1px solid lightgrey;
+}
+
+#contact .contact-wrapper h3 {
+    background-color: #F5F8FA;
+    color: #444 !important;
+    border-bottom: 1px solid #eee;
+}
+
+.services-wrapper-sm{
+    min-height: initial !important;
+}
+
+.site-purple{
+    color: rgba(107, 21, 161, 0.57) !important;
+}
+
+.alertify .ajs-body .ajs-content {
+    padding: 16px 24px 16px 1px !important;
+    font-size: 14px !important;
+}
+
+button.ajs-ok {
+    color: #3593D2 !important;
+    border: 1px solid #3593D2 !important;
+    border-radius: 2px !important;
+    font-size: 12px !important;
+}
+
+.dashboardstat{
+    background-color: rgba(40, 130, 181, 0.74) !important;
+    height: 110px;
+}
+
+.dashboardstat #count{
+    color: white !important;
+    font-size: 38px;
+}
+
+.dashboardstat .iconstat{
+    font-size: 60px;
+    line-height: 60px;
+    color: rgba(255,255,255,0.5);
+    padding-top: 20%;
+}
+
+.dashboardstat .captionstat{
+    color: white;
+    font-weight: bold;
+    margin-bottom: 0px;
+}
+
+.power-button{
+    color: rgb(228, 79, 79);
+    background: white;
+    padding: 2px 2px 2px 3px;
+    border-radius: 50%;
+}
+
+.power-button:hover{
+    color: lightgrey;
+}
+
+/*Enable Perfect Scrollbar On This Element*/
+#microdatabases,#macrodatabases{
+    position: relative;
+    height: 158px;
+    overflow: hidden;
+}
+
+#requestarea,#overviewarea,#datalistarea{
+    position: relative;
+    height: 580px;
+    overflow: hidden;
+}
+
+#requestarea .services-wrapper,#overviewarea .services-wrapper,#datalistarea .services-wrappers{
+    margin-bottom: 0px !important;
+    padding-bottom: 20px !important;
 }

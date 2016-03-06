@@ -221,7 +221,7 @@ function login($details)
             session_put('site_logged_in',$site_logged_in);
 
 			$url = geturl('admin/dashboard');
-			redirect_to($url,array('as' => 'notification','message' => 'Welcome to anastat admin : <span class="site-red">'.user('username') .'</span>'));
+			redirect_to($url,array('as' => 'notification','message' => "Welcome To Anastat Admin Dashboard : ".ucfirst(user('username'))));
         }
         else{
 
@@ -241,8 +241,13 @@ function login($details)
     }
 }
 
+/**
+ * @param $details
+ */
 function loginaffiliate($details)
 {
+	$password = "";
+
 	extract($details);
 
     $hashkey  = hashkey($password);
@@ -259,6 +264,9 @@ function loginaffiliate($details)
         if(!empty($user) && !is_null($user))
         {
         	$Affiliate  = App('App\Entities\Affiliate')->get($user['affiliate_id']);
+
+//        	dd($Affiliate);
+        	
         	$status     = $Affiliate['status'];
         	$balance    = $Affiliate['datasize'];
 
@@ -286,7 +294,7 @@ function loginaffiliate($details)
 
 			// $url .= "?error={$notification}";
 
-			redirect_to($url,array('as' => 'message','message' => 'Welcome to anastat affiliate manager : <span class="site-red">'.user('username') .'</span>'));
+			redirect_to($url,array('as' => 'message','message' => "Welcome To Anastat Affiliate Manager Dashboard : ".ucfirst(user('username'))));
         }
         else{
 
@@ -410,7 +418,7 @@ function redirect_to($url,$array = array())
 /**
  * Get role loggedin user belongs to
  */
-function getrole($intval)
+function getrole($role)
 {
 	switch ($role) {
 		case 1:

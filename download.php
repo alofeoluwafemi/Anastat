@@ -7,6 +7,8 @@ require 'vendor/autoload.php';
 			$file = $_GET['filename'];
 
 			$filepath = config('storage_path_survey').$file;
+
+			// dd($filepath);
 			
 			downloadfile($filepath);
 		} 

@@ -594,4 +594,31 @@ class Request{
 		$stmt->execute();
 	}
 
+
+	/**
+	 * Get number of approved affiliate reuqests
+	 * @return mixed
+     */
+	public  function getApprovedAffiliatedRQ()
+	{
+		$stmt = $this->db->prepare("SELECT COUNT(*) as count FROM transactions WHERE approved = 'approved' ");
+
+		$stmt->execute();
+
+		return !empty($stmt->fetch()) ? $stmt->fetch()['count'] : 0;
+	}
+
+	/**
+	 * Get number of approved affiliate reuqests
+	 * @return mixed
+	 */
+	public  function getPaidIndependentRQ()
+	{
+		$stmt = $this->db->prepare("SELECT COUNT(*) as count FROM transactions WHERE approved = 'paid' ");
+
+		$stmt->execute();
+
+        return !empty($stmt->fetch()) ? $stmt->fetch()['count'] : 0;
+    }
+
 }

@@ -9,53 +9,39 @@ $viewpath = config('view_path');
 <!--MENU SECTION END-->
 
 <!--SERVICE SECTION START-->
-<br>
-<br>
 
 <section id="services">
     <div class="container">
-
-        <div class="row text-center header">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 animate-in" data-anim-type="fade-in-up">
-                <h3 style="margin:0px;">REQUEST DATA</h3>
-                <hr style="margin-top:5px !mportant;margin-bottom:0px"/>
-            </div>
-        </div>
-
-        <div class="row animate-in" data-anim-type="fade-in-up">
+        <div class="row animate-in margin-top-4" data-anim-type="fade-in-up">
             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                 <?php include($viewpath.'partials/databaselist.phtml') ?>
             </div>
 
-            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5" id="requestarea">
                 <div class="services-wrapper" id="financeplace">
-                    <h3><i class="ion-pie-graph"></i> Data Selection</h3>
+                    <h3 class="text-center"> Select To Download </h3>
+                    <a href="<?php echo geturl("surveyresearch") ?>" class="btn button-custom btn-custom-two pull-right ion-ios-arrow-back fonts">
+                    &nbsp; Return Back</a>
 
-                    <?php if(isset($notification) && !empty($notification)) :?>
-                        <div class="notify" style="width:100% !important"><?php echo $notification ?></div>
-                    <?php endif ?>
 
-                    <div class="col-md-12" id="empty">
+                    <div class="col-md-12 nopad" id="empty">
                         <?php if(!empty($Surveys)) :?>
-                            <h5 class="text-center inline">Select Any To Download</h5>
-                            <a href="<?php echo geturl("surveyresearch") ?>" class="site-init action-btn pull-right">
-                                <i class="ion-ios-arrow-back fonts site-red"></i> Back</a>
+                            
                             <hr>
 
                             <ul class="sectorslist">
                                 <?php foreach($Surveys as $data) :?>
                                     <li>
-                                        <a title="click to download pdf file" href="<?php echo geturl('download.php?action=download&filename='.$data['pathname']) ?>"
+                                        <a title="Click to download file" href="<?php echo geturl('download.php?action=download&filename='.$data['pathname']) ?>"
                                            class="dart site-init surveydata">
                                             <?php echo $data['filename'] ?></a>
-                                        <span class="ion-android-download pull-left site-red question"></span>
+                                        <span class="ion-ios-download-outline pull-left site-purple question"></span>
                                     </li>
                                 <?php endforeach?>
                             </ul>
                         <?php else:?>
-                            <div class="notifystay" style="width:100% !important">Sorry there are no free database under this sub sector</div>
-                            <br><a href="<?php echo geturl("surveyresearch") ?>" class="site-init action-btn pull-right">
-                                <i class="ion-ios-arrow-back fonts site-red"></i> Back</a>
+                            <br>
+                            <?php include($viewpath.'partials/notification.phtml') ?>
                         <?php endif ?>
                     </div>
 

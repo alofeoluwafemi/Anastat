@@ -29,8 +29,9 @@ GENERAL STYLES
 body {
 font-family: 'Ubuntu', sans-serif;
 color: #fff;
-background-image: url('../img/white_carbonfiber.png');
-/*Background-Color:#000;*/
+/*background-image: url('../img/white_carbonfiber.png');*/
+background-color:#f1f1f1;
+
 }
 
 section {
@@ -76,26 +77,26 @@ margin: 5px;
 .btn-custom-one {
 background-color: transparent;
 color: #fff;
-border: 2px solid rgb(228, 79, 79);
+border: 2px solid rgba(107, 21, 161, 0.57);
 }
 
 .btn-custom-one:hover {
-background-color: rgb(228, 79, 79);
+background-color: rgba(192, 192, 192, 0.21);
 text-decoration: none;
 color: #fff;
 }
 
 .btn-custom-two {
-color: #fff;
-background-color: rgb(228, 79, 79);
-border: 2px solid rgb(228, 79, 79);
+    color: rgba(107, 21, 161, 0.57);
+    font-size: 13px;
+    border: 2px solid rgba(107, 21, 161, 0.57);
 }
 
 .btn-custom-two:hover {
-border: 2px solid rgb(228, 79, 79);
+border: 2px solid rgba(107, 21, 161, 0.57);
 text-decoration: none;
 color: #fff;
-background-color: transparent;
+background-color: rgba(192, 192, 192, 0.21);
 }
 
 

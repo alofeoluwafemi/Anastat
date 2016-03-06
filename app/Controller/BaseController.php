@@ -140,7 +140,7 @@ class BaseController{
 				return App('App\Controller\AdminController')->editperiod();
 				break;
 			case 'survey':
-				return App('App\Controller\AdminController')->survey();
+				return App('App\Controller\AdminController')->survey($id,$action);
 				break;
 			case 'addsurvey':
 				return App('App\Controller\AdminController')->addsurvey();
@@ -158,7 +158,7 @@ class BaseController{
 				return App('App\Controller\AdminController')->addaffiliateduser();
 				break;
 			case 'sector':
-				return App('App\Controller\AdminController')->sector();
+				return App('App\Controller\AdminController')->sector($id,$action);
 				break;
 			case 'addsector':
 				return App('App\Controller\AdminController')->addsector();
@@ -177,6 +177,9 @@ class BaseController{
                 break;
             case 'condition':
                 return App('App\Controller\AdminController')->condition();
+                break;
+            case 'contact':
+                return App('App\Controller\AdminController')->contact();
                 break;
 			default:
 				return App('App\Controller\AdminController')->dashboard();
@@ -199,7 +202,7 @@ class BaseController{
 		}
 
 		switch ($page) {
-			case 'dashboard':
+			case 'drop':
 				return App('App\Controller\AffiliateController')->dashboard();
 				break;
 			case 'view':
@@ -276,7 +279,9 @@ class BaseController{
 			$notification = "We received your message,we shall get back to you shortly";
 		}
 
-		frontview('contact',compact('notification'));
+		$Contact = App('App\Entities\Contact')->get();
+
+		frontview('contact',compact('notification','Contact'));
 	}
 
     /**
@@ -308,26 +313,34 @@ class BaseController{
 		frontview('userarea/code',compact('Requests','notification','Client'));
 	}
 
-	public function surveyresearch()
+	public function surveyresearch($id = "",$action = "")
 	{
+		if($action == "sectors") return $this->subSectorList($id);
+
 		$Micros        = App('App\Entities\Database')->allmicros();
 		$Macros        = App('App\Entities\Database')->allmacros();
 		$Instituitions = App('App\Entities\Affiliate')->lists();
 		$Sectors       = App('App\Entities\Survey')->listSectors();
 
-		if(!empty($_GET['for']) && ($_GET['for'] == 'survey') && !empty($_GET['id']) )
-		{
-			$id = $_GET['id'];
-			$Surveys = App('App\Entities\Survey')->getSurveys($id);
-
-			// dd($Surveys);
-
-			frontview('surveysectors',compact('Micros','Macros','Instituitions','Sectors','Surveys'));
-
-			exit;
-		}
+		
 
 		frontview('surveyresearch',compact('Micros','Macros','Instituitions','Sectors'));
+	}
+
+	/**
+	 * 
+	 */
+	private function subSectorList($id)
+	{
+		$Surveys = App('App\Entities\Survey')->getSurveys($id);
+		$Micros        = App('App\Entities\Database')->allmicros();
+		$Macros        = App('App\Entities\Database')->allmacros();
+		$Instituitions = App('App\Entities\Affiliate')->lists();
+		$Sectors       = App('App\Entities\Survey')->listSectors();
+
+		$notification = "No downloads available under this sub sector";
+
+		frontview('surveysectors',compact('Micros','Macros','Instituitions','Sectors','Surveys','notification'));
 	}
 
 	/**
@@ -389,12 +402,21 @@ class BaseController{
 		frontview('variable',compact('Variables'));
 	}
 
-	public function periods($id)
+    /**
+     * @param $id
+     */
+    public function periods($id)
 	{
+		$table 	= "";
+		$level 	= "";
+		$freq 	= "";
+		$from 	= "";
+		$to 	= "";
+
 		extract($_GET);
 
 		/**
-		* If calendar type set by admistrator on
+		* If calendar type set by administrator on
 		* generic table is year list: get the range to display
 		*/
 		$Range = App('App\Entities\Period')->getDateRange($table,$level,$freq);

@@ -61,7 +61,10 @@ include($viewpath.'/partials/adminheader.phtml');
                         <?php if(!empty($Tables)) :?>
                             <?php foreach($Tables as $key => $table) :?>
                                 <div class="col-md-1 site-init">
-                                    <?php echo $key + 1 ?>
+                                <?php 
+                                echo !empty($_GET['page']) || !empty($_GET['count']) ? 
+                                ($_GET['page'] * $count = $_GET['count']) - $count + ($key + 1) : $key + 1 
+                                ?>
                                 </div>
 
                                 <div class="col-md-10 site-init">
@@ -78,8 +81,6 @@ include($viewpath.'/partials/adminheader.phtml');
                                 </div>
 
                             <?php endforeach ?>
-                        <?php else :?>
-                            <div class="notify">Tables List Empty!</div>
                         <?php endif ?>
 
                     </div>

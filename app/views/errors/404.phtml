@@ -1,9 +1,11 @@
-<!--HEADER -->
-<?php @include('partials/header.phtml') ?>
+<?php
+$viewpath = config('view_path');
+@include($viewpath.'partials/header.phtml')
+?>
 <!-- END HEADER -->
 
 <!-- MENU SECTION -->
-<?php @include('partials/frontmenu.phtml') ?>
+<?php @include($viewpath.'partials/frontmenu.phtml') ?>
 <!--MENU SECTION END-->
 
 
@@ -27,7 +29,8 @@
 	<div class="services-wrapper">
 	<h1 class="text-center">404</h1>
 	<!-- <h4 class="text-center" style="color:grey">Page Not Found</h4> -->
-	<h6 class="text-center site-red">We are sorry but we don't know how you ended up here. <a href="">Take me to safety</a> </h6>
+	<h6 class="text-center site-red">We are sorry but we don't know how you ended up here. <a href="<?php echo geturl('/') ?>">Take me to safety</a>
+	</h6>
 	</div>
 </div>
 
@@ -41,11 +44,6 @@
 </section>
 
 
-
-<!--CONTACT SECTION START-->
-<?php @include('partials/contact.phtml') ?>
-<!--CONTACT SECTION END-->
-
 <!-- FOOTER -->
-<?php @include('partials/footer.phtml') ?>
+<?php @include($viewpath.'partials/footer.phtml') ?>
 <!-- END FOOTER

@@ -1,11 +1,12 @@
-<!--HEADER -->
-<?php @include('partials/header.phtml') ?>
+<?php
+$viewpath = config('view_path');
+@include($viewpath.'partials/header.phtml')
+?>
 <!-- END HEADER -->
 
 <!-- MENU SECTION -->
-<?php @include('partials/frontmenu.phtml') ?>
+<?php @include($viewpath.'partials/frontmenu.phtml') ?>
 <!--MENU SECTION END-->
-
 
 <!--HOME SECTION END-->
 <!--SERVICE SECTION START-->
@@ -41,11 +42,6 @@
 </section>
 
 
-
-<!--CONTACT SECTION START-->
-<?php @include('partials/contact.phtml') ?>
-<!--CONTACT SECTION END-->
-
 <!-- FOOTER -->
-<?php @include('partials/footer.phtml') ?>
+<?php @include($viewpath.'partials/footer.phtml') ?>
 <!-- END FOOTER

@@ -109,6 +109,8 @@ function downloadfile($filepath)
         readfile($filepath);
         exit;
     }
+
+    die("file doesn't exists");
 }
 
 

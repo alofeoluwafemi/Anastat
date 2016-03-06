@@ -25,11 +25,17 @@ include($viewpath.'/partials/header.phtml');
 </div>
 
 <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
-	<div class="services-wrapper">
+	<div class="services-wrapper services-wrapper-sm">
 	<?php if(!empty($_GET['error'])) :?>
-			<div class="notify"><?php echo $_GET['error'] ?></div>
+		<div class="alert alert-warning alert-dismissible anasatnotification" role="alert">
+	    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	   <span class="ion-alert-circled"></span>&nbsp;<?php echo $_GET['error'] ?>
+	   </div>
 	<?php endif ?>
-	<h3 class="site-init"><i class="ion-key site-red"></i>Affiliate Login</h3>
+
+	<?php include($viewpath.'partials/notification.phtml') ?>
+
+		<h3 class="site-init"><i class="ion-ios-locked site-red"></i>Affiliate Login</h3>
 		
 		<form class="form-horizontal" method="post" action="<?php echo geturl('affiliate/login') ?>">
 			<div class="row" id="">

@@ -9,14 +9,12 @@ $viewpath = config('view_path');
 <!--MENU SECTION END-->
 
 <!--SERVICE SECTION START-->
-<br>
-<br>
 
 <!--HOME SECTION END-->
 <!--SERVICE SECTION START-->
 <section id="services" style="padding-top:55px">
 <div class="container">
-<div class="row text-center header">
+<div class="row text-center header margin-top-4">
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 animate-in" data-anim-type="fade-in-up">
 <h3 class="" style="color:#444;font-size:18px">REQUEST DATA OVERVIEW</h3>
 </div>
@@ -52,6 +50,7 @@ $viewpath = config('view_path');
 			<span class="content site-init"><?php echo $Client['address'] ?></span>
 			<hr class="splitter"/>
 		</div>
+		<?php if($Client['affiliate_id'] != 0 || $Client['affiliate_id'] != null):?>
 		<div class="col-md-12" id="databaseoverview">
 			<h5 class="site-red">Designation</h5>
 			<span class="content site-init"><?php echo $Client['position_instituition'] ?></span>
@@ -61,8 +60,17 @@ $viewpath = config('view_path');
 			<h5 class="site-red">Identification No</h5>
 			<span class="content site-init"><?php echo $Client['identification_no'] ?></span>
 		</div>
+		<?php endif ?>
 
-	</div>
+        <div class="col-md-12" id="databaseoverview">
+            <br>
+            <h5 class="client-title site-init no-margin" style="">Request Code</h5>
+            <h6 class="content site-init text-center bold"><?php echo $Client['transaction_id'] ?></h6>
+            <hr class="splitter"/>
+        </div>
+
+
+    </div>
 </div>
 </div>
 
@@ -70,11 +78,7 @@ $viewpath = config('view_path');
 	<div class="services-wrapper">
 	<div class="row">
 				
-				<div class="col-md-12" id="">
-				<h5 class="client-title site-init bold no-margin" style="">
-				<span class="site-red">Submission Code :</span> <?php echo $Client['transaction_id']  ?>
-				</h5>
-				</div>
+
 				<?php foreach($Requests as $key => $request): ?>
 				<div class="row" id="requestlists">
 				<h5 class="client-title site-init no-margin" style="">REQUEST <?php echo $key + 1 ?></h5>

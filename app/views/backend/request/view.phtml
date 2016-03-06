@@ -84,8 +84,14 @@ include($viewpath.'/partials/adminheader.phtml');
 			<?php echo ucfirst($Client['approved']) ?>
 			</button>
 		</div>
-		
 
+        <div class="col-md-12" id="databaseoverview">
+            <br>
+            <h5 class="client-title site-init no-margin" style="">Request Code</h5>
+            <h6 class="content site-init text-center bold"><?php echo $Client['transaction_id'] ?></h6>
+            <hr class="splitter"/>
+        </div>
+		
 		<div class="col-md-12 nopad">
 		<br>
 		<h5 class="client-title site-init no-margin" style="">MANGERS COMMENT</h5>
@@ -133,18 +139,27 @@ include($viewpath.'/partials/adminheader.phtml');
 		<div class="col-md-12 nopad">
 		<!-- Billing & Delivery Status Action -->
 		<div class="col-md-6 nopad">
-		<button class="btn button-custom btn-custom-two ion-android-done-all">&nbsp;Perform Action</button>
+        <br>
+		<button class="btn button-custom btn-custom-two ion-android-done-all no-margin">&nbsp;Perform Action</button>
 		</div>
 		</form>
 		
-		<?php if(!empty($Client['affiliate_id'])) :?>
+		<?php if(empty($Client['affiliate_id']) || $Client['affiliate_id'] == null) :?>
 		<!-- UPDATE PAYMENT STATUS -->
 		<div class="col-md-12 nopad">
 		<br>
 		<h5 class="client-title site-init no-margin" style="">UPDATE STATUS</h5>
 
 		<form action="#" method="POST" class="">
-		<input type="hidden" name="transactionid" 		  value="<?php echo $Client['transactionid'] ?>" />
+
+			<input type="hidden" name="affiliateid"   		  value="<?php echo $Client['affiliate_id'] ?>" />
+			<input type="hidden" name="transactionid" 		  value="<?php echo $Client['transactionid'] ?>" />
+			<input type="hidden" name="billed" 		  		  value="<?php echo $Client['billed'] ?>" />
+			<input type="hidden" name="balance_after" 		  value="<?php echo $Client['balance_after'] ?>" />
+			<input type="hidden" name="data" 		  		  value="<?php echo $Client['data'] ?>" />
+			<input type="hidden" name="datacost" 		      value="<?php echo $Client['datacost'] ?>" />
+
+		<input type="hidden" name="transactionid" 	value="<?php echo $Client['transactionid'] ?>" />
 
 		<input type="hidden" name="action" value="updatestatus">
 			<div class="col-md-5 nopad" id="logindiv">
@@ -158,7 +173,8 @@ include($viewpath.'/partials/adminheader.phtml');
 
 			<div class="col-md-12 nopad">
 			<div class="col-md-5 nopad">
-			<button class="btn button-custom btn-custom-two">Update Status</button>
+			<br>
+			<button class="btn button-custom btn-custom-two no-margin">Update Status</button>
 			</div>
 			</div>
 		</form>
@@ -167,8 +183,8 @@ include($viewpath.'/partials/adminheader.phtml');
 
 		<div class="col-md-12 nopad">
 		<hr class="splitter"/>
-		
-		<a class="btn button-custom btn-custom-two ion-ios-trash" href="#" onclick="Anastat.Mixing.AdminPromptDelete('<?php echo "/admin/requests/{$Client['transactionid']}/drop" ?>')">&nbsp;Delete Requests</a>
+		<br>
+		<a class="btn button-custom btn-custom-two ion-ios-trash no-margin" href="#" onclick="Anastat.Mixing.AdminPromptDelete('<?php echo "/admin/requests/{$Client['transactionid']}/drop" ?>')">&nbsp;Delete Requests</a>
 		</div>
 
 		</div>
@@ -187,11 +203,7 @@ include($viewpath.'/partials/adminheader.phtml');
 
 				<?php include($viewpath.'partials/notification.phtml') ?>
 
-				<div class="col-md-12 nopad">
-				<h5 class="client-title site-init bold no-margin" style="">
-				<span class="site-red">Submission Code :</span> <?php echo $Client['transaction_id']  ?>
-				</h5>
-				</div>
+
 				<?php foreach($Requests as $key => $request): ?>
 				<div class="row" id="requestlists">
 				<h5 class="client-title site-init no-margin" style="">REQUEST <?php echo $key + 1 ?></h5>

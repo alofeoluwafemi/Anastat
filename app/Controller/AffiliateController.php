@@ -12,6 +12,9 @@ class AffiliateController{
 		//
 	}
 
+	/**
+	 * List Institution Request On Affiliate Dashboard
+     */
 	public function dashboard()
 	{
 		$affiliateid = affiliate('affiliate_id');
@@ -20,9 +23,13 @@ class AffiliateController{
 		$Results       = App('App\Entities\Request')->listByAffiliate($affiliateid);
 		$Requests      = !empty($Results) ? $Results->results() : array();
 		$Links         = !empty($Results) ? $Results->links() : "";
+
+//        dd($Requests);
+
 		$environment   = 'affiliate';
+		$notification  = empty($Requests) ? "Request lists empty! No request made yet" : "";
 		
-		backview('affiliate/manager/dashboard',compact('Requests','Links','environment'));
+		backview('affiliate/manager/dashboard',compact('Requests','Links','environment','notification'));
 	}
 
 	/**
@@ -35,6 +42,8 @@ class AffiliateController{
 			$data = $_POST;
 
 			App('App\Entities\Request')->updateTransaction($data);
+
+            $notification = "Transaction updated!";
 
 			redirect_to('/affiliate/dashboard',array('as' => 'notification','message' => $notification));
 		}

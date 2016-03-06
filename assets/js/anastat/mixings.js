@@ -32,7 +32,7 @@ Anastat.Mixing = (function(){
                 var present = $(this).val();
                 if(!$.isNumeric(present) && present.length > 0)
                 {
-                    alert('Only number allowed!');
+                    showarning('Only numbers allowed!');
                     return false;
                 }
             });
@@ -137,8 +137,17 @@ Anastat.Mixing = (function(){
 
         AdminPromptDelete : function(url)
         {
-            $('#deletePromptAdmin').find('a').attr('href',url);
-            $('#deletePromptAdmin').modal();
+            var phrase = "Are you sure you want to perform delete action";
+
+            Anastat.Mixing.showarningWithOption(phrase,{"button" : "Yes I Got It!", "action" : function()
+                                                                                    {
+                                                                                        return Anastat.Mixing.goTo(url);
+                                                                                    }});
+        },
+
+        goTo : function(url)
+        {
+           return window.location.assign(url);
         },
 
         /*Generate a random string*/
@@ -172,10 +181,30 @@ Anastat.Mixing = (function(){
         /*Display warning alert prompt*/
         showarning : function(phrase)
         {
-                //Hide any preopened modal box
-                $('.modal').modal('hide');
-                $('#warningPrompt').find('div.modal-body>h5').html(phrase);
-                $('#warningPrompt').modal();
+            //Close previous
+            alertify.alert().close();
+
+            alertify.alert('<h4 class="site-red ion-android-alert">&nbsp;Warning</h4>',phrase)
+                    .setting({"label" : "<span class='ion-android-checkmark-circle'></span> I understand"});
+
+        },
+
+        showarningWithOption : function(phrase,param)
+        {
+            var title  = (param.title)  ? param.title : "<h4 class='site-red ion-android-alert'>&nbsp;Warning</h4>";
+            var button = (param.button) ? param.button : "<span class='ion-android-checkmark-circle'></span> I understand";
+            var action = (param.action) ? param.action : function(){};
+
+            //Close previous
+            Anastat.Mixing.closeAlertify();
+
+            alertify.confirm(title,phrase,action,Anastat.Mixing.closeAlertify())
+                    .setting({"label" : button })
+        },
+
+        closeAlertify : function()
+        {
+            alertify.alert().close();
         },
 
         /*Click a database selected from referer page*/

@@ -95,7 +95,7 @@ Anastat.Request = (function(){
 
             if(Date.parse(FromFeild) > Date.parse(ToField))
                 {
-                    var warning = '<b class="site-red">Warning: </b> Date selected in <b class="site-red">To</b> field must be greater than <b class="site-red">From</b> field';
+                    var warning = 'Date selected in <b>To</b> field must be greater than <b>From</b> field';
                     Anastat.Mixing.showarning(warning);
                     //Empty field
                     e.val('');
@@ -182,13 +182,13 @@ Anastat.Request = (function(){
                     //Disallow field submission if there is any empty value
                     if($.inArray("",inputs) > -1)
                     {
-                        Anastat.Mixing.showarning('<b class="site-red">Warning: </b> No required field must be empty!');
+                        Anastat.Mixing.showarning('No required field must be empty!');
                         return false;
                     }
 
                     if($.inArray("",selectval) > -1)
                     {
-                        Anastat.Mixing.showarning('<b class="site-red">Warning: </b> No required field must be empty!');
+                        Anastat.Mixing.showarning('No required field must be empty!');
                         return false;
                     }
                     //End check
@@ -409,36 +409,52 @@ Anastat.Request = (function(){
 
         DeleteRequest : function(requestid)
         {
-                    $('#requestoverviewof' + requestid).remove();
+            var notification = "Are sure you really want to delete this request!";
 
-                    //Reduce numbers of requests
-                    Privaterequests.splice(0,1);
+            Anastat.Mixing.showarningWithOption(notification,{"button" : "Yes I Know What Am Doing","action" : function()
+                                                                                                                {
+                                                                                                                    return Anastat.Request.PurgeRequest(requestid);
+                                                                                                                } });
+        },
 
-                    if(Privaterequests.length == 0) window.location.reload();
-                        
-                    //Remove From storage
-                    url = Anastat.Mixing.getUrl() + 'ddr/' + requestid;
+        PurgeRequest : function(requestid)
+        {
+            $('#requestoverviewof' + requestid).remove();
 
-                    $.get(url)
-                    .done(function(){
-                        Anastat.Errors['DeleteRequest'] = 'request deleted';
-                    })
-                    .fail(function(Exception){
-                        Anastat.Errors['DeleteRequest'] = 'Request Not deleted : ' + Exception;
-                    });
+            //Reduce numbers of requests
+            Privaterequests.splice(0,1);
+
+            if(Privaterequests.length == 0) window.location.reload();
+
+            //Remove From storage
+            url = Anastat.Mixing.getUrl() + 'ddr/' + requestid;
+
+            $.get(url)
+                .done(function(){
+                    Anastat.Errors['DeleteRequest'] = 'request deleted';
+                })
+                .fail(function(Exception){
+                    Anastat.Errors['DeleteRequest'] = 'Request Not deleted : ' + Exception;
+                });
         },
 
         //Confirm If User Actually What To Edit
         NotifyEdit : function(requestid)
         {
-            $('#firedit').attr('onclick',"Anastat.Request.EditRequest(" + requestid + ")");
-            $('#deletePrompt').modal(); 
+            var notification = "Are you sure you want to edit this request ?";
+
+            Anastat.Mixing.showarningWithOption(notification,{"button" : "Yes",
+                                                              "title" : "<h4 class='site-red ion-android-notifications-none'>&nbsp;Notification</h4>",
+                                                              "action" : function()
+                                                                        {
+                                                                            return Anastat.Request.EditRequest(requestid);
+                                                                        } });
         },
 
         //Edit Request
         EditRequest : function(requestid)
         {
-            $('#deletePrompt').modal('hide');
+            alertify.alert().close();
             window.open("editrequest?stash=editstash" + requestid,"Edit-Request","width=1000,height=500,left=200,top=100,status=0,scrollbars=0;");
         },
 
@@ -570,7 +586,7 @@ Anastat.Request = (function(){
                 $('#submitclientbutton').html('Yes');
                 $(document).find('.modal').modal('hide');                                                       //Close any previous opened modal
 
-                Anastat.Mixing.showarning('<b class="site-red">Warning: </b> No required field in the bio form must be empty!');
+                Anastat.Mixing.showarning('No required field in the bio form must be empty!');
 
                 return false;
             }
@@ -606,11 +622,6 @@ Anastat.Request = (function(){
 
                 if(status == 0)
                 {
-                    console.log(instituition);
-                    console.log(status);
-                    console.log(code);
-                    console.log("Status Check");
-
                     Anastat.Mixing.showarning(Anastat.Request.ValidError);
 
                     return false;
@@ -618,11 +629,6 @@ Anastat.Request = (function(){
 
                 if(instituition != code)
                 {
-                    console.log(instituition);
-                    console.log(status);
-                    console.log(code);
-                    console.log("First Check");
-
                     Anastat.Mixing.showarning(Anastat.Request.ValidError);
 
                     return false;
@@ -630,11 +636,6 @@ Anastat.Request = (function(){
 
                 if(instituition == 'cb5e1' || code == 'cb5e1')
                 {
-                    console.log(instituition);
-                    console.log(status);
-                    console.log(code);
-                    console.log("First Check");
-
                     Anastat.Mixing.showarning(Anastat.Request.ValidError);
 
                     return false;
@@ -642,7 +643,7 @@ Anastat.Request = (function(){
             }
             //End check
 
-            $('#submitclientbutton').html('<i class="fa fa-spinner fa-spin"></i> Submitting.....');
+            $('#submitclientbutton').html('<i class="ion-load-c fa-spin"></i> Submitting.....');
             // return false;
 
             $('#addclient').submit();

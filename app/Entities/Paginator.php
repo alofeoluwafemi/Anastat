@@ -136,7 +136,7 @@ class Paginator
     {
     	if(!empty($append)) $append = '&'.$append;
 
-        $link = "http://".$this->baseUrl."?page=".$page.$append;
+        $link = "http://".$this->baseUrl."?page=".$page."&count=".$this->limit.$append;
         foreach($this->appends as $key => $value) {
             $link .= "&".$key."=".$value;
         }

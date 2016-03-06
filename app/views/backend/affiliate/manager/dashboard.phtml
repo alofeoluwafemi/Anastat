@@ -12,8 +12,6 @@ include($viewpath.'/partials/adminheader.phtml');
 
 <!--HOME SECTION END-->
 <!--SERVICE SECTION START-->
-<br>
-<br>
 <section id="services" >
 <div class="container nopad">
 <div class="row text-center header">
@@ -22,113 +20,110 @@ include($viewpath.'/partials/adminheader.phtml');
 <hr style="margin-top:5px !mportant;margin-bottom:0px"/>
 </div> -->
 </div>
-<div class="row animate-in" data-anim-type="fade-in-up">
+<div class="row animate-in margin-top-4" data-anim-type="fade-in-up">
 
 
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 nopad">
 	<div class="services-wrapper">
 			<div class="row dash-row">
             <?php include($viewpath.'partials/notification.phtml') ?>
-			<div class="col-md-12 theaders">
 					<!-- START Databases -->
-					<div class="col-md-1 text-left site-red font10">
-					S/N
-					</div>
-					<div class="col-md-2 text-left site-red font10">
-					NAME OF REQUESTER
-					</div>
-					
-					<div class="col-md-2 site-red font10">
-					DESIGNATION
-					</div>
+					<table class="table table-bordered site-init">
+						<thead>
+						<th>
+							S/N
+						</th>
 
-					<div class="col-md-2 site-red font10">
-					DATE/TIME
-					</div>
+						<th>
+							NAME OF REQUESTER
+						</th>
 
-					<div class="col-md-1 site-red font10">
-					APPROVAL
-					</div>
-					
-					<div class="col-md-1 site-red font10">
-					DELIVERY
-					</div>
+						<th>
+							DESIGNATION
+						</th>
 
-					<div class="col-md-1 site-red font10">
-					DATA-SIZE
-					</div>
+						<th>
+							DATE/TIME
+						</th>
 
-					<div class="col-md-1 site-red font10">
-					BALANCE
-					</div>
+						<th>
+							APPROVAL
+						</th>
 
-					<div class="col-md-1 site-red font10">
-					ACTIONS
-					</div>
-			</div>
+						<th>
+							DELIVERY
+						</th>
 
-			<?php foreach($Requests as $key => $request): ?>
-			<div class="col-md-12 tdbody">
-					<!-- START Databases -->
-					<div class="col-md-1 text-left site-red font10">
-					<?php echo $key + 1?>
-					</div>
+						<th>
+							DATA-SIZE
+						</th>
 
-					<div class="col-md-2 text-left site-init font10">
-					<?php echo $request['name'] ?>
-					</div>
+						<th>
+							BALANCE
+						</th>
 
-					<div class="col-md-2 site-init font10">
-					<?php echo $request['position_instituition'] ?>
-					</div>
-					
-					<div class="col-md-2 site-init font10">
-					<?php echo format_date($request['created_at'],'d M Y h:i:s') ?>
-					</div>
+						<th>
+							ACTIONS
+						</th>
+						</thead>
 
-					<div class="col-md-1 font10 
-					<?php echo ($request['approved'] == 'awaiting') ? 'site-blue' : (($request['approved'] == 'approved') ? 'green' : 'site-red') ?> ">
-					<?php echo ucfirst($request['approved']) ?>
-					</div>
-					
-					<div class="col-md-1 site-init font10">
-					<?php echo ($request['delivery'] == 0) ? "No" : "Yes"  ?>
-					</div>
+						<tbody>
+						<?php foreach($Requests as $key => $request): ?>
+						<tr>
+							<td>
+								<?php
+								echo !empty($_GET['page']) || !empty($_GET['count']) ? ($_GET['page'] * $count = $_GET['count']) - $count + ($key + 1) : $key + 1
+								?>
+							</td>
 
-					<div class="col-md-1 site-init font10">
-					<?php echo ($request['datasize']) ? $request['datasize'].'(kb)' : "NIL" ?>
-					</div>
+							<td>
+								<?php echo $request['name'] ?>
+							</td>
 
-					<div class="col-md-1 site-init font10">
-					<?php echo ($request['balance_after']) ? $request['balance_after'].'(kb)' : "NIL" ?>
-					</div>
+							<td>
+								<?php echo $request['position_instituition'] ?>
+							</td>
 
-					<div class="col-md-1 site-init font10">
-					<a title="view"  href="<?php echo geturl("affiliate/view/{$request['transactionid']}" ) ?>" class="site-init action-btn">
-					<i class="ion-ios-eye-outline fonts site-red"></i>
-					</a>
-					</div>
+							<td>
+								<?php echo format_date($request['created_at'],'d M Y h:i:s') ?>
+							</td>
 
-			</div>
-			<?php endforeach ?>
-			
+							<td class="<?php echo ($request['approved'] == 'awaiting') ? 'site-blue' : (($request['approved'] == 'approved') ? 'green' : 'site-red') ?> ">
+								<?php echo ucfirst($request['approved']) ?>
+							</td>
+
+							<td>
+								<?php echo ($request['delivery'] == 0) ? "No" : "Yes"  ?>
+							</td>
+
+							<td>
+								    <?php echo ($request['data']) ? $request['data'].'(kb)' : $request['data'] ?>
+							</td>
+
+							<td>
+								<?php echo ($request['balance_after'] != "") ? $request['balance_after'].'(kb)' : "NIL" ?>
+							</td>
+
+							<td>
+								<a title="view"  href="<?php echo geturl("affiliate/view/{$request['transactionid']}" ) ?>" class="site-init action-btn">
+									<i class="ion-ios-eye-outline fonts site-red"></i>
+								</a>
+							</td>
+						</tr>
+						<?php endforeach ?>
+
+						</tbody>
+					</table>
+
+			<!--Display Pagination Links Or notification If Request List Is Empty-->
 			<?php if(!empty($Requests)) :?>
-
-			<div class="col-md-12">
+			<div class="col-md-12 nopad">
 				<?php echo $Links ?>
-			</div>
-			<?php else :?>
-			<div class="col-md-12">
-			  <div class="notify row">Requests List Empty!</div>
 			</div>
 			<?php endif ?>
 
 		</div>
-		<!-- END Databases -->
 	</div>
-
-	<br>
-
 
 	</div>
 </div>
@@ -139,10 +134,6 @@ include($viewpath.'/partials/adminheader.phtml');
 </div>
 </section>
 
-
-
-<!--CONTACT SECTION START-->
-<!--CONTACT SECTION END-->
 
 <!-- FOOTER -->
 <?php @include($viewpath.'partials/footer.phtml') ?>

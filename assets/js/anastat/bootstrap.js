@@ -118,9 +118,26 @@ Anastat.Intialization = (function()
 
                 var email = $(this).val();
 
-                if(!Anastat.Mixing.ValidateEmail(email)) Anastat.Mixing.showarning('<b class="site-red">Warning: </b> Invalid Email Supplied!');
+                if(!Anastat.Mixing.ValidateEmail(email)) Anastat.Mixing.showarning('Invalid Email Supplied!');
 
             });
+
+            //Enable scrolls on the following elements IDS
+            var scrolls = ['microdatabases','macrodatabases','overviewarea','requestarea'];
+
+            for(element in scrolls)
+            {
+                var databaselist = document.getElementById(scrolls[element]);
+
+                Ps.initialize(databaselist);
+            }
+
+            //Pace
+            paceOptions = {
+                elements: true,
+            };
+
+            $(document).ajaxStart(function() { Pace.restart(); });
         }
     }
 })();

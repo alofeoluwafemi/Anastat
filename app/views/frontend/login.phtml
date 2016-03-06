@@ -6,7 +6,7 @@ include($viewpath.'/partials/header.phtml');
 
 <br>
 <br>
-<section id="services" style="padding-bottom: 20%;">
+<section id="services" style="padding-bottom: 20% !important;">
 <div class="container">
 <div class="row text-center header">
 </div>
@@ -17,11 +17,11 @@ include($viewpath.'/partials/header.phtml');
 </div>
 
 <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
-	<div class="services-wrapper">
+	<div class="services-wrapper services-wrapper-sm">
 	<?php if(!empty($_GET['error'])) :?>
 			<div class="notify"><?php echo $_GET['error'] ?></div>
 	<?php endif ?>
-	<h4 class="site-init"><i class="ion-ios-locked site-red"></i>Secure Login</h4>
+	<h4 class="site-init"><i class="ion-ios-locked site-red"></i>Admin Login</h4>
 		
 		<form class="form-horizontal" method="post" action="<?php echo geturl('login') ?>">
 			<div class="row" id="">

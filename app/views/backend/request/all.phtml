@@ -111,115 +111,120 @@ include($viewpath.'/partials/adminheader.phtml');
 
 	<br>
 		<div class="row dash-row">
-			
-			<div class="col-md-12 theaders">
-					<!-- START Databases -->
-					<div class="col-md-half text-left site-red font10">
+
+			<table class="table table-bordered site-init">
+				<thead>
+				<th>
 					S/N
-					</div>
-					<div class="col-md-2 text-left site-red font10">
+				</th>
+
+				<th>
 					NAME OF REQUESTER
-					</div>
-					
-					<div class="col-md-1 site-red font10">
+				</th>
+
+				<th>
 					DATE/TIME
-					</div>
+				</th>
 
-					<div class="col-md-1 site-red font10">
+				<th>
 					TYPE
-					</div>
+				</th>
 
-					<div class="col-md-2 site-red font10">
+				<th>
 					AFFILIATED INSTITUTION
-					</div>
+				</th>
 
-					<div class="col-md-1 site-red font10">
+				<th>
 					APPROVAL
-					</div>
-					
-					<div class="col-md-1 site-red font10">
+				</th>
+
+				<th>
 					DELIVERY
-					</div>
+				</th>
 
-					<div class="col-md-1 site-red font10">
+				<th>
 					DATA-SIZE
-					</div>
+				</th>
 
-					<div class="col-md-1 site-red font10">
+				<th>
 					DATA COST
-					</div>
+				</th>
 
-					<div class="col-md-1 site-red font10">
+				<th>
 					BALANCE
-					</div>
-					<div class="col-md-half text-left site-red font10">
+				</th>
+
+				<th>
 					ACTIONS
-					</div>
-			</div>
+				</th>
+				</thead>
 
-			<?php foreach($Requests as $key => $request): ?>
-			<div class="col-md-12 tdbody">
-					<!-- START Databases -->
-					<div class="col-md-half text-left site-red font10">
-					<?php echo $key + 1?>
-					</div>
-					<div class="col-md-2 text-left site-init font10">
-					<?php echo $request['name'] ?>
-					</div>
-					
-					<div class="col-md-1 site-init font10">
-					<?php echo format_date($request['created_at'],'d M Y h:i:s') ?>
-					</div>
+				<tbody>
+                <?php foreach($Requests as $key => $request): ?>
+                <tr>
+                        <td>
+                            <?php
+                            echo !empty($_GET['page']) || !empty($_GET['count']) ? ($_GET['page'] * $count = $_GET['count']) - $count + ($key + 1) : $key + 1
+                            ?>
+                        </td>
 
-					<div class="col-md-1 site-init font10">
-					<?php echo empty($request['affiliate_id']) ||  $request['affiliate_id'] == 0 ? 'Independent' : 'Affiliated'?>
-					</div>
+                        <td>
+                            <?php echo $request['name'] ?>
+                        </td>
 
-					<div class="col-md-2 site-init font10">
-					<?php echo ($request['affiliate_name']) ?>
-					</div>
+                        <td>
+                            <?php echo format_date($request['created_at'],'d M Y h:i:s') ?>
+                        </td>
 
-					<div class="col-md-1 font10 
-					<?php echo ($request['approved'] == 'awaiting') ? 'site-blue' : (($request['approved'] == 'approved') ? 'green' : 'site-red') ?> ">
-					<?php echo ucfirst($request['approved']) ?>
-					</div>
-					
-					<div class="col-md-1 site-init font10">
-					<?php echo ($request['delivery'] == 0) ? "No" : "Yes"  ?>
-					</div>
+                        <td>
+                            <?php echo empty($request['affiliate_id']) ||  $request['affiliate_id'] == 0 ? 'Independent' : 'Affiliated'?>
+                        </td>
 
-					<div class="col-md-1 site-init font10">
-					<?php echo ($request['data']) ? $request['data'].'(kb)' : "NIL" ?>
-					</div>
+                        <td>
+                        <?php echo ($request['affiliate_name']) ?>
+                        </td>
 
-					<div class="col-md-1 site-init font10">
-					<?php echo ($request['datacost']) ? $request['datacost'].'(N)' : "NIL"?>
-					</div>
+                        <td class="<?php echo ($request['approved'] == 'awaiting') ? 'site-blue' : (($request['approved'] == 'approved') ? 'green' : 'site-red') ?> ">
+                            <?php echo ucfirst($request['approved']) ?>
+                        </td>
 
-					<div class="col-md-1 site-init font10">
-					<?php echo ($request['balance_after']) ? $request['balance_after'].'(kb)' : "NIL" ?>
-					</div>
-					<div class="col-md-half text-left site-red font10">
-					<a title="view"  href="<?php echo geturl("admin/requests/{$request['transactionid']}/view" ) ?>" class="site-init action-btn">
-					<i class="ion-ios-eye-outline fonts site-red"></i>
-					</a>
-					</div>
-			</div>
-			<?php endforeach ?>
-			
-			<?php if(!empty($Requests)) :?>
+                        <td>
+                            <?php echo ($request['delivery'] == 0) ? "No" : "Yes"  ?>
+                        </td>
 
-			<div class="col-md-12">
-				<?php echo $Links ?>
-			</div>
-			<?php else :?>
-			<div class="col-md-12">
-			  <div class="notify row">Requests List Empty!</div>
-			</div>
-			<?php endif ?>
+                        <td>
+                            <?php echo ($request['data']) ? $request['data'].'(kb)' : "NIL" ?>
+                        </td>
+
+                        <td>
+                            <?php echo ($request['datacost']) ? $request['datacost'].'(N)' : "NIL"?>
+                        </td>
+
+                        <td>
+                            <?php echo ($request['balance_after']) ? $request['balance_after'].'(kb)' : "NIL" ?>
+                        </td>
+
+                        <td>
+                            <a title="view"  href="<?php echo geturl("admin/requests/{$request['transactionid']}/view" ) ?>" class="site-init action-btn">
+                                <i class="ion-ios-eye-outline fonts site-red"></i>
+                            </a>
+                        </td>
+					</tr>
+                <?php endforeach ?>
+
+                </tbody>
+
+            </table>
+
+            <!--Display Pagination Links Or notification If Request List Is Empty-->
+            <?php if(!empty($Requests)) :?>
+                <div class="col-md-12 nopad">
+                    <?php echo $Links ?>
+                </div>
+            <?php endif ?>
 
 		</div>
-		<!-- END Databases -->
+		<!-- END -->
 
 	</div>
 </div>

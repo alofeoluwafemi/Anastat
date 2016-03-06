@@ -127,11 +127,11 @@ class Survey {
 		return $data = $stmt->fetch();
 	}
 
-	public function addnew($data)
+	public function addnew($data,$upload = true)
 	{
 		// dd($data);
 		extract($data);
-		$pathname = hasFile('file') ? getFileName('file') : 'default.txt';
+		$pathname = ($upload == true) ? getFileName('file') : 'default.txt';
 
 		$query = $this->db->prepare('INSERT INTO `surveys` (filename,pathname,sector_id) VALUES (:filename,:pathname,:sector)');
 			 
@@ -165,7 +165,7 @@ class Survey {
 	/**
 	 * Edit
 	*/
-	public function editsector($id)
+	public function editSector($id)
 	{
 		$stmt = $this->db->prepare("SELECT * FROM `sectors` WHERE id =  :id");
 
@@ -179,7 +179,7 @@ class Survey {
 	/**
 	 * Update table details
 	 */
-	public function updatesector($data)
+	public function updateSector($data)
 	{
 		extract($data);
 		

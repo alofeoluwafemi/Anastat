@@ -39,7 +39,7 @@ include($viewpath.'/partials/adminheader.phtml');
 
                     <div class="row dash-row">
                         <div class="col-md-8">
-                            <h4>General Details</h4>
+                            <h4 class="site-init">General Details</h4>
                             <hr>
                             <div class="col-md-12 nopad">
                             <h6 class="site-init"><b class="site-red">Affiliate Name</b> :
@@ -68,31 +68,30 @@ include($viewpath.'/partials/adminheader.phtml');
                             </div>
 
                             <div class="col-md-12 nopad">
-                                <br>
-                                <br>
-                                <h4>Actions</h4>
+
+                                <h4 class="site-init margin-top-3">Actions</h4>
                                 <hr>
                                 <a class="btn button-custom btn-custom-two" href="<?php echo geturl("admin/affiliate/{$Affiliate['id']}/edit") ?>" title="Edit Affiliate">
-                                    <i class="ion-edit fonts white"></i> Edit
+                                    <i class="ion-edit fonts site-purple"></i> Edit
                                 </a>
                                 <a class="btn button-custom btn-custom-two" href="#" onclick="Anastat.Mixing.AdminPromptDelete('<?php echo geturl("admin/affiliate/{$Affiliate['id']}/drop") ?>')" title="Delete Affiliate">
-                                    <i class="ion-trash-a fonts white"></i> Delete
+                                    <i class="ion-trash-a fonts site-purple"></i> Delete
                                 </a>
                                 <a class="btn button-custom btn-custom-two" href="<?php echo geturl("admin/affiliate/{$Affiliate['id']}/user") ?>">
-                                    <i class="ion-key fonts white"></i>Manage User
+                                    <i class="ion-key fonts site-purple"></i>Manage User
                                 </a>
                                 <a class="btn button-custom btn-custom-two" href="<?php echo geturl('admin/affiliate?for=report&id='.$Affiliate['id']) ?>">
-                                    <i class="ion-connection-bars fonts white"></i> Report
+                                    <i class="ion-connection-bars fonts site-purple"></i> Report
                                 </a>
                                 <br>
                                 <a class="btn button-custom btn-custom-two" href="<?php echo geturl("admin/requests/{$Affiliate['id']}/affiliate") ?>">
-                                    <i class="ion-clipboard fonts white"></i>View Clients Requests
+                                    <i class="ion-clipboard fonts site-purple"></i>View Clients Requests
                                 </a>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="col-md-12 no-pad">
-                                <h4>Active Plan</h4>
+                                <h4 class="site-init">Active Plan</h4>
                                 <hr>
                                 <?php if(empty($Active)):?>
                                     <h6 class="site-init">No Active Plan!</h6>
@@ -118,12 +117,7 @@ include($viewpath.'/partials/adminheader.phtml');
                                 <?php endif ?>
                             </div>
                             <div class="col-md-12 no-pad">
-                                <br>
-                                <br>
-                                <br>
-                                <br>
-                                <br>
-                                <h4>Plan History </h4>
+                                <h4 class="site-init">Plan History </h4>
                                 <hr>
                                 <?php if(!empty($History)): ?>
                                 <?php foreach($History as $plan) :?>
@@ -149,10 +143,6 @@ include($viewpath.'/partials/adminheader.phtml');
     </div>
 </section>
 
-
-
-<!--CONTACT SECTION START-->
-<!--CONTACT SECTION END-->
 
 <!-- FOOTER -->
 <?php @include($viewpath.'partials/footer.phtml') ?>

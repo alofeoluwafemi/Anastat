@@ -59,7 +59,9 @@ include($viewpath.'/partials/adminheader.phtml');
 			<?php if(!empty($Categories)) :?>
 			<?php foreach($Categories as $key => $data) :?>
 			<div class="col-md-1 site-init">
-			<?php echo $key + 1 ?>
+			<?php 
+			echo !empty($_GET['page']) || !empty($_GET['count']) ? ($_GET['page'] * $count = $_GET['count']) - $count + ($key + 1) : $key + 1 
+			?>
 			</div>
 
 			<div class="col-md-4 site-init">

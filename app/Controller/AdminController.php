@@ -12,8 +12,16 @@ class AdminController{
 		//
 	}
 
-	public function dashboard()
+    /**
+     * Admin dashboard
+     */
+    public function dashboard()
 	{
+		$ApprovedAffiliate  = App('App\Entities\Request')->getApprovedAffiliatedRQ();
+		$PaidIndependent    = App('App\Entities\Request')->getPaidIndependentRQ();
+
+        dd($PaidIndependent);
+
 		backview('dashboard',compact('Affiliates','Clients','Requests'));
 	}
 
@@ -79,6 +87,8 @@ class AdminController{
 	 */
 	private function dropaffiliateduser($affiliateid)
 	{
+        $id = "";
+
 		if(!super()) return redirect_to('/dashboard',array('as' => 'message','message' => 'You don\'t have permission to perform action.contact super administrator '));
 
 		//Obtain id of manager
@@ -88,6 +98,8 @@ class AdminController{
 
 		//Delete manager details from storage
 		App('App\Entities\User')->drop($id);
+
+        $notification = "Affiliate manager successfully removed";
 
 		redirect_to("/admin/affiliate/{$affiliateid}/user",array('as' => 'notification','message' => $notification));
 	}
@@ -382,8 +394,9 @@ class AdminController{
 
 		$Variables = App('App\Entities\Variable')->listByTable($id);
 		$Tableid   = $id;
+        $notification = empty($Variables) ? "Variable List Empty!" :"";
 		
-		backview('table/variable',compact('Variables','Database','Tableid'));
+		backview('table/variable',compact('Variables','Database','Tableid','notification'));
 	}
 
 
@@ -765,35 +778,51 @@ class AdminController{
 	/**
 	 * View Variable Lists
 	 */
-	public function survey()
+	public function survey($id,$action)
 	{
-		if(isset($_GET['action']) && $_GET['action'] == 'drop' && !empty($_GET['id']))
-		{
-			//Do not allow ordinary users to delete		
-			if(!super()) return redirect_to('/dashboard',array('as' => 'message','message' => 'You don\'t have permission to perform action.contact super administrator '));
 
-			$id = $_GET['id'];
-			App('App\Entities\Survey')->drop($id);
+		switch($action){
+            case  'edit':
+                return $this->editSurvey($id);
+                break;
+            case  'drop':
+                return $this->dropSurvey($id);
+                break;
+            default:
+                //Survey lists
+				$Surveys = App('App\Entities\Survey')->lists();
 
-			$notification = "Survey file successfully removed";
-		} 
+				backview('survey/all',compact('notification','Surveys'));
+                break;
+        }
 
-		if(isset($_GET['action']) && $_GET['action'] == 'download' && !empty($_GET['id']))
-		{
-			$id = $_GET['id'];
-			$File = App('App\Entities\Survey')->get($id);
+	}
 
-			$filepath = config('storage_path_survey').$File['pathname'];
+	/**
+	 * Delete survey
+	 */
+	private function dropSurvey($id)
+	{
+		//Do not allow ordinary users to delete		
+		if(!super()) return redirect_to('/dashboard',array('as' => 'message','message' => 'You don\'t have permission to perform action.contact super administrator '));
+
+		App('App\Entities\Survey')->drop($id);
+
+		$notification = "Survey file successfully removed";
+
+        redirect_to("/admin/survey",array('as' => 'notification','message' => $notification));
+	}
+
+	/**
+	 * Delete survey
+	 */
+	private function dropDownload($id)
+	{
+		$File = App('App\Entities\Survey')->get($id);
+
+		$filepath = config('storage_path_survey').$File['pathname'];
 			
-			downloadfile($filepath);
-		} 
-
-		//Survey lists
-		$Surveys = App('App\Entities\Survey')->lists();
-
-		backview('surveylists',compact('notification','Surveys'));
-
-		exit;
+		downloadfile($filepath);
 	}
 
 	/**
@@ -812,30 +841,27 @@ class AdminController{
 			$filename = getFileName('file');
 			$filetype = getFileExtension($filename);
 			$allowed  = ['pdf','docx','doc','xlsx','xls'];
-			// dd($filetype);
 
 			if(hasFile('file'))
 			{
-				if(!in_array($filetype,$allowed)){
+				if(in_array($filetype,$allowed)){
+
 					App('App\Entities\Survey')->addnew($data);
+
 					$notification = "Free survey database file successfully added";
 				}
 				else{
 					$notification = "Error: Only pdf,docx,doc,xlsx,xls uploads allowed!";
 				}
 			}else{
-					App('App\Entities\Survey')->addnew($data);
+					App('App\Entities\Survey')->addnew($data,false);
 					$notification = "Free survey database file successfully added";
 			}
 			
-			backview('addsurvey',compact('notification','Sectors'));
-
-			exit;
+        	redirect_to("/admin/survey",array('as' => 'notification','message' => $notification));
 		}
 
-		backview('addsurvey',compact('Sectors'));
-
-		exit;
+		backview('survey/add',compact('Sectors'));
 	}
 
 	/**--------------------------------------------------------------------------------------------------------------------------/
@@ -1057,8 +1083,9 @@ class AdminController{
 
         //Table lists
         $Tables = App('App\Entities\Table')->listByTable($id);
+        $notification = empty($Tables) ? "Tables List Empty!" :"";
 
-        backview('database/tables',compact('Tables','Database'));
+        backview('database/tables',compact('Tables','Database','notification'));
     }
 
      /**
@@ -1072,7 +1099,10 @@ class AdminController{
         if(request() == "post")
 		{
 			$datas = $_POST;
+
 			App('App\Entities\Table')->assign($datas);
+
+            $notification = "Tables successfully assigned!";
 
 			redirect_to("/admin/database/{$id}/tables",array('as' => 'notification','message' => $notification));
 		}
@@ -1169,15 +1199,21 @@ class AdminController{
 	 */
 	private function editDatabase($id)
 	{
-        $data = $_POST;
 
-        App('App\Entities\Database')->update($data);
+		if(request() == "post")
+		{
+			$data = $_POST;
 
-        $notification = "Database details successfully updated";
+        	App('App\Entities\Database')->update($data);
+
+        	$notification = "Database details successfully updated";
+
+        	redirect_to("/admin/database",array('as' => 'notification','message' => $notification));
+		}
 
         $Database = App('App\Entities\Database')->edit($id);
 
-        redirect_to("/admin/database",array('as' => 'notification','message' => $notification));
+		backview('database/edit',compact('Database'));
 	}
 
 	/**--------------------------------------------------------------------------------------------------------------------------/
@@ -1265,14 +1301,19 @@ class AdminController{
 				$Results  = App('App\Entities\Request')->lists(true);
 				$Requests = !empty($Results) ? $Results->results() : array();
 				$Links    = !empty($Results) ? $Results->links() : "";
+				$notification  = empty($Requests) ? "Request lists empty! No request made yet" : "";
 
-				backview('request/all',compact('Affiliates','notification','Requests','Links'));
+//                dd($Requests);
+				backview('request/all',compact('Affiliates','notification','Requests','Links','notification'));
             	break;
         }
 
 	}
 
-	private function sortRequest()
+    /**
+     * Sort request in a pattern
+     */
+    private function sortRequest()
 	{
 		//Paginate result here
 		$affiliate = $_GET['affiliate'];
@@ -1284,12 +1325,13 @@ class AdminController{
 		$Requests = !empty($Results) ? $Results->results() : array();
 		$append   =  'for=sort&affiliate='.$affiliate.'&type='.$type.'&status='.$status.'&approved='.$approval;
 		$Links    = !empty($Results) ? $Results->links($append) : "";
+		$notification  = empty($Requests) ? "Request lists empty!" : "";
 
 		// dd($Requests);
 
 		$notification = "Sorted Data Returned!";
 
-		backview('request/all',compact('Affiliates','notification','Requests','Links'));
+		backview('request/all',compact('Affiliates','notification','Requests','Links'.'notification'));
 	}
 
 	/**
@@ -1384,7 +1426,7 @@ class AdminController{
 				
 					App('App\Entities\Request')->processTransaction($data);
 
-					$notification = 'Transaction successfully proccessed on client!';
+					$notification = 'Transaction details successfully updated';
 
 				}
 			
@@ -1551,25 +1593,22 @@ class AdminController{
 	/**
 	 * View Variable Lists
 	 */
-	public function sector()
+	public function sector($id,$action)
 	{
-		if(isset($_GET['action']) && $_GET['action'] == 'drop' && !empty($_GET['id']))
-		{
-			//Do not allow ordinary users to delete		
-			if(!super()) return redirect_to('/dashboard',array('as' => 'message','message' => 'You don\'t have permission to perform action.contact super administrator '));
+		switch($action){
+            case  'edit':
+                return $this->editSector($id);
+            break;
+            case  'drop':
+                return $this->dropSector($id);
+            break;
+            default:
+	            //Sectors lists
+				$Sectors = App('App\Entities\Survey')->listSectors();
 
-			$id = $_GET['id'];
-			App('App\Entities\Survey')->dropsector($id);
-
-			$notification = "Sector successfully deleted";
-		} 
-
-		//Sectors lists
-		$Sectors = App('App\Entities\Survey')->listSectors();
-
-		backview('sectorlists',compact('notification','Sectors'));
-
-		exit;
+				backview('survey/sector/all',compact('notification','Sectors'));
+            break;
+        }
 	}
 
 	/**
@@ -1577,7 +1616,6 @@ class AdminController{
 	 */
 	public function addsector()
 	{
-
 		if(request() == "post")
 		{
 			$data = $_POST;
@@ -1586,12 +1624,47 @@ class AdminController{
 
 			$notification = "New sector successfully added";
 
-			backview('addsector',compact('notification'));
-
+			redirect_to('/admin/sector',array('as' => 'notification','message' => $notification));
 		}
 
-		backview('addsector');
+		backview('survey/sector/add');
 
+	}
+
+	/**
+	 * Add new sub sector
+	 */
+	private function editSector($id)
+	{
+		if(request() == "post")
+		{
+			$data = $_POST;
+
+			App('App\Entities\Survey')->updateSector($data);
+
+			$notification = "Sector detail successfully updated";
+			
+			redirect_to('/admin/sector',array('as' => 'notification','message' => $notification));
+		}
+
+		$Sector = App('App\Entities\Survey')->editSector($id);
+
+		backview('survey/sector/edit',compact('Sector'));
+	}
+
+	/**
+	 * Edit a sector details from storage
+	 */
+	private function dropSector($id)
+	{
+		//Do not allow ordinary users to delete		
+		if(!super()) return redirect_to('/dashboard',array('as' => 'message','message' => 'You don\'t have permission to perform action.contact super administrator '));
+
+		App('App\Entities\Survey')->dropsector($id);
+
+		$notification = "Sector successfully deleted";
+
+		redirect_to('/admin/sector',array('as' => 'notification','message' => $notification));
 	}
 
 	/**
@@ -1680,6 +1753,23 @@ class AdminController{
     	$term = App('App\Entities\Condition')->get();
 
     	backview('term&condition/term',compact('notification','term'));
+    }
+
+    /**
+     * Manage Contact Us
+     */
+    public function contact()
+    {
+    	if(request() == "post")
+    	{
+    		$data = $_POST;
+    		App('App\Entities\Contact')->update($data);
+    		$notification = "Contact us page details successfully updated";
+    	}
+
+    	$contact = App('App\Entities\Contact')->get();
+
+    	backview('contact/edit',compact('notification','contact'));
     }
 
 } 
