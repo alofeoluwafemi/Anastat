@@ -195,9 +195,9 @@ function sendmail($email,$name,$subject,$body)
                 //Whether to use SMTP authentication
                 $mail->SMTPAuth = true;
                 // $mail->Username = 'eniolasadiq@gmail.com';                    // SMTP username
-                // $mail->Password = 'phpartisanserve';                          // SMTP password
+                // $mail->Password = '**************';                          // SMTP password
                 $mail->Username = 'anastat2015@gmail.com';                     // SMTP username
-                $mail->Password = 'anastat2015!!';                             // SMTP password
+                $mail->Password = '************';                             // SMTP password
                 //Set who the message is to be sent from
                 $mail->setFrom('info@adsr.com.ng',    'Anastat');             //Set who the message is to be sent from
                 $mail->addReplyTo('info@adsr.com.ng', 'Anastat');             //Set an alternative reply-to address
